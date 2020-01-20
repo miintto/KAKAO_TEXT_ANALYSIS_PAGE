@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load staticfiles %}
+	<title>Main</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	<script src="{% static 'script/charts/main_analysis.js' %}"></script>
+</head>
+
+<body>
+	<div class="main-box">
+		<div>
+			<h1>Main</h1>
+		</div>
+		<div>
+			<div class="main-comment">
+				<h3>카카오톡 텍스트 파일을 올려주세요.</h3>
+			</div>
+			<form method="POST" action="{% url 'check' %}" enctype="multipart/form-data">
+				{% csrf_token %}
+				<div class="load-file">
+					<input type="file" name="uploadfile">
+				</div>
+				<button>분석</button>
+			</form>
+		</div>
+	</div>	
+</body>
+</html>

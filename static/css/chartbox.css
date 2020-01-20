@@ -1,0 +1,27 @@
+.chart-table {
+	margin-left: auto;
+	margin-right: auto;
+	border-spacing: 30px;
+}
+.chartbox {
+	width: 540px;
+	border-radius: 2em;
+	background-color: #F6F6F6;
+}
+.chartbox h3 {
+	text-align: center;
+}
+
+.cell:hover {
+	cursor: pointer;
+}
+.tooltip {
+	position: absolute;
+	border: 0px solid;
+	border-radius: 8px 8px 8px 8px;
+	/*background-color: #FFEB33;*/
+	background-color: #FFFFFF;
+	padding: 10px;
+	text-align: center;
+	font-size: 15px;
+}

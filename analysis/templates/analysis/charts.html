@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load staticfiles %}
+	<title>차트</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/chartbox.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/menubar.css' %}">
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
+</head>
+<body>
+	<div id="title">
+		<h1>차트</h1>
+	</div>
+	<div class="menu-bar">
+		<div>
+			<div class="menu-button">
+				<div class="menu-button-text"><a class="sidemenu" href="{% url 'main' %}">처음</a></div>
+			</div>
+			<div class="menu-button">
+				<div class="menu-button-text"><a class="sidemenu" href="{% url 'check' %}">분석</a></div>
+			</div>
+			<div class="menu-button-active">
+				<div class="menu-button-text"><a class="sidemenu" href="{% url 'charts' %}">차트</a></div>
+			</div>
+			<div class="menu-button">
+				<div class="menu-button-text"><a class="sidemenu" href="{% url 'inquiry' %}">정보</a></div>
+			</div>
+		</div>
+	</div>
+	<div class="range-date">
+		<div><p>분석기간 : 2019-01-01 ~ 2019-12-31</p></div>
+	</div>
+	<div id="contents">
+		<table class='chart-table'>
+			<tr>
+				<td>
+					<div id='chart1', class="chartbox">
+						<h3>Chart 1</h3>
+					</div>
+				</td>
+				<td>
+					<div id='chart2', class="chartbox">
+						<h3>Chart 2</h3>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id='chart3', class="chartbox">
+						<h3>Chart 3</h3>
+					</div>
+				</td>
+				<td>
+					<div id='chart4', class="chartbox">
+						<h3>Chart 4</h3>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id='chart5', class="chartbox">
+						<h3>Chart 5</h3>
+					</div>
+				</td>
+				<td>
+					<div id='chart6', class="chartbox">
+						<h3>Chart 6</h3>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id='chart7', class="chartbox">
+						<h3>Chart 7</h3>
+					</div>
+				</td>
+				<td>
+					<div id='chart8', class="chartbox">
+						<h3>Chart 8</h3>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<script src="{% static 'script/charts/charts.js' %}"></script>
+	<script src="{% static 'script/charts/main_analysis.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+body{
+	/*background-color: #F6F6F6;*/
+	background-color: #B2C7DA;
+}
+
+div.main-box {
+	text-align : center;
+	margin : auto;
+	margin-top: 50px;
+	/*background-color: #FFEB33;*/
+	background-color: #FFFFFF;
+	width: 400px;
+	height: 600px;
+	border-radius: 1.5em;
+}
+
+.main-box h1 {
+	padding: 70px;
+	text-align : center;
+	color: #40342F;
+}
+
+.main-box button{
+	width: 360px;
+	height: 80px;
+	border-radius: 1em;
+	background-color: #F6F6F6;
+	color: #7A7A7A	;
+}
+
+.main-comment h3 {
+	padding: 30px
+}
+
+.status-box h2 {
+	padding-top: 100px;
+	padding-bottom: 50px;
+	text-align : center;
+	color: #40342F;
+}
+
+.main-contents form {
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+.load-file {
+	padding-bottom: 30px;
+}
+
+.inquiry-contents {
+	padding-left: 20px;
+	width: 100%
+}

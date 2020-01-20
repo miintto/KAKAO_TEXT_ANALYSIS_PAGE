@@ -1,0 +1,7 @@
+### Ignore File ###
+
+mysite/setting_private.py
+
+**/__pycashe__
+*.pyc
+*.log

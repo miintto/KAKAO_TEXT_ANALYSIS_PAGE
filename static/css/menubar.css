@@ -1,0 +1,90 @@
+body{
+	margin: 0px auto;
+	background-color : #B2C7DA;
+}
+#title {
+	height: 40px;
+	text-align: center;
+	background-color : #9AADBC;
+	color: #40342F;
+	padding: 5px 0px
+	/*position: fixed;*/
+}
+
+.menu-bar {
+	width: 100%;
+	height: 50px;
+	background-color: #9AADBC;
+	color: #40342F;
+	padding: 0px 0px
+}
+
+.menu-button {
+	width: 100px;
+	height: 50px;
+	color: #40342F;
+	text-align: center;
+	border-top: 10px;
+	display: table;
+	float: left;
+}
+
+.menu-button a {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+	text-decoration:none;
+	font-weight: bold;
+	color: #40342F;
+}
+
+.menu-button-active {
+	width: 100px;
+	height: 50px;
+	color: #40342F;
+	text-align: center;
+	border-top: 10px;
+	display: table;
+	float: left;
+	background-color: #82939E;
+}
+
+.menu-button-active a{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+	text-decoration:none;
+	font-weight: bold;
+	color: #40342F;
+}
+
+.menu-button-text {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.menu-button:hover{
+	background-color: #8EA0AD;
+}
+
+.range-date {
+	padding-left: 20px;
+	width: 100%
+}
+
+
+/*#contents {
+	width: 100%;
+	height: 100%;
+}
+*/
+
+.sidemenu {
+	list-style: none;
+}
+.sidemenu li{	
+	height: 50px;
+	margin: 1px;
+}
