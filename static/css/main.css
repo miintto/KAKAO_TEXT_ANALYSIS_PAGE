@@ -28,8 +28,8 @@ div.main-box {
 	color: #7A7A7A	;
 }
 
-.main-comment h3 {
-	padding: 30px
+.main-comment {
+	padding-bottom: 30px
 }
 
 .status-box h2 {

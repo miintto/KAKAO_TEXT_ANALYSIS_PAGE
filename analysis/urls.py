@@ -4,8 +4,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-	path('main', views.main, name='main'),
-	path('check', views.check, name='check'),
-	path('charts', views.charts.as_view(), name='charts'),
-	path('inquiry', views.inquiry, name='inquiry'),
+	path('main', views.Main.as_view(), name='main'),
+	path('check', views.Check.as_view(), name='check'),
+	path('charts', views.Charts.as_view(), name='charts'),
+	path('inquiry', views.Inquiry.as_view(), name='inquiry'),
 ] 

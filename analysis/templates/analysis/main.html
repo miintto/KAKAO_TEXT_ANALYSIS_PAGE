@@ -4,7 +4,6 @@
 	{% load staticfiles %}
 	<title>Main</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-	<script src="{% static 'script/charts/main_analysis.js' %}"></script>
 </head>
 
 <body>
@@ -15,6 +14,7 @@
 		<div>
 			<div class="main-comment">
 				<h3>카카오톡 텍스트 파일을 올려주세요.</h3>
+				<p>(PC버전만 가능)</p>
 			</div>
 			<form method="POST" action="{% url 'check' %}" enctype="multipart/form-data">
 				{% csrf_token %}
@@ -24,6 +24,8 @@
 				<button>분석</button>
 			</form>
 		</div>
-	</div>	
+	</div>
+	<br>
+	beta 버전
 </body>
 </html>

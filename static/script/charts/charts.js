@@ -52,7 +52,7 @@ function heatmap(dataset) {
 		.on('mousemove', function(d) {
 			tooltip.style("left", (d3.event.pageX + 10) + "px")
 				.style("top", (d3.event.pageY - 10) + "px")
-				.html('이름 : '+d.name+'<br>월 : '+d.month+'<br>채팅량 : '+d.chat)
+				.html('20'+d.month+' '+d.name+'<br>채팅 <b>'+d.chat+'</b> 건')
 			});
 
 	var tooltip = d3.select('body').append('div')
@@ -63,7 +63,7 @@ function heatmap(dataset) {
 
 
 function pie_chart(dataset) {
-	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513', 
+	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513',
 				'#CB4225', '#969696']
 
 	var margin = 25
@@ -72,7 +72,7 @@ function pie_chart(dataset) {
 	var radius = height/2
 
 	var svg = d3.select('#chart2')
-				.append('svg').attr('class', 'background').attr('width', width).attr('height', height)
+	            .append('svg').attr('class', 'background').attr('width', width).attr('height', height)
 				.append('g').attr('transform', "translate("+width/2+","+height/2+")")
 
 	var pie = d3.pie()
@@ -129,7 +129,6 @@ function pie_chart(dataset) {
 			posC[0] = radius * 1.05 * (midangle < Math.PI ? 1 : -1)
 			return [posA, posB, posC]
 		})
-	console.log(data_arcs)
 	svg.selectAll()
 		.data(data_arcs)
 		.enter().append('text')
@@ -158,6 +157,10 @@ function pie_chart(dataset) {
 			return (midangle < Math.PI ? 'start' : 'end')
 		 })
 		.style('font-size', '10px')
+
+	var tooltip = d3.select('body').append('div')
+					.attr('class', 'tooltip')
+					.style('display', 'none')
 }
 
 
@@ -283,7 +286,7 @@ function heatmap2(dataset) {
 		.on('mousemove', function(d) {
 			tooltip.style("left", (d3.event.pageX + 10) + "px")
 				.style("top", (d3.event.pageY - 10) + "px")
-				.html('요일 : '+weekDays[d.wkday]+'요일<br>시간 : '+d.hour+'시<br>채팅량 : '+d.chat)
+				.html(weekDays[d.wkday]+'요일  '+d.hour+'시<br>채팅 <b>'+d.chat+'</b> 건')
 			});
 
 	var tooltip = d3.select('body').append('div')
@@ -403,4 +406,7 @@ function circular_packing(dataset) {
 			d.fx = null;
 			d.fy = null;
 	}
+	var tooltip = d3.select('body').append('div')
+					.attr('class', 'tooltip')
+					.style('display', 'none')
 }

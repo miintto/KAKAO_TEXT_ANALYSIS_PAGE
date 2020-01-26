@@ -4,7 +4,6 @@
 	{% load staticfiles %}
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-	<script src="{% static 'script/charts/main_analysis.js' %}"></script>
 </head>
 
 <body>
@@ -16,7 +15,8 @@
 
 			{% if is_load %}
 			<div class="main-contents">
-				<form method="GET" action="{% url 'charts' %}">
+				<form method="POST" action="{% url 'charts' %}">
+					{% csrf_token %}
 					<div>
 						<button class='charts'>분석</button>
 					</div>
@@ -25,8 +25,7 @@
 
 			{% else %}
 			<div class="main-contents">
-				<form method="POST" action="{% url 'main' %}" enctype="multipart/form-data">
-					{% csrf_token %}
+				<form method="GET" action="{% url 'main' %}" enctype="multipart/form-data">
 					<button class='charts'>처음으로</button>
 				</form>
 			</div>

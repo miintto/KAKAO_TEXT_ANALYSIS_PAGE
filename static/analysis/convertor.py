@@ -11,16 +11,18 @@ class Convertor:
 	(PC버전만 유효)
 	'''
 	def __init__(self):
+		self.date = None
 		self.title = None
+		self.df = None
 
 	def convert(self, file):
-		self.df = pd.read_csv(file, sep='\n', header=None)
+		self.df = pd.read_csv(file, sep='\n', header=None, encoding='utf-8')
 		print('>>> load')
 		df_concat = []
 		for line in self.df[0].values:
 			name, time, chat = self.split_chatting(line)
-			df_concat.append([name, time, chat])
-		df_chat = pd.DataFrame(np.array(df_concat), columns=['Name', 'Time', 'Chat'])
+			df_concat.append([self.date, time, name, chat])
+		df_chat = pd.DataFrame(np.array(df_concat), columns=['date', 'time', 'name', 'chat'])
 		return df_chat.dropna().reset_index(drop=True)
 
 	def split_chatting(self, line):
@@ -33,6 +35,11 @@ class Convertor:
 			chat = line[(split2+5):]
 			return name, time, chat
 		except:
-			return None, None, line
+			if '--------------- ' in line:
+				n = line.find('요일')
+				self.date = str(dt.datetime.strptime(line[:n-2], '--------------- %Y년 %m월 %d일').date())
+				return None, None, None
+			else:
+				return None, None, line
 
 
