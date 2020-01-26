@@ -42,6 +42,7 @@ def make_sample():
 
     result_json.update({'start_date': '2019-01-01'})
     result_json.update({'end_date': '2019-12-31'})
+    result_json.update({'title': 'SAMPLE DATASET'})
     result_json.update({'json_heatmap': json.dumps(json_heatmap)})
     result_json.update({'json_pie': json.dumps(json_pie)})
     result_json.update({'json_wkday': json.dumps(json_wkday)})

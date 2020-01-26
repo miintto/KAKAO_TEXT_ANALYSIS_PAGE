@@ -17,11 +17,12 @@ class Convertor:
 
 	def convert(self, file):
 		self.df = pd.read_csv(file, sep='\n', header=None, encoding='utf-8')
-		print('>>> load')
 		df_concat = []
+		self.title = self.df[0].values[0]
 		for line in self.df[0].values:
 			name, time, chat = self.split_chatting(line)
 			df_concat.append([self.date, time, name, chat])
+		print(f'>>> finished convert {self.title}')
 		df_chat = pd.DataFrame(np.array(df_concat), columns=['date', 'time', 'name', 'chat'])
 		return df_chat.dropna().reset_index(drop=True)
 

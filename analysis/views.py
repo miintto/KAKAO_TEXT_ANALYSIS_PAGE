@@ -38,6 +38,7 @@ class Check(View):
 			message = '파일을 성공적으로 불러왔습니다.'
 			request.session['filename'] = filename
 			request.session['is_file'] = True
+			request.session['file_title'] = con.title
 
 			return render(request, template, {'message':message, 'is_load':is_load})
 		except:
@@ -56,8 +57,10 @@ class Charts(View):
 		if 'is_file' in request.session:
 
 			file = request.session['filename']
+			title = request.session['file_title']
 			df = pd.read_csv(file, encoding='utf-8-sig')
 			result_json = make_json(df)
+			result_json.update({'title':title})
 
 			return render(request, template, result_json)
 		else:
