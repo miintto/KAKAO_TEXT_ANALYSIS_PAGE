@@ -3,7 +3,7 @@ from django.views.generic.edit import View
 from django.shortcuts import render
 from django.urls import reverse
 from static.analysis.convertor import Convertor
-from static.analysis.chart_model import make_json
+from static.analysis.chart_model import make_json, make_sample
 import datetime as dt
 import pandas as pd
 import numpy as np
@@ -47,7 +47,9 @@ class Check(View):
 
 class Charts(View):
 	def get(self, request):
-		return HttpResponseRedirect(reverse('main'))
+		template = 'analysis/charts.html'
+		result_json = make_sample()
+		return render(request, template, result_json)
 
 	def post(self, request):
 		template = 'analysis/charts.html'

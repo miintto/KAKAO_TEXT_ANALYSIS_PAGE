@@ -112,7 +112,7 @@ function pie_chart(dataset) {
 		.on('mousemove', function(d) {
 			tooltip.style("left", (d3.event.pageX + 10) + "px")
 				.style("top", (d3.event.pageY - 10) + "px")
-				.html('이름 : '+d.data.name+'<br>채팅량 : '+d.value)
+				.html(d.data.name+'<br>채팅 <b>'+d.value+'</b> 건')
 			});
 
 	svg.selectAll()
@@ -218,7 +218,7 @@ function barchart(dataset) {
 		.on('mousemove', function(d) {
 			tooltip.style("left", (d3.event.pageX + 10) + "px")
 				.style("top", (d3.event.pageY - 10) + "px")
-				.html('이름 : '+d.name+'<br>채팅량 : '+d.chat)
+				.html(d.name+'<br>채팅 <b>'+d.chat+'</b> 건')
 			})
 
 	var tooltip = d3.select('body').append('div')
@@ -371,7 +371,7 @@ function circular_packing(dataset) {
 					.on('mousemove', function(d) {
 						tooltip.style("left", (d3.event.pageX + 10) + "px")
 							.style("top", (d3.event.pageY - 10) + "px")
-							.html('이름 : '+d.name+'<br>채팅량 : '+d.chat)
+				            .html(d.name+'<br>채팅 <b>'+d.chat+'</b> 건')
 						})
 					.call(d3.drag()
 						.on("start", dragstarted)
