@@ -1,7 +1,9 @@
 ### Ignore File ###
 
 mysite/setting_private.py
+uploads/
 
 **/__pycashe__
 *.pyc
 *.log
+db.sqlite3
