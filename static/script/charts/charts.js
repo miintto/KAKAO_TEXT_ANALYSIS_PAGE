@@ -3,14 +3,14 @@ function heatmap(dataset) {
 		.domain([0, d3.max(dataset, function(d){ return d.chat**0.5;})])
 
 
-	var margin = {top: 10, right: 10, bottom: 30, left: 50};
+	var margin = {top: 10, right: 10, bottom: 30, left: 60};
 
-	var width  = 500 - margin.right-margin.left;	// width = 500-30 = 470
+	var width  = 560 - margin.right-margin.left;	// width = 500-30 = 470
 	var height = 300 - margin.top-margin.bottom;	// height = 300-20 = 280
 
 
 	var svg = d3.select('#chart1')
-				.append('svg').attr('width', 500).attr('height', 300)
+				.append('svg').attr('width', 600).attr('height', 300)
 				.append('g').attr('transform', "translate("+margin.left+","+margin.top+")");
 
 	var xScale = d3.scaleBand()		/// 고정된 문자열일때
@@ -36,18 +36,18 @@ function heatmap(dataset) {
 			.attr('x', function(d, i) {return xScale(d.month)})		/// xScale 로 간격을 자동으로 조정하여 배열
 			.attr('y', function(d, i) {return yScale(d.name)})
 			.style('opacity', 0.8)
-		.on('mouseover', function() { 
+		.on('mouseover', function() {
 			tooltip.style("display", null);
 			d3.select(this)
 				.style('stroke', 'black')
 				.style('stroke-width', 3)
-				.style('opacity', 1) 
+				.style('opacity', 1)
 			})
-		.on('mouseout',  function() { 
+		.on('mouseout', function() {
 			tooltip.style("display", "none");
 			d3.select(this)
 				.style('stroke', 'none')
-				.style('opacity', 0.8) 
+				.style('opacity', 0.8)
 			})
 		.on('mousemove', function(d) {
 			tooltip.style("left", (d3.event.pageX + 10) + "px")
@@ -67,26 +67,27 @@ function pie_chart(dataset) {
 				'#CB4225', '#969696']
 
 	var margin = 25
-	var width	= 500
+	var width  = 600
 	var height = 300
 	var radius = height/2
 
 	var svg = d3.select('#chart2')
-	            .append('svg').attr('class', 'background').attr('width', width).attr('height', height)
+				.append('svg').attr('class', 'background').attr('width', width).attr('height', height)
 				.append('g').attr('transform', "translate("+width/2+","+height/2+")")
 
 	var pie = d3.pie()
 				.value(function(d) {return d.chat})
 	var data_arcs = pie(dataset)
 
+    var sum = d3.sum(dataset, function(d) {return d.chat})
 
 	var arc = d3.arc()
-	  .innerRadius(radius*0.3)
-	  .outerRadius(radius*0.8)
+		.innerRadius(radius*0.3)
+		.outerRadius(radius*0.8)
 
 	var outerArc = d3.arc()
-	  .innerRadius(radius*0.9)
-	  .outerRadius(radius*0.9)
+		.innerRadius(radius*0.9)
+		.outerRadius(radius*0.9)
 
 
 	svg.selectAll()
@@ -112,7 +113,7 @@ function pie_chart(dataset) {
 		.on('mousemove', function(d) {
 			tooltip.style("left", (d3.event.pageX + 10) + "px")
 				.style("top", (d3.event.pageY - 10) + "px")
-				.html(d.data.name+'<br>채팅 <b>'+d.value+'</b> 건')
+				.html(d.data.name+'<br>채팅 <b>'+d.value+'</b> 건  ( '+(d.value/sum*100).toFixed(1)+'% )')
 			});
 
 	svg.selectAll()
@@ -148,7 +149,7 @@ function pie_chart(dataset) {
 	svg.selectAll()
 		.data(data_arcs)
 		.enter().append('text')
-		.text( function(d) { return d.data.chat } )
+		.text( function(d) { return (d.data.chat/sum*100).toFixed(1)+'%' } )
 		.attr('transform', function(d) {
 			return 'translate(' + arc.centroid(d) + ')';
 		})
@@ -165,17 +166,176 @@ function pie_chart(dataset) {
 
 
 
+function area_chart(dataset) {
+	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513',
+				'#CB4225', '#969696']
+
+	var margin = {top: 10, right: 10, bottom: 30, left: 60};
+
+	var width  = 600 - margin.right-margin.left;	// width = 500-30 = 470
+	var height = 300 - margin.top-margin.bottom;	// height = 300-20 = 280
+
+	var svg = d3.select('#chart8')
+				.append('svg').attr('class', 'background').attr('width', 600).attr('height', 300)
+				.append('g').attr('transform', "translate("+margin.left+","+margin.top+")");
+
+	var sumstat = d3.nest()
+		.key(function(d) {return d.month;})
+		.entries(dataset)
+
+	var mygroups = ['가레기', '박민재', '저녕구', '타다요시', '박병규', '정승원', '이종하', '박지성', '김정민']
+	var mygroup = [1, 2, 3, 4, 5, 6, 7, 8, 9].reverse()
+	var stacked_data = d3.stack()
+		.keys(mygroup)
+		.value(function(d, key){
+			return d.values[key].chat
+		})
+		(sumstat)
+
+	var xScale = d3.scaleBand()		/// 고정된 문자열일때
+		.domain(dataset.map(function(d) { return d.month;} ))
+		.range([0, width]).padding(0.01);
+	svg.append("g")
+		.attr("transform", "translate(0,"+height+")")	/// (0, 280)에 axis 그리기
+		.call(d3.axisBottom(xScale));
+
+	var yScale = d3.scaleLinear()	/// 연속된 숫자일때
+		.domain([0, d3.max(dataset, function(d) { return d.chat*2;})])
+		.range([height, 0]);
+	svg.append("g")
+		.call(d3.axisLeft(yScale));
+
+	console.log(d3.max(dataset, function(d) { return d.chat;}));
+	var colormap = d3.scaleOrdinal()
+		.domain(mygroups)
+		.range(color)
+
+	svg.selectAll('area')
+		.data(stacked_data)
+		.enter()
+		.append('path')
+			.style('fill', function(d) { name = mygroups[d.key-1]; return colormap(name); })
+			.attr('d', d3.area()
+						.curve(d3.curveMonotoneX)
+						.x(function(d, i) { return xScale(d.data.key); })
+						.y0(function(d) { return yScale(d[0]); })
+						.y1(function(d) { return yScale(d[1]); })
+				)
+		.on('mouseover', function() {
+			tooltip.style("display", null);
+			d3.select(this)
+				.style('stroke', 'black')
+				.style('stroke-width', 3)
+				.style('opacity', 1)
+			})
+		.on('mouseout', function() {
+			tooltip.style("display", "none");
+			d3.select(this)
+				.style('stroke', 'none')
+				.style('opacity', 0.9)
+			})
+		.on('mousemove', function(d) {
+			tooltip.style("left", (d3.event.pageX + 10) + "px")
+				.style("top", (d3.event.pageY - 10) + "px")
+				.html('<br>채팅 <b>'+d+'</b> 건')
+			})
+		console.log(stacked_data);
+
+	var tooltip = d3.select('body').append('div')
+					.attr('class', 'tooltip')
+					.style('display', 'none')
+}
+
+
+
+function stream_chart(dataset) {
+	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513',
+				'#CB4225', '#969696']
+
+	var margin = {top: 10, right: 10, bottom: 30, left: 60};
+
+	var width  = 560 - margin.right-margin.left;	// width = 500-30 = 470
+	var height = 300 - margin.top-margin.bottom;	// height = 300-20 = 280
+
+	var svg = d3.select('#chart3')
+				.append('svg').attr('class', 'background').attr('width', 600).attr('height', 300)
+				.append('g').attr('transform', "translate("+margin.left+","+margin.top+")");
+
+	var keys = Object.getOwnPropertyNames(dataset[0]).slice(1)
+
+	var stacked_data = d3.stack()
+		.offset(d3.stackOffsetSilhouette)
+		.keys(keys.reverse())
+		(dataset)
+
+    var limit = d3.max(stacked_data[0], function(d) {return -d[0]})
+
+	var xScale = d3.scaleBand()
+		.domain(dataset.map(function(d) { return d.month;} ))
+//		.domain(d3.extent(dataset, function(d) { return d.month; }))
+		.range([0, width]).padding(0.01);
+	svg.append("g")
+		.attr("transform", "translate(0,"+height+")")	/// (0, 280)에 axis 그리기
+		.call(d3.axisBottom(xScale));
+
+	var yScale = d3.scaleLinear()
+		.domain([-limit, limit])
+		.range([height, 0]);
+	svg.append("g")
+		.call(d3.axisLeft(yScale));
+
+	var colormap = d3.scaleOrdinal()
+		.domain(keys.reverse())
+		.range(color)
+
+	svg.selectAll('area')
+		.data(stacked_data)
+		.enter()
+		.append('path')
+			.style('fill', function(d) { return colormap(d.key); })
+			.attr('d', d3.area()
+						.curve(d3.curveMonotoneX)
+						.x(function(d, i) { return xScale(d.data.month); })
+						.y0(function(d) { return yScale(d[0]); })
+						.y1(function(d) { return yScale(d[1]); })
+				)
+			.on('mouseover', function() {
+				tooltip.style("display", null);
+				d3.select(this)
+					.style('stroke', 'black')
+					.style('stroke-width', 3)
+					.style('opacity', 1)
+				})
+			.on('mouseout', function() {
+				tooltip.style("display", "none");
+				d3.select(this)
+					.style('stroke', 'none')
+					.style('opacity', 0.9)
+				})
+			.on('mousemove', function(d) {
+				tooltip.style("left", (d3.event.pageX + 10) + "px")
+					.style("top", (d3.event.pageY - 10) + "px")
+					.html('<b>'+d.key+'</b>')
+				})
+
+	var tooltip = d3.select('body').append('div')
+					.attr('class', 'tooltip')
+					.style('display', 'none')
+}
+
+
+
 function barchart(dataset) {
 	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513', 
 				'#CB4225', '#969696']
 
-	var margin = {top: 10, right: 10, bottom: 30, left: 40};
+	var margin = {top: 10, right: 10, bottom: 30, left: 60};
 
-	var width  = 500 - margin.right-margin.left;	// width = 500-30 = 470
+	var width  = 560 - margin.right-margin.left;	// width = 500-30 = 470
 	var height = 300 - margin.top-margin.bottom;	// height = 300-20 = 280
 
-	var svg = d3.select('#chart3')
-				.append('svg').attr('class', 'background').attr('width', 500).attr('height', 300)
+	var svg = d3.select('#chart7')
+				.append('svg').attr('class', 'background').attr('width', 600).attr('height', 300)
 				.append('g').attr('transform', "translate("+margin.left+","+margin.top+")");
 
 	var xScale = d3.scaleBand()		/// 고정된 문자열일때
@@ -188,7 +348,7 @@ function barchart(dataset) {
 
 	var yScale = d3.scaleLinear()	/// 연속된 숫자일때
 		.domain([0, d3.max(dataset, function(d){ return d.chat;})])
-		.range([height, 0]);  
+		.range([height, 0]);
 	svg.append("g")
 		.call(d3.axisLeft(yScale).ticks(5));
 
@@ -209,7 +369,7 @@ function barchart(dataset) {
 				.style('stroke-width', 3)
 				.style('opacity', 1) 
 			})
-		.on('mouseout',  function() { 
+		.on('mouseout', function() {
 			tooltip.style("display", "none");
 			d3.select(this)
 				.style('stroke', 'none')
@@ -232,17 +392,16 @@ function heatmap2(dataset) {
 	var myColor = d3.scaleSequential(d3.interpolateBlues)
 		.domain([0, d3.max(dataset, function(d){ return d.chat**0.5;})])
 
-
 	var weekDays = {0:'월', 1:'화', 2:'수', 3:'목', 4:'금', 5:'토', 6:'일'}
 
-	var margin = {top: 10, right: 10, bottom: 30, left: 20};
+	var margin = {top: 10, right: 10, bottom: 30, left: 40};
 
-	var width  = 500 - margin.right-margin.left;	// width = 500-30 = 470
+	var width  = 575 - margin.right-margin.left;	// width = 500-30 = 470
 	var height = 300 - margin.top-margin.bottom;	// height = 300-20 = 280
 
 
 	var svg = d3.select('#chart4')
-				.append('svg').attr('width', 500).attr('height', 300)
+				.append('svg').attr('width', 600).attr('height', 300)
 				.append('g').attr('transform', "translate("+margin.left+","+margin.top+")");
 
 	var xScale = d3.scaleBand()		/// 고정된 문자열일때
@@ -277,7 +436,7 @@ function heatmap2(dataset) {
 				.style('stroke-width', 3)
 				.style('opacity', 1) 
 			})
-		.on('mouseout',  function() {
+		.on('mouseout', function() {
 			tooltip.style("display", "none");
 			d3.select(this)
 				.style('stroke', 'none')
@@ -302,7 +461,7 @@ function wordcloud(dataset) {
 
 	var margin = {top: 10, right: 10, bottom: 10, left: 10}
 	var height = 300 - margin.top - margin.bottom
-	var width = 500 - margin.right - margin.right
+	var width = 600 - margin.right - margin.right
 
 	var svg = d3.select('#chart5')
 				.append('svg').attr('width', 600).attr('height', 300)
@@ -329,7 +488,43 @@ function wordcloud(dataset) {
 				.attr('text-anchor', 'middle')
 				.attr('transform', function(d) {return 'translate('+[d.x,d.y]+')rotate('+d.rotate+')'})
 				.text(function(d) {return d.text})
-	}
+// TODO : wordcloud 에 tool넣기
+//				.on('mouseover', handleMouseOver)
+//				.on('mouseout', handleMouseOut);
+//	}
+//
+//	function handleMouseOver(d) {
+//	var group = svg.append('g')
+//					 .attr('id', 'story-titles');
+//	 var base = d.y - d.size;
+//
+//	group.selectAll('text')
+//		 .data(data['sample_title'][d.key])
+//		 .enter().append('text')
+//		 .attr('x', d.x)
+//		 .attr('y', function(title, i) {
+//		   return (base - i*14);
+//		 })
+//		 .attr('text-anchor', 'middle')
+//		 .text(function(title) { return title; });
+//
+//	var bbox = group.node().getBBox();
+//	var bboxPadding = 5;
+//
+//	// place a white background to see text more clearly
+//	var rect = group.insert('rect', ':first-child')
+//				  .attr('x', bbox.x)
+//				  .attr('y', bbox.y)
+//				  .attr('width', bbox.width + bboxPadding)
+//				  .attr('height', bbox.height + bboxPadding)
+//				  .attr('rx', 10)
+//				  .attr('ry', 10)
+//				  .attr('class', 'label-background-strong');
+//  }
+//
+//  function handleMouseOut(d) {
+//	d3.select('#story-titles').remove();
+  }
 }
 
 
@@ -339,7 +534,7 @@ function circular_packing(dataset) {
 				'#CB4225', '#969696']
 
 	var margin = 25
-	var width	= 500
+	var width	= 600
 	var height = 300
 
 	var svg = d3.select('#chart6')
@@ -362,7 +557,7 @@ function circular_packing(dataset) {
 							.style('stroke-width', 3)
 							.style('opacity', 1) 
 						})
-					.on('mouseout',  function() { 
+					.on('mouseout', function() {
 						tooltip.style("display", "none");
 						d3.select(this)
 							.style('stroke', 'none')
@@ -371,7 +566,7 @@ function circular_packing(dataset) {
 					.on('mousemove', function(d) {
 						tooltip.style("left", (d3.event.pageX + 10) + "px")
 							.style("top", (d3.event.pageY - 10) + "px")
-				            .html(d.name+'<br>채팅 <b>'+d.chat+'</b> 건')
+							.html(d.name+'<br>채팅 <b>'+d.chat+'</b> 건')
 						})
 					.call(d3.drag()
 						.on("start", dragstarted)
@@ -388,7 +583,7 @@ function circular_packing(dataset) {
 
 	simulation.nodes(dataset)
 			.on("tick", function(d){
-		  		node.attr("cx", function(d){ return d.x; })
+				node.attr("cx", function(d){ return d.x; })
 					.attr("cy", function(d){ return d.y; })
 			});
 

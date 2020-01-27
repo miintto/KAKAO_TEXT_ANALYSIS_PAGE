@@ -16,7 +16,7 @@ class Convertor:
 		self.df = None
 
 	def convert(self, file):
-		self.df = pd.read_csv(file, sep='\n', header=None, encoding='utf-8')
+		self.df = pd.read_csv(file, sep='\n', header=None, encoding='utf-8', error_bad_lines=False)
 		df_concat = []
 		self.title = self.df[0].values[0]
 		for line in self.df[0].values:
