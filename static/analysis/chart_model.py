@@ -27,7 +27,7 @@ def make_json(df):
     json_wkday = [{'hour': month, 'wkday': k, 'chat': v} for month, gp in g.items() for k, v in gp.items()]
     result_json.update({'json_wkday': json.dumps(json_wkday)})
 
-    result_json.update({'json_wordcloud': []})
+    result_json.update({'json_wordcloud': [{'word': '개발중... ', 'count': 400}]})
     return result_json
 
 
