@@ -2,6 +2,7 @@
 
 mysite/setting_private.py
 uploads/
+venv/
 
 **/__pycashe__
 *.pyc
