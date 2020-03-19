@@ -14,8 +14,12 @@ def make_json(df):
 
     g = df.groupby('name').size().sort_values(ascending=False)
     name_sorted = g[:10].keys()
+    total_chat = sum(g)
     json_pie = [{'name': k, 'chat': v} for k, v in g[:10].items()]
+    json_packing = [{'name':user.get('name'), 'chat':user.get('chat'), 'area':user.get('chat')/total_chat*15000} for user in json_pie]
     result_json.update({'json_pie': json.dumps(json_pie)})
+    result_json.update({'json_packing': json.dumps(json_packing)})
+
 
     g = df.pivot_table(index='name', columns='month', aggfunc="size", fill_value=0).reindex(name_sorted)
     json_heatmap = [{'month': month, 'name': k, 'chat': v} for month, gp in g.items() for k, v in gp.items()]
@@ -42,6 +46,8 @@ def make_sample():
     json_pie = sample.json_pie
     json_wkday = sample.json_wkday
     json_wordcloud = sample.json_wordcloud
+    json_packing = sample.json_packing
+
 
     result_json.update({'start_date': '2019-01-01'})
     result_json.update({'end_date': '2019-12-31'})
@@ -51,4 +57,5 @@ def make_sample():
     result_json.update({'json_pie': json.dumps(json_pie)})
     result_json.update({'json_wkday': json.dumps(json_wkday)})
     result_json.update({'json_wordcloud': json.dumps(json_wordcloud)})
+    result_json.update({'json_packing': json.dumps(json_packing)})
     return result_json

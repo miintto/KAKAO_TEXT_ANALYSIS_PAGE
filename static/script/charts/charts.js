@@ -1,4 +1,4 @@
-function heatmap(dataset) {
+function chart_heatmap(dataset, chart_idx) {
 	var myColor = d3.scaleSequential(d3.interpolateBlues)
 		.domain([0, d3.max(dataset, function(d){ return d.chat**0.5;})])
 
@@ -9,7 +9,7 @@ function heatmap(dataset) {
 	var height = 300 - margin.top-margin.bottom;	// height = 300-20 = 280
 
 
-	var svg = d3.select('#chart1')
+	var svg = d3.select(chart_idx)
 				.append('svg').attr('width', 600).attr('height', 300)
 				.append('g').attr('transform', "translate("+margin.left+","+margin.top+")");
 
@@ -62,7 +62,7 @@ function heatmap(dataset) {
 
 
 
-function pie_chart(dataset) {
+function chart_pie(dataset, chart_idx) {
 	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513',
 				'#CB4225', '#969696']
 
@@ -71,7 +71,7 @@ function pie_chart(dataset) {
 	var height = 300
 	var radius = height/2
 
-	var svg = d3.select('#chart2')
+	var svg = d3.select(chart_idx)
 				.append('svg').attr('class', 'background').attr('width', width).attr('height', height)
 				.append('g').attr('transform', "translate("+width/2+","+height/2+")")
 
@@ -166,7 +166,7 @@ function pie_chart(dataset) {
 
 
 
-function area_chart(dataset) {
+function chart_area(dataset, chart_idx) {
 	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513',
 				'#CB4225', '#969696']
 
@@ -175,7 +175,7 @@ function area_chart(dataset) {
 	var width  = 600 - margin.right-margin.left;	// width = 500-30 = 470
 	var height = 300 - margin.top-margin.bottom;	// height = 300-20 = 280
 
-	var svg = d3.select('#chart8')
+	var svg = d3.select(chart_idx)
 				.append('svg').attr('class', 'background').attr('width', 600).attr('height', 300)
 				.append('g').attr('transform', "translate("+margin.left+","+margin.top+")");
 
@@ -248,7 +248,7 @@ function area_chart(dataset) {
 
 
 
-function stream_chart(dataset) {
+function chart_stream(dataset, chart_idx) {
 	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513',
 				'#CB4225', '#969696']
 
@@ -257,7 +257,7 @@ function stream_chart(dataset) {
 	var width  = 560 - margin.right-margin.left;	// width = 500-30 = 470
 	var height = 300 - margin.top-margin.bottom;	// height = 300-20 = 280
 
-	var svg = d3.select('#chart3')
+	var svg = d3.select(chart_idx)
 				.append('svg').attr('class', 'background').attr('width', 600).attr('height', 300)
 				.append('g').attr('transform', "translate("+margin.left+","+margin.top+")");
 
@@ -325,7 +325,7 @@ function stream_chart(dataset) {
 
 
 
-function barchart(dataset) {
+function chart_bar(dataset, chart_idx) {
 	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513', 
 				'#CB4225', '#969696']
 
@@ -334,7 +334,7 @@ function barchart(dataset) {
 	var width  = 560 - margin.right-margin.left;	// width = 500-30 = 470
 	var height = 300 - margin.top-margin.bottom;	// height = 300-20 = 280
 
-	var svg = d3.select('#chart7')
+	var svg = d3.select(chart_idx)
 				.append('svg').attr('class', 'background').attr('width', 600).attr('height', 300)
 				.append('g').attr('transform', "translate("+margin.left+","+margin.top+")");
 
@@ -388,7 +388,7 @@ function barchart(dataset) {
 
 
 
-function heatmap2(dataset) {
+function chart_wkday(dataset, chart_idx) {
 	var myColor = d3.scaleSequential(d3.interpolateBlues)
 		.domain([0, d3.max(dataset, function(d){ return d.chat**0.5;})])
 
@@ -400,7 +400,7 @@ function heatmap2(dataset) {
 	var height = 300 - margin.top-margin.bottom;	// height = 300-20 = 280
 
 
-	var svg = d3.select('#chart4')
+	var svg = d3.select(chart_idx)
 				.append('svg').attr('width', 600).attr('height', 300)
 				.append('g').attr('transform', "translate("+margin.left+","+margin.top+")");
 
@@ -455,7 +455,7 @@ function heatmap2(dataset) {
 
 
 
-function wordcloud(dataset) {
+function chart_wordcloud(dataset, chart_idx) {
 	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513', 
 				'#CB4225', '#969696']
 
@@ -463,7 +463,7 @@ function wordcloud(dataset) {
 	var height = 300 - margin.top - margin.bottom
 	var width = 600 - margin.right - margin.right
 
-	var svg = d3.select('#chart5')
+	var svg = d3.select(chart_idx)
 				.append('svg').attr('width', 600).attr('height', 300)
 				.append('g').attr('transform', "translate("+margin.left+","+margin.top+")")
 
@@ -529,7 +529,7 @@ function wordcloud(dataset) {
 
 
 
-function circular_packing(dataset) {
+function chart_circular_packing(dataset, chart_idx) {
 	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513', 
 				'#CB4225', '#969696']
 
@@ -537,7 +537,7 @@ function circular_packing(dataset) {
 	var width	= 600
 	var height = 300
 
-	var svg = d3.select('#chart6')
+	var svg = d3.select(chart_idx)
 				.append('svg').attr('class', 'background').attr('width', width).attr('height', height)
 
 	var node = svg.append('g')
@@ -545,7 +545,7 @@ function circular_packing(dataset) {
 				.data(dataset)
 				.enter().append('circle')
 					.attr('class', 'cell')
-					.attr('r', function(d) {return d.chat**0.5})
+					.attr('r', function(d) {return d.area**0.5})
 					.attr("cx", width / 2)
 					.attr("cy", height / 2)
 					.style("fill", function(d, i){return color[i]})
@@ -579,7 +579,7 @@ function circular_packing(dataset) {
 		.force("forceY", d3.forceY().strength(.05).y(height * .5))  // 가운데로 몰리도록 y축
 		.force("center", d3.forceCenter().x(width / 2).y(height / 2))
 		.force("charge", d3.forceManyBody().strength(.1))
-		.force("collide", d3.forceCollide().strength(.5).radius(function(d){return d.chat**0.5}).iterations(1)) // node끼리 밀어내는 힘
+		.force("collide", d3.forceCollide().strength(.5).radius(function(d){return d.area**0.5}).iterations(1)) // node끼리 밀어내는 힘
 
 	simulation.nodes(dataset)
 			.on("tick", function(d){
