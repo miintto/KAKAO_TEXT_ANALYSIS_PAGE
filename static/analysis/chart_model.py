@@ -28,6 +28,7 @@ def make_json(df):
     result_json.update({'json_stream': json.dumps(json_stream)})
 
     g = df.pivot_table(index='wkday', columns='hour', aggfunc="size", fill_value=0)
+    g = g.reindex(index=range(7), columns=[str(i).zfill(2) for i in range(24)]).fillna(0)
     json_wkday = [{'hour': month, 'wkday': k, 'chat': v} for month, gp in g.items() for k, v in gp.items()]
     result_json.update({'json_wkday': json.dumps(json_wkday)})
 
