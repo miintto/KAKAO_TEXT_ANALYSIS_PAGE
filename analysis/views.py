@@ -9,16 +9,22 @@ import pandas as pd
 import numpy as np
 import os
 
+import logging
+logger = logging.getLogger(__name__)
 
 
 class Main(View):
 	def get(self, request):
+		session_key = request.session.session_key
+		print(f'>>> session_key = {session_key}')
 		template = 'analysis/main.html'
 		return render(request, template)
 
 
 class Check(View):
 	def get(self, request):
+		session_key = request.session.session_key
+		print(f'>>> session_key = {session_key}')
 		return HttpResponseRedirect(reverse('main'))
 
 	def post(self, request):
@@ -41,30 +47,37 @@ class Check(View):
 			request.session['file_title'] = con.title
 
 			return render(request, template, {'message':message, 'is_load':is_load})
-		except:
+
+		except Exception as e:
+			print(f'>>> Load File Exception : {e}')
 			is_load = False
 			return render(request, template, {'message':message, 'is_load':is_load})
 
 
 class Charts(View):
 	def get(self, request):
-		template = 'analysis/charts.html'
-		result_json = make_sample()
-		return render(request, template, result_json)
-
-	def post(self, request):
+		session_key = request.session.session_key
+		print(f'>>> session_key = {session_key}')
 		template = 'analysis/charts.html'
 		if 'is_file' in request.session:
-
-			file = request.session['filename']
-			title = request.session['file_title']
-			df = pd.read_csv(file, encoding='utf-8-sig')
-			result_json = make_json(df)
-			result_json.update({'title':title})
-
-			return render(request, template, result_json)
+		# result_json = make_sample()
+			return render(request, template)
 		else:
 			return HttpResponseRedirect(reverse('main'))
+
+	# def post(self, request):
+	# 	template = 'analysis/charts.html'
+	# 	if 'is_file' in request.session:
+	#
+	# 		file = request.session['filename']
+	# 		title = request.session['file_title']
+	# 		df = pd.read_csv(file, encoding='utf-8-sig')
+	# 		result_json = make_json(df)
+	# 		result_json.update({'title':title})
+	#
+	# 		return render(request, template, result_json)
+	# 	else:
+	# 		return HttpResponseRedirect(reverse('main'))
 
 
 class Inquiry(View):

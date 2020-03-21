@@ -1,34 +1,133 @@
-var json_str = $('#json_dump_heatmap').text();
-json_str = json_str.replace(/\'/g, '"');
-var json_heatmap = JSON.parse(json_str);
-chart_heatmap(json_heatmap, '#chart1');
+var csrf_token = $('[name=csrfmiddlewaretoken]').val();
 
-var json_str = $('#json_dump_pie').text();
-json_str = json_str.replace(/\'/g, '"');
-var json_pie = JSON.parse(json_str);
-chart_pie(json_pie, '#chart2');
+$.ajax({
+    url: '/api/heatmap/monthly',
+    type: 'POST',
+    dataType: "JSON",
+    beforeSend: function () {
+        console.log('beforeSend')
+    },
+    data: {
+        'csrfmiddlewaretoken': csrf_token
+    },
+    success: function (data) {
+        chart_heatmap(data['data'], '#chart1');
+    },
+    fail: function (err) {
+        console.log(err);
+    }
+})
 
-var json_str = $('#json_dump_stream').text();
-json_str = json_str.replace(/\'/g, '"');
-var json_stream = JSON.parse(json_str);
-chart_stream(json_stream, '#chart3');
 
-var json_str = $('#json_dump_wkday').text();
-json_str = json_str.replace(/\'/g, '"');
-var json_wkday = JSON.parse(json_str);
-chart_wkday(json_wkday, '#chart4');
+$.ajax({
+    url: '/api/pie/total',
+    type: 'POST',
+    dataType: "JSON",
+    beforeSend: function () {
+        console.log('beforeSend')
+    },
+    data: {
+        'csrfmiddlewaretoken': csrf_token
+    },
+    success: function (data) {
+        chart_pie(data['data'], '#chart2');
+    },
+    fail: function (err) {
+        console.log(err);
+    }
+})
 
-var json_str = $('#json_dump_wordcloud').text();
-json_str = json_str.replace(/\'/g, '"');
-var json_wordcloud = JSON.parse(json_str);
-chart_wordcloud(json_wordcloud, '#chart5');
 
-var json_str = $('#json_dump_packing').text();
-json_str = json_str.replace(/\'/g, '"');
-var json_circular_packing = JSON.parse(json_str);
-chart_circular_packing(json_circular_packing, '#chart6');
+$.ajax({
+    url: '/api/stream/monthly',
+    type: 'POST',
+    dataType: "JSON",
+    beforeSend: function () {
+        console.log('beforeSend')
+    },
+    data: {
+        'csrfmiddlewaretoken': csrf_token
+    },
+    success: function (data) {
+        chart_stream(data['data'], '#chart3');
+    },
+    fail: function (err) {
+        console.log(err);
+    }
+})
 
-var json_str = $('#json_dump_pie').text();
-json_str = json_str.replace(/\'/g, '"');
-var json_bar = JSON.parse(json_str);
-chart_bar(json_bar, '#chart7');
+
+$.ajax({
+    url: '/api/heatmap/time',
+    type: 'POST',
+    dataType: "JSON",
+    beforeSend: function () {
+        console.log('beforeSend')
+    },
+    data: {
+        'csrfmiddlewaretoken': csrf_token
+    },
+    success: function (data) {
+        chart_wkday(data['data'], '#chart4');
+    },
+    fail: function (err) {
+        console.log(err);
+    }
+})
+
+
+$.ajax({
+    url: '/api/wordcloud',
+    type: 'POST',
+    dataType: "JSON",
+    beforeSend: function () {
+        console.log('beforeSend')
+    },
+    data: {
+        'csrfmiddlewaretoken': csrf_token
+    },
+    success: function (data) {
+        chart_wordcloud(data['data'], '#chart5');
+    },
+    fail: function (err) {
+        console.log(err);
+    }
+})
+
+
+$.ajax({
+    url: '/api/circularpacking',
+    type: 'POST',
+    dataType: "JSON",
+    beforeSend: function () {
+        console.log('beforeSend')
+    },
+    data: {
+        'csrfmiddlewaretoken': csrf_token
+    },
+    success: function (data) {
+        chart_circular_packing(data['data'], '#chart6');
+    },
+    fail: function (err) {
+        console.log(err);
+    }
+})
+
+
+$.ajax({
+    url: '/api/bar/user',
+    type: 'POST',
+    dataType: "JSON",
+    beforeSend: function () {
+        console.log('beforeSend')
+    },
+    data: {
+        'csrfmiddlewaretoken': csrf_token
+    },
+    success: function (data) {
+        chart_bar(data['data'], '#chart7');
+    },
+    fail: function (err) {
+        console.log(err);
+    }
+})
