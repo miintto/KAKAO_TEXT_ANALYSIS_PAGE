@@ -18,7 +18,7 @@ class Main(View):
 	def get(self, request):
 		ip = get_ip(request)
 		session_key = request.session.session_key
-		logger.debug(f'[USER SESSION] : {ip} - {session_key}')
+		logger.debug(f'[USER SESSION] ip: {ip} / session_key: {session_key}')
 
 		template = 'analysis/main.html'
 		return render(request, template)
@@ -28,14 +28,14 @@ class Check(View):
 	def get(self, request):
 		ip = get_ip(request)
 		session_key = request.session.session_key
-		logger.debug(f'[USER SESSION] : {ip} - {session_key}')
+		logger.debug(f'[USER SESSION] ip: {ip} / session_key: {session_key}')
 
 		return HttpResponseRedirect(reverse('main'))
 
 	def post(self, request):
 		ip = get_ip(request)
 		session_key = request.session.session_key
-		logger.debug(f'[USER SESSION] : {ip} - {session_key}')
+		logger.debug(f'[USER SESSION] ip: {ip} / session_key: {session_key}')
 
 		template = 'analysis/check.html'
 		message = None
@@ -68,7 +68,7 @@ class Charts(View):
 	def get(self, request):
 		ip = get_ip(request)
 		session_key = request.session.session_key
-		logger.debug(f'[USER SESSION] : {ip} - {session_key}')
+		logger.debug(f'[USER SESSION] ip: {ip} / session_key: {session_key}')
 
 		template = 'analysis/charts.html'
 		if 'is_file' in request.session:
@@ -81,7 +81,7 @@ class Inquiry(View):
 	def get(self, request):
 		ip = get_ip(request)
 		session_key = request.session.session_key
-		logger.debug(f'[USER SESSION] : {ip} - {session_key}')
+		logger.debug(f'[USER SESSION] ip: {ip} / session_key: {session_key}')
 
 		template = 'analysis/inquiry.html'
 		return render(request, template)
