@@ -1,11 +1,54 @@
 var csrf_token = $('[name=csrfmiddlewaretoken]').val();
 
 $.ajax({
+    url: '/api/title',
+    type: 'POST',
+    dataType: "JSON",
+    beforeSend: function () {
+        $('div.title').html("<h1>-</h1>")
+    },
+    data: {
+        'csrfmiddlewaretoken': csrf_token
+    },
+    success: function (data) {
+        console.log(data)
+        title = data['title']
+        $('div#title').html("<h1>"+title+"</h1>")
+    },
+    fail: function (err) {
+        console.log(err);
+    }
+})
+
+
+$.ajax({
+    url: '/api/date/interval',
+    type: 'POST',
+    dataType: "JSON",
+    beforeSend: function () {
+        $('div.range-date').html("<div><p>분석기간 : 0000-00-00 ~ 0000-00-00</p></div>")
+    },
+    data: {
+        'csrfmiddlewaretoken': csrf_token
+    },
+    success: function (data) {
+        start_date = data['start_date']
+        end_date = data['end_date']
+        console.log(start_date)
+        $('div.range-date').html("<div><p>분석기간 : "+start_date+" ~ "+end_date+"</p></div>")
+    },
+    fail: function (err) {
+        console.log(err);
+    }
+})
+
+
+$.ajax({
     url: '/api/heatmap/monthly',
     type: 'POST',
     dataType: "JSON",
     beforeSend: function () {
-        console.log('beforeSend')
+        console.log('ajax beforeSend - Loading chart')
     },
     data: {
         'csrfmiddlewaretoken': csrf_token
@@ -24,7 +67,7 @@ $.ajax({
     type: 'POST',
     dataType: "JSON",
     beforeSend: function () {
-        console.log('beforeSend')
+        console.log('ajax beforeSend - Loading chart')
     },
     data: {
         'csrfmiddlewaretoken': csrf_token
@@ -43,7 +86,7 @@ $.ajax({
     type: 'POST',
     dataType: "JSON",
     beforeSend: function () {
-        console.log('beforeSend')
+        console.log('ajax beforeSend - Loading chart')
     },
     data: {
         'csrfmiddlewaretoken': csrf_token
@@ -62,7 +105,7 @@ $.ajax({
     type: 'POST',
     dataType: "JSON",
     beforeSend: function () {
-        console.log('beforeSend')
+        console.log('ajax beforeSend - Loading chart')
     },
     data: {
         'csrfmiddlewaretoken': csrf_token
@@ -81,7 +124,7 @@ $.ajax({
     type: 'POST',
     dataType: "JSON",
     beforeSend: function () {
-        console.log('beforeSend')
+        console.log('ajax beforeSend - Loading chart')
     },
     data: {
         'csrfmiddlewaretoken': csrf_token
@@ -100,7 +143,7 @@ $.ajax({
     type: 'POST',
     dataType: "JSON",
     beforeSend: function () {
-        console.log('beforeSend')
+        console.log('ajax beforeSend - Loading chart')
     },
     data: {
         'csrfmiddlewaretoken': csrf_token
@@ -119,7 +162,7 @@ $.ajax({
     type: 'POST',
     dataType: "JSON",
     beforeSend: function () {
-        console.log('beforeSend')
+        console.log('ajax beforeSend - Loading chart')
     },
     data: {
         'csrfmiddlewaretoken': csrf_token

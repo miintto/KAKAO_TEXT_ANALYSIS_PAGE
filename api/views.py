@@ -8,6 +8,24 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+class Title(View):
+    def post(self, request):
+        title = request.session['file_title']
+        json_res = {'title': title}
+        return JsonResponse(json_res)
+
+
+class DateInterval(View):
+    def post(self, request):
+        file = request.session['filename']
+        df = pd.read_csv(file, encoding='utf-8-sig')
+
+        start_date = df['date'].values[0]
+        end_date = df['date'].values[-1]
+        json_res = {'start_date': start_date, 'end_date': end_date}
+        return JsonResponse(json_res)
+
+
 class HeatmapMonthly(View):
     def post(self, request):
         file = request.session['filename']
