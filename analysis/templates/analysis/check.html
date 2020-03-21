@@ -11,17 +11,15 @@
 	<div class="main-box">
 		<div id="status-box" class="status-box">
 			<h2>{{ message }}</h2>
+			{% csrf_token %}
 		</div>
 		<div id="status-contents">
 
 			{% if is_load %}
 			<div class="main-contents">
-<!--				<form method="GET" action="{% url 'charts' %}">-->
-					{% csrf_token %}
-					<div>
-						<button onclick="load_charts()" class='charts'>분석</button>
-					</div>
-<!--				</form>-->
+				<div>
+					<button onclick="load_charts()" class='charts'>분석</button>
+				</div>
 			</div>
 
 			{% else %}

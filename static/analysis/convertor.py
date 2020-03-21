@@ -2,6 +2,9 @@ import pandas as pd
 import numpy as np
 import datetime as dt
 
+import logging
+logger = logging.getLogger('analysis')
+print(__name__)
 
 
 class Convertor:
@@ -10,7 +13,6 @@ class Convertor:
 	(PC버전만 유효)
 	'''
 	def __init__(self):
-		self.date = None
 		self.title = None
 		self.df_input = None
 		self.type = None
@@ -18,8 +20,9 @@ class Convertor:
 
 	def _load_file(self, file):
 		self.df_input = pd.read_csv(file, sep='\n', header=None, encoding='utf-8', error_bad_lines=False)
+		logger.debug(f'[Convertor] _load_file() : df_input.__len__ = {len(self.df_input)}')
 		self.title = self.df_input.values[0, 0]
-		print(f'>>> Convertor._load_file()         -  file = {file}')
+		logger.debug(f'[Convertor] _load_file() : title = {self.title}')
 
 	def _check_type(self):
 		if '저장한 날짜 :' in self.df_input.values[1, 0]:
@@ -29,9 +32,10 @@ class Convertor:
 				self.type = 'Mobile'
 		else:
 			pass
-		print(f'>>> Convertor._check_type()        -  type = {self.type}')
+		logger.debug(f'[Convertor] _check_type() : type = {self.type}')
 
 	def _append_by_pc(self):
+		self.date = None
 		for line in self.df_input[0].values:
 			try:
 				split1 = line.find('] [')
@@ -48,7 +52,7 @@ class Convertor:
 					pass
 				else:
 					self.chat_list.append([self.date, None, None, line])
-		print(f'>>> Convertor._append_by_pc()      -  len(chat_list) = {len(self.chat_list)}')
+		logger.debug(f'[Convertor] _append_by_pc() : chat_list.__len__ = {len(self.chat_list)}')
 
 	def _append_by_mobile(self):
 		for line in self.df_input[0].values:
@@ -65,7 +69,7 @@ class Convertor:
 					self.chat_list.append([date, time, name, chat])
 			except:
 				self.chat_list.append([None, None, None, line])
-		print(f'>>> Convertor._append_by_mobile()  -  len(chat_list) = {len(self.chat_list)}')
+		logger.debug(f'[Convertor] _append_by_mobile() : chat_list.__len__ = {len(self.chat_list)}')
 
 	def _append_chat(self):
 		if self.type=='PC':
@@ -83,14 +87,14 @@ class Convertor:
 				del array[i]
 		del array[0]
 		self.chat_list = array
-		print(f'>>> Convertor._join_chat()         -  len(chat_list) = {len(self.chat_list)}')
+		logger.debug(f'[Convertor] _join_chat() : chat_list.__len__ = {len(self.chat_list)}')
 
 	def convert(self, file):
-		print(f'>>> Convertor.convert() : START')
+		logger.debug(f'[Convertor]  START')
 		self._load_file(file)
 		self._check_type()
 		self._append_chat()
 		self._join_chat()
-		print(f'>>> Convertor.convert() : END    -  title = {self.title}')
 		df_chat = pd.DataFrame(self.chat_list, columns=['date', 'time', 'name', 'chat'])
+		logger.debug(f'[Convertor]  END')
 		return df_chat

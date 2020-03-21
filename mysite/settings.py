@@ -132,3 +132,43 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/uploads/'
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'standard': {
+            # 'format': '[%(asctime)s] <%(levelname)s> %(message)s \t\t\t\t\t\t[%(name)s:%(lineno)d]',
+            'format': '[%(asctime)s] <%(levelname)s> %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/kakao.log'),
+            'formatter': 'standard',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard',
+        }
+    },
+    'loggers': {
+        'django.server': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+        },
+        'api': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG'
+        },
+        'analysis': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG'
+        }
+    }
+}

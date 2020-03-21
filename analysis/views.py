@@ -11,23 +11,32 @@ import os
 
 import logging
 logger = logging.getLogger(__name__)
+print(__name__)
 
 
 class Main(View):
 	def get(self, request):
+		ip = get_ip(request)
 		session_key = request.session.session_key
-		print(f'>>> session_key = {session_key}')
+		logger.debug(f'[USER SESSION] : {ip} - {session_key}')
+
 		template = 'analysis/main.html'
 		return render(request, template)
 
 
 class Check(View):
 	def get(self, request):
+		ip = get_ip(request)
 		session_key = request.session.session_key
-		print(f'>>> session_key = {session_key}')
+		logger.debug(f'[USER SESSION] : {ip} - {session_key}')
+
 		return HttpResponseRedirect(reverse('main'))
 
 	def post(self, request):
+		ip = get_ip(request)
+		session_key = request.session.session_key
+		logger.debug(f'[USER SESSION] : {ip} - {session_key}')
+
 		template = 'analysis/check.html'
 		message = None
 		try:
@@ -45,42 +54,43 @@ class Check(View):
 			request.session['filename'] = filename
 			request.session['is_file'] = True
 			request.session['file_title'] = con.title
+			logger.debug(f'[SUCCESS] Save file : {filename}')
 
 			return render(request, template, {'message':message, 'is_load':is_load})
 
 		except Exception as e:
-			print(f'>>> Load File Exception : {e}')
+			logger.debug(f'[EXCEPTION] : {e}')
 			is_load = False
 			return render(request, template, {'message':message, 'is_load':is_load})
 
 
 class Charts(View):
 	def get(self, request):
+		ip = get_ip(request)
 		session_key = request.session.session_key
-		print(f'>>> session_key = {session_key}')
+		logger.debug(f'[USER SESSION] : {ip} - {session_key}')
+
 		template = 'analysis/charts.html'
 		if 'is_file' in request.session:
-		# result_json = make_sample()
 			return render(request, template)
 		else:
 			return HttpResponseRedirect(reverse('main'))
 
-	# def post(self, request):
-	# 	template = 'analysis/charts.html'
-	# 	if 'is_file' in request.session:
-	#
-	# 		file = request.session['filename']
-	# 		title = request.session['file_title']
-	# 		df = pd.read_csv(file, encoding='utf-8-sig')
-	# 		result_json = make_json(df)
-	# 		result_json.update({'title':title})
-	#
-	# 		return render(request, template, result_json)
-	# 	else:
-	# 		return HttpResponseRedirect(reverse('main'))
-
 
 class Inquiry(View):
 	def get(self, request):
+		ip = get_ip(request)
+		session_key = request.session.session_key
+		logger.debug(f'[USER SESSION] : {ip} - {session_key}')
+
 		template = 'analysis/inquiry.html'
 		return render(request, template)
+
+
+def get_ip(request):
+	x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+	if x_forwarded_for:
+		ip = x_forwarded_for.split(',')[0]
+	else:
+		ip = request.META.get('REMOTE_ADDR')
+	return ip
