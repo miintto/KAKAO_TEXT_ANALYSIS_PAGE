@@ -169,6 +169,10 @@ LOGGING = {
         'analysis': {
             'handlers': ['file', 'console'],
             'level': 'DEBUG'
+        },
+        'static': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG'
         }
     }
 }

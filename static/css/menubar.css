@@ -20,44 +20,42 @@ body{
 }
 
 .menu-button {
-	width: 100px;
+	width: 125px;
 	height: 50px;
 	color: #40342F;
-	text-align: center;
-	border-top: 10px;
 	display: table;
 	float: left;
 }
 
 .menu-button a {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 30px;
-	padding-right: 30px;
+    display: block;
+    height: 100%;
+    line-height: 50px;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
 	text-decoration:none;
-	font-weight: bold;
-	color: #40342F;
+	color: #FFFFFF;
 }
 
 .menu-button-active {
-	width: 100px;
+	width: 125px;
 	height: 50px;
 	color: #40342F;
-	text-align: center;
-	border-top: 10px;
 	display: table;
 	float: left;
 	background-color: #82939E;
 }
 
 .menu-button-active a{
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 30px;
-	padding-right: 30px;
+    display: block;
+    height: 100%;
+    line-height: 50px;
+    font-size: 20px;
+    text-align:center;
+    vertical-align: middle;
 	text-decoration:none;
-	font-weight: bold;
-	color: #40342F;
+	color: #FFFFFF;
 }
 
 .menu-button-text {

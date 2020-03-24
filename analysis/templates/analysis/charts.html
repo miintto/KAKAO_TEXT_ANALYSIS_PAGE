@@ -12,91 +12,100 @@
 </head>
 <body>
 	<div id="title">
-		<h1></h1>
+		<h2></h2>
 	</div>
 	<div class="menu-bar">
 		<div>
 			<div class="menu-button">
-				<div class="menu-button-text"><a class="sidemenu" href="{% url 'main' %}">처음</a></div>
+				<div class="menu-button-text"><a class="sidemenu" href="{% url 'main' %}">Main</a></div>
 			</div>
 			<div class="menu-button-active">
-				<div class="menu-button-text"><a class="sidemenu" href="{% url 'charts' %}">차트</a></div>
+				<div class="menu-button-text"><a class="sidemenu" href="{% url 'charts' %}">Charts</a></div>
 			</div>
 			<div class="menu-button">
-				<div class="menu-button-text"><a class="sidemenu" href="{% url 'inquiry' %}">정보</a></div>
+				<div class="menu-button-text"><a class="sidemenu" href="{% url 'inquiry' %}">Info</a></div>
 			</div>
 		</div>
-	</div>
-	<div class="range-date">
-		<div><p>분석기간 : </p></div>
 	</div>
 	<div id="contents">
 		{% csrf_token %}
 		<table class='chart-table'>
-			<tr>
-				<td>
-					<div id='chart1' class="chartbox">
-						<div class="chartbox-title">
-							<h2>#월별 대화량</h2>
+			<tbody>
+				<tr>
+					<td>
+						<div class="date-box">
+							<ul class="date-interval">
+								<li><p id="startdate" class="date-box"></p></li>
+								<li><p id="enddate"class="date-box"></p></li>
+							</ul>
 						</div>
-					</div>
-				</td>
-				<td>
-					<div id='chart2' class="chartbox">
-						<div class="chartbox-title">
-							<h2>#사용자 점유율</h2>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div id='chart1' class="chartbox">
+							<div class="chartbox-title">
+								<h2>#월별 대화량</h2>
+							</div>
 						</div>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<div id='chart3' class="chartbox">
-						<div class="chartbox-title">
-							<h2>#월별 대화 변동</h2>
+					</td>
+					<td>
+						<div id='chart2' class="chartbox">
+							<div class="chartbox-title">
+								<h2>#사용자 점유율</h2>
+							</div>
 						</div>
-					</div>
-				</td>
-				<td>
-					<div id='chart4' class="chartbox">
-						<div class="chartbox-title">
-							<h2>#요일x시간별 대화량</h2>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div id='chart3' class="chartbox">
+							<div class="chartbox-title">
+								<h2>#월별 대화 변동</h2>
+							</div>
 						</div>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<div id='chart5' class="chartbox">
-						<div class="chartbox-title">
-							<h2>#최빈 사용단어</h2>
+					</td>
+					<td>
+						<div id='chart4' class="chartbox">
+							<div class="chartbox-title">
+								<h2>#요일x시간별 대화량</h2>
+							</div>
 						</div>
-					</div>
-				</td>
-				<td>
-					<div id='chart6' class="chartbox">
-						<div class="chartbox-title">
-							<h2>#사용자 대화량</h2>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div id='chart5' class="chartbox">
+							<div class="chartbox-title">
+								<h2>#최빈 사용단어</h2>
+							</div>
 						</div>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<div id='chart7' class="chartbox">
-						<div class="chartbox-title">
-							<h2>#잉여력 랭킹</h2>
+					</td>
+					<td>
+						<div id='chart6' class="chartbox">
+							<div class="chartbox-title">
+								<h2>#사용자 대화량</h2>
+							</div>
 						</div>
-					</div>
-				</td>
-				<td>
-					<div id='chart8' class="chartbox">
-						<div class="chartbox-title">
-							<h2>#Chart 8</h2>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div id='chart7' class="chartbox">
+							<div class="chartbox-title">
+								<h2>#잉여력 랭킹</h2>
+							</div>
 						</div>
-					</div>
-				</td>
-			</tr>
+					</td>
+					<td>
+						<div id='chart8' class="chartbox">
+							<div class="chartbox-title">
+								<h2>#Chart 8</h2>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
 		</table>
 	</div>
 	<script src="{% static 'script/charts/charts.js' %}"></script>

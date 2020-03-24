@@ -3,9 +3,9 @@ function chart_heatmap(dataset, chart_idx) {
 		.domain([0, d3.max(dataset, function(d){ return d.chat**0.5;})])
 
 
-	var margin = {top: 10, right: 10, bottom: 30, left: 60};
+	var margin = {top: 10, right: 10, bottom: 30, left: 80};
 
-	var width  = 560 - margin.right-margin.left;	// width = 500-30 = 470
+	var width  = 560 - margin.right-margin.left;	// width = 560-30 = 530
 	var height = 300 - margin.top-margin.bottom;	// height = 300-20 = 280
 
 

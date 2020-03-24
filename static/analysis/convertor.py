@@ -3,8 +3,7 @@ import numpy as np
 import datetime as dt
 
 import logging
-logger = logging.getLogger('analysis')
-print(__name__)
+logger = logging.getLogger(__name__)
 
 
 class Convertor:
