@@ -15,15 +15,20 @@ ul.date-interval li {
     padding-left: 20px;
 }
 
-p.date-box{
+p.date-box {
     margin: 0px;
 	color: #FFFFFF;
-	background-color: #8EA0AD;
+	background-color: #9AADBC;
     width: 150px;
     height: 36px;
     text-align: center;
 	border-radius: 2em;
     line-height: 36px;
+    cursor: pointer;
+}
+
+p.date-box:hover {
+	background-color: #8EA0AD;
 }
 
 div.chartbox {
@@ -40,17 +45,20 @@ div.chartbox svg {
 	margin-right: auto;
 	margin-bottom: 80px;
 }
+
 .chartbox {
 	width: 630px;
 	height: 360px;
 	border-radius: 1.5em;
 	background-color: #F6F6F6;
 }
+
 .chartbox-title {
     padding-top: 10px;
     padding-left: 18px;
     padding-bottom: 18px;
 }
+
 .chartbox-title h2 {
 	text-align: left;
 	margin: 0px;
@@ -60,6 +68,7 @@ div.chartbox svg {
 .cell:hover {
 	cursor: pointer;
 }
+
 .tooltip {
 	position: absolute;
 	border: 0px solid;

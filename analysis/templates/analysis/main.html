@@ -4,12 +4,13 @@
 	{% load static %}
 	<title>Main</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <script type="text/javascript" src="{% static 'script/common.js' %}"></script>
+    <script type="text/javascript" src="{% static 'script/jquery-1.12.4.min.js' %}"></script>
 </head>
 
 <body>
 	<div class="main-box">
-		<div>
-			<h1>Main</h1>
+		<div class="main-margin-top">
 		</div>
 		<div>
 			<div class="main-comment">
@@ -18,9 +19,12 @@
 			<form method="POST" action="{% url 'check' %}" enctype="multipart/form-data">
 				{% csrf_token %}
 				<div class="load-file">
-					<input type="file" name="uploadfile">
+					<label id="upload-space" for="upload">업로드</label>
+					<input type="file" id="upload" name="uploadfile" onchange="LoadFile()">
 				</div>
-				<button>분석</button>
+				<div class="main-button">
+					<button id="next-check">분석</button>
+				</div>
 			</form>
 		</div>
 	</div>

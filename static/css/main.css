@@ -8,32 +8,27 @@ div.main-box {
 	margin : auto;
 	margin-top: 50px;
 	/*background-color: #FFEB33;*/
-	background-color: #FFFFFF;
+	background-color: #F6F6F6;
 	width: 400px;
 	height: 600px;
 	border-radius: 1.5em;
 }
 
-.main-box h1 {
-	padding: 70px;
-	text-align : center;
-	color: #40342F;
-}
-
-.main-box button{
-	width: 360px;
+div.main-margin-top {
 	height: 80px;
-	border-radius: 1em;
-	background-color: #F6F6F6;
-	color: #7A7A7A	;
 }
 
-.main-comment {
-	padding-bottom: 30px
+div.main-comment {
+	padding: 30px;
 }
 
-.main-sample {
-	padding: 50px
+div.main-button{
+    padding: 30px;
+    visibility:hidden;
+}
+
+div.main-sample {
+	padding: 50px;
 }
 
 .status-box h2 {
@@ -47,8 +42,57 @@ div.main-box {
 	padding-top: 50px;
 	padding-bottom: 50px;
 }
+
 .load-file {
-	padding-bottom: 30px;
+	padding: 30px;
+}
+
+.load-file label {
+    padding: 60px 60px;
+    width: 100px;
+    display: inline-block;
+    background-color: #F6F6F6;
+    color: #BBBBBB;
+    border: 1px solid #BBBBBB;
+    text-align:center;
+    vertical-align: middle;
+    cursor: pointer;
+    border-radius: .25em;
+}
+
+.load-file label:hover {
+    background-color: #FAFAFA;
+}
+
+.load-file input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip:rect(0,0,0,0);
+    border: 0;
+}
+
+.next-charts button {
+    margin: 0;
+    border: 0;
+    display: inline-block;
+	background-color: #FFEB33;
+	width: 200px;
+	height: 40px;
+	border-radius: 0.25em;
+	color: #423630;
+    cursor: pointer;
+}
+
+next-charts. button:hover {
+    margin: 0;
+    border: 0;
+    display: inline-block;
+	background-color: #423630;
+	color: #FFEB33;
 }
 
 .inquiry-contents {
