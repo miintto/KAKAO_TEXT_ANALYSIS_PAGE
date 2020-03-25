@@ -75,7 +75,7 @@ div.main-sample {
     border: 0;
 }
 
-.next-charts button {
+.check-button button {
     margin: 0;
     border: 0;
     display: inline-block;
@@ -87,7 +87,7 @@ div.main-sample {
     cursor: pointer;
 }
 
-.next-charts button:hover {
+.check-button button:hover {
     margin: 0;
     border: 0;
     display: inline-block;

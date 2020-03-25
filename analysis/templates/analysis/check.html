@@ -17,14 +17,16 @@
 
 			{% if is_load %}
 			<div class="main-contents">
-				<div class="next-charts">
+				<div class="check-button">
 					<button onclick="load_charts()" class='charts'>분석</button>
 				</div>
 			</div>
 
 			{% else %}
 			<div class="main-contents">
-				<button onclick="load_main()" class='main'>처음으로</button>
+				<div class="check-button">
+					<button onclick="load_main()" class='main'>처음으로</button>
+				</div>
 			</div>
 			{% endif %}
 
