@@ -1,10 +1,14 @@
 ### Ignore File ###
 
+### Setting Files
 mysite/setting_private.py
-uploads/
+
+### Virtual Environment
 venv/
 
+### cashe files
 **/__pycashe__
 *.pyc
-*.log
-db.sqlite3
+*.ipynb
+*.csv
+kakao.log*
