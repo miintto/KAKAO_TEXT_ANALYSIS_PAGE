@@ -6,6 +6,9 @@ mysite/setting_private.py
 ### Virtual Environment
 venv/
 
+### DB
+mysite.iml
+
 ### cashe files
 **/__pycashe__
 *.pyc

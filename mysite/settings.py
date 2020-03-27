@@ -76,16 +76,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'kakao_front',
-        'USER': 'django_kakao',
-	'PASSWORD': 'Django1234@',
-	'HOST': 'localhost',
-	'PORT': '3306'
-    }
-}
+DATABASES = setting_private.DATABASES
 
 
 # Password validation

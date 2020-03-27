@@ -72,9 +72,7 @@ class HeatmapTime(View):
         file = request.session['filename']
         df = pd.read_csv(file, encoding='utf-8-sig')
 
-        to_weekday = lambda x: dt.datetime.weekday(dt.datetime.strptime(x, '%Y-%m-%d'))
         df['hour'] = [i[:2] for i in df.time]
-        df['wkday'] = [to_weekday(d) for d in df.date]
 
         g = df.pivot_table(index='wkday', columns='hour', aggfunc="size", fill_value=0)
         g = g.reindex(index=range(7), columns=[str(i).zfill(2) for i in range(24)]).fillna(0)
@@ -113,7 +111,3 @@ class BarByUser(View):
         json_user = [{'name': k, 'chat': v} for k, v in g[:10].items()]
         json_res = {'data': json_user}
         return JsonResponse(json_res)
-
-
-
-

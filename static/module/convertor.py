@@ -17,13 +17,21 @@ class Convertor:
 		self.type = None
 		self.chat_list = list()
 
+
 	def _load_file(self, file):
+		"""
+		유저가 업로드한 텍스트파일을 Pandas Dataframe 형식으로 가져옴
+		"""
 		self.df_input = pd.read_csv(file, sep='\n', header=None, encoding='utf-8', error_bad_lines=False)
 		logger.debug(f'[Convertor] _load_file() : df_input.__len__ = {len(self.df_input)}')
 		self.title = self.df_input.values[0, 0]
 		logger.debug(f'[Convertor] _load_file() : title = {self.title}')
 
+
 	def _check_type(self):
+		"""
+		파일형식이 모바일인지 PC버전인지 판별
+		"""
 		if '저장한 날짜 :' in self.df_input.values[1, 0]:
 			if '---------------' in self.df_input.values[2, 0]:
 				self.type = 'PC'
@@ -33,7 +41,11 @@ class Convertor:
 			pass
 		logger.debug(f'[Convertor] _check_type() : type = {self.type}')
 
+
 	def _append_by_pc(self):
+		"""
+		PC버전 카카오톡 대화 메시지를 field별로 파싱
+		"""
 		self.date = None
 		for line in self.df_input[0].values:
 			try:
@@ -53,7 +65,12 @@ class Convertor:
 					self.chat_list.append([self.date, None, None, line])
 		logger.debug(f'[Convertor] _append_by_pc() : chat_list.__len__ = {len(self.chat_list)}')
 
+
 	def _append_by_mobile(self):
+		"""
+		모바일버전 카카오톡 대화 메시지를 field별로 파싱
+		:return:
+		"""
 		for line in self.df_input[0].values:
 			try:
 				split1 = line.find(',')
@@ -71,6 +88,9 @@ class Convertor:
 		logger.debug(f'[Convertor] _append_by_mobile() : chat_list.__len__ = {len(self.chat_list)}')
 
 	def _append_chat(self):
+		"""
+		대화파일 파싱
+		"""
 		if self.type=='PC':
 			self._append_by_pc()
 		elif self.type == 'Mobile':
@@ -79,6 +99,9 @@ class Convertor:
 			raise Exception
 
 	def _join_chat(self):
+		"""
+		엔터로 분리된 대화 메시지 연결
+		"""
 		array = self.chat_list
 		for i in range(1, len(array))[::-1]:
 			if not array[i][1]:
@@ -88,12 +111,23 @@ class Convertor:
 		self.chat_list = array
 		logger.debug(f'[Convertor] _join_chat() : chat_list.__len__ = {len(self.chat_list)}')
 
-	def convert(self, file):
+	def _make_dateframe(self):
+		"""
+		파싱된 리스트를 Dateframe 형태로 변환
+		날짜마다 요일 매칭
+		"""
+		df_chat = pd.DataFrame(self.chat_list, columns=['date', 'time', 'name', 'chat'])
+		df_chat['wkday'] = df_chat['date'].map(lambda x: dt.datetime.weekday(dt.datetime.strptime(x, '%Y-%m-%d')))
+		logger.debug(f'[Convertor] _make_dateframe() : df_chat.shape = {df_chat.shape}')
+		return df_chat
+
+
+	def run(self, file):
 		logger.debug(f'[Convertor]  START')
 		self._load_file(file)
 		self._check_type()
 		self._append_chat()
 		self._join_chat()
-		df_chat = pd.DataFrame(self.chat_list, columns=['date', 'time', 'name', 'chat'])
+		df_chat = self._make_dateframe()
 		logger.debug(f'[Convertor]  END')
 		return df_chat
