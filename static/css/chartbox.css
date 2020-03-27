@@ -11,8 +11,8 @@ ul.date-interval {
 
 ul.date-interval li {
     float: left;
-    padding-right: 20px;
-    padding-left: 20px;
+    padding-right: 5px;
+    padding-left: 5px;
 }
 
 p.date-box {
@@ -29,6 +29,15 @@ p.date-box {
 
 p.date-box:hover {
 	background-color: #8EA0AD;
+}
+
+p.date-join-string {
+    margin: 0px;
+	color: #40342F;
+    width: 10px;
+    height: 36px;
+    text-align: center;
+    line-height: 36px;
 }
 
 div.chartbox {

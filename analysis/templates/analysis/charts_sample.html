@@ -20,10 +20,7 @@
 				<div class="menu-button-text"><a class="sidemenu" href="{% url 'main' %}">Main</a></div>
 			</div>
 			<div class="menu-button-active">
-				<div class="menu-button-text"><a class="sidemenu" href="{% url 'charts' %}">Charts</a></div>
-			</div>
-			<div class="menu-button">
-				<div class="menu-button-text"><a class="sidemenu" href="{% url 'inquiry' %}">Info</a></div>
+				<div class="menu-button-text"><a class="sidemenu" href="{% url 'charts_sample' %}">Charts</a></div>
 			</div>
 		</div>
 	</div>
@@ -110,6 +107,7 @@
 		</table>
 	</div>
 	<script src="{% static 'script/charts/charts.js' %}"></script>
-	<script src="{% static 'script/charts/main_analysis.js' %}"></script>
+	<script src="{% static 'script/charts/sample_json.js' %}"></script>
+	<script src="{% static 'script/charts/charts_sample.js' %}"></script>
 </body>
 </html>

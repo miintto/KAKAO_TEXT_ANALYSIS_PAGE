@@ -6,6 +6,10 @@ function load_charts() {
     location.href="/analysis/charts";
 }
 
+function load_sample_charts() {
+    location.href="/analysis/charts/sample";
+}
+
 function LoadFile() {
     var button = document.getElementById("next-check");
     button.click();

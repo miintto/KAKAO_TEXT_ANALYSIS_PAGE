@@ -3,7 +3,6 @@ from django.views.generic.edit import View
 from django.shortcuts import render
 from django.urls import reverse
 from static.analysis.convertor import Convertor
-from static.analysis.chart_model import make_json, make_sample
 import datetime as dt
 import pandas as pd
 import numpy as np
@@ -74,6 +73,16 @@ class Charts(View):
 			return render(request, template)
 		else:
 			return HttpResponseRedirect(reverse('main'))
+
+
+class ChartsSample(View):
+	def get(self, request):
+		ip = get_ip(request)
+		session_key = request.session.session_key
+		logger.debug(f'[USER SESSION] ip: {ip} / session_key: {session_key}')
+
+		template = 'analysis/charts_sample.html'
+		return render(request, template)
 
 
 class Inquiry(View):
