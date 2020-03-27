@@ -117,6 +117,9 @@ class Convertor:
 		날짜마다 요일 매칭
 		"""
 		df_chat = pd.DataFrame(self.chat_list, columns=['date', 'time', 'name', 'chat'])
+		is_name = df_chat['name'].map(lambda x: ('님을 초대했습니다' not in x) & ('님이 나갔습니다' not in x) &
+												('최신버전으로 업데이트해주세요' not in x) & ('삭제된 메시지입니다' not in x))
+		df_chat = df_chat[is_name]
 		df_chat['wkday'] = df_chat['date'].map(lambda x: dt.datetime.weekday(dt.datetime.strptime(x, '%Y-%m-%d')))
 		logger.debug(f'[Convertor] _make_dateframe() : df_chat.shape = {df_chat.shape}')
 		return df_chat

@@ -111,3 +111,16 @@ class BarByUser(View):
         json_user = [{'name': k, 'chat': v} for k, v in g[:10].items()]
         json_res = {'data': json_user}
         return JsonResponse(json_res)
+
+
+class TextByUser(View):
+    def post(self, request):
+        file = request.session['filename']
+        df = pd.read_csv(file, encoding='utf-8-sig')
+        text = self.request.POST.get('text')
+
+        df['word_count'] = df['chat'].map(lambda x: text in x).astype(int)
+        g = df.loc[:, ['name', 'word_count']].groupby(by='name').sum().sort_values(by='word_count', ascending=False)
+        json_user = [{'name': k, 'chat': v} for k, v in g[:10].itertuples()]
+        json_res = {'data': json_user, 'text': text}
+        return JsonResponse(json_res)

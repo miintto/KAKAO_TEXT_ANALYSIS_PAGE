@@ -1,0 +1,9 @@
+div.inquiry-contents-box {
+    margin-top: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 50px;
+    height: 300px;
+    width: 450px;
+	background-color: #F6F6F6;
+}

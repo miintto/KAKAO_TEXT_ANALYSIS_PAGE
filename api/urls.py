@@ -11,4 +11,5 @@ urlpatterns = [
 	path('wordcloud', views.WordCloud.as_view(), name='wordcloud'),
 	path('circularpacking', views.CircularPacking.as_view(), name='circular_packing'),
 	path('bar/user', views.BarByUser.as_view(), name='bar_user'),
+	path('bar/text', views.TextByUser.as_view(), name='text_user'),
 ]
