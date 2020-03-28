@@ -3,8 +3,7 @@
 <head>
 	{% load static %}
 	<title>차트</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/chartbox.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/inquiry.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/menubar.css' %}">
 </head>
 <body>
@@ -25,10 +24,51 @@
 		</div>
 	</div>
 	<div class="inquiry-contents" id="contents">
-		<br><br>
-		문의 및 건의사항은 하단 이메일로 연락 바랍니다.<br><br>
-		minjp93@gmail.com<br><br><br>
-		Founded in 2019 & created by miintto<br>
-		https://github.com/miintto
+		<div class="inquiry-contents-box">
+			<div class="my-info">
+				<div class="title">
+					<h1>Profile</h1>
+				</div>
+				<div class="my-info-img">
+					<img src="{% static 'img/profile.jpg' %}" width="150" height="150">
+				</div>
+				<div class="my-info-content">
+					<div class="my-info-name">
+						<div class="my-name">
+							<div class="my-name-kr">
+								<h2>박민재</h2>
+							</div>
+							<div class="my-name-eng">
+								<p>(Park Minjae)</p>
+							</div>
+						</div>
+					</div>
+					<div>
+						<ul class="profile-list">
+							<li><p>인하대학교 수학 / 통계학 전공 (2012 ~ 2019)</p></li>
+							<li><p>(주)데이터마케팅코리아 R&D센터 데이터기술연구소 전임 컨설턴트 (2020 ~ )</p></li>
+						</ul>
+					</div>
+				</div>
+				<div class="my-info-contact">
+					<ul class="profile-list">
+						<li><p>E-mail: minjp93@gmail.com</p></li>
+						<li><p>Github: https://github.com/miintto</p></li>
+						<li><p>Blog: https://blog.naver.com/mj93m</p></li>
+					</ul>
+				</div>
+				<div class="my-info-tags">
+					<div>
+						<p>#Data Analysis #Statistics #Mathematics #Machine Learning #Deep Learning #Textmining #Data Science #Data Engineer
+							#Python #R #SAS #Postgresql #Mysql #Elasticsearch #Django</p>
+					</div>
+				</div>
+				<div class="comment">
+					<p>문의 및 건의사항은 상단 이메일로 연락 바랍니다.</p>
+				</div>
+			</div>
+<!--			Created in 2019 by miintto<br>-->
+<!--			https://github.com/miintto-->
+		</div>
 	</div>
 </body>
