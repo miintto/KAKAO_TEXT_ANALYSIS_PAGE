@@ -1,12 +1,13 @@
 body{
 	margin: 0px auto;
-	background-color : #B2C7DA;
+	background-color: #F6F6F6;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 #title {
 	height: 40px;
 	text-align: center;
-	background-color : #9AADBC;
-	color: #40342F;
+	background-color: #FCFCFC;
+	color: #404040;
 	padding: 5px 0px
 	/*position: fixed;*/
 }
@@ -14,15 +15,16 @@ body{
 .menu-bar {
 	width: 100%;
 	height: 50px;
-	background-color: #9AADBC;
-	color: #40342F;
+	background-color: #FCFCFC;
+    border-bottom: 0.15em #879399;
+    border-style: hidden hidden solid;
 	padding: 0px 0px
 }
 
 .menu-button {
 	width: 125px;
 	height: 50px;
-	color: #40342F;
+	color: #404040;
 	display: table;
 	float: left;
 }
@@ -35,7 +37,7 @@ body{
     text-align: center;
     vertical-align: middle;
 	text-decoration:none;
-	color: #FFFFFF;
+	color: #404040;
 }
 
 .menu-button-active {
@@ -44,7 +46,7 @@ body{
 	color: #40342F;
 	display: table;
 	float: left;
-	background-color: #82939E;
+	background-color: #404040;
 }
 
 .menu-button-active a{
@@ -63,8 +65,9 @@ body{
 	vertical-align: middle;
 }
 
-.menu-button:hover{
-	background-color: #8EA0AD;
+.menu-button a:hover{
+	background-color: #879399;
+	color: #FFFFFF;
 }
 
 .range-date {
@@ -85,4 +88,14 @@ body{
 .sidemenu li{	
 	height: 50px;
 	margin: 1px;
+}
+
+.footer {
+	background-color: #404040;
+	color: #FFFFFF;
+	padding: 30px;
+}
+
+.footer-info p {
+    font-size: 12px;
 }

@@ -1,13 +1,11 @@
 body{
-	/*background-color: #F6F6F6;*/
-	background-color: #B2C7DA;
+	background-color: #F6F6F6;
+	/*background-color: #FFFFFF;*/
 }
 
 div.main-box {
 	text-align : center;
 	margin : auto;
-	margin-top: 50px;
-	/*background-color: #FFEB33;*/
 	background-color: #F6F6F6;
 	width: 400px;
 	height: 600px;
@@ -22,7 +20,11 @@ div.main-comment {
 	padding: 30px;
 }
 
-div.main-button{
+div.main-sample {
+    margin: 50px;
+}
+
+div.hidden-button{
     padding: 30px;
     visibility:hidden;
 }
@@ -30,12 +32,17 @@ div.main-button{
 div.main-sample {
 	padding: 50px;
 }
+.status-box {
+	height: 80px;
+}
 
 .status-box h2 {
-	padding-top: 100px;
-	padding-bottom: 50px;
 	text-align : center;
 	color: #40342F;
+}
+
+.main-contents {
+    padding: 50px;
 }
 
 .main-contents form {
@@ -43,28 +50,25 @@ div.main-sample {
 	padding-bottom: 50px;
 }
 
-.load-file {
-	padding: 30px;
-}
-
-.load-file label {
-    padding: 60px 60px;
-    width: 100px;
+label.upload-space {
+    width: 360px;
+    height: 150px;
     display: inline-block;
-    background-color: #F6F6F6;
+	background-color: #F6F6F6;
     color: #BBBBBB;
-    border: 1px solid #BBBBBB;
+    border: 0.1em dashed #BBBBBB;
     text-align:center;
     vertical-align: middle;
+    line-height: 150px;
     cursor: pointer;
     border-radius: .25em;
 }
 
-.load-file label:hover {
-    background-color: #FAFAFA;
+label.upload-space:hover {
+    background-color: #FCFCFC;
 }
 
-.load-file input {
+.load-space input {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -79,23 +83,25 @@ div.main-sample {
     margin: 0;
     border: 0;
     display: inline-block;
-	background-color: #FFEB33;
+	background-color: #262626;
 	width: 200px;
 	height: 40px;
 	border-radius: 0.25em;
-	color: #423630;
+	color: #FFFFFF;
     cursor: pointer;
 }
 
 .submit-button button:hover {
-    margin: 0;
-    border: 0;
-    display: inline-block;
-	background-color: #423630;
-	color: #FFEB33;
+	background-color: #879399;
 }
 
 .inquiry-contents {
 	padding-left: 20px;
 	width: 100%
+}
+
+.loading img{
+    display: block;
+    position: absolute;
+    opacity: 0.5;
 }

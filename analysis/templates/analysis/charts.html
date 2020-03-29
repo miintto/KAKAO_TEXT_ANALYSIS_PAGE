@@ -5,6 +5,7 @@
 	<title>차트</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/chartbox.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/menubar.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="https://d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
@@ -46,14 +47,14 @@
 					<td>
 						<div id='chart1' class="chartbox">
 							<div class="chartbox-title">
-								<h2>#월별 대화량</h2>
+								<h2># 월별 대화량</h2>
 							</div>
 						</div>
 					</td>
 					<td>
 						<div id='chart2' class="chartbox">
 							<div class="chartbox-title">
-								<h2>#사용자 점유율</h2>
+								<h2># 사용자 점유율</h2>
 							</div>
 						</div>
 					</td>
@@ -62,14 +63,14 @@
 					<td>
 						<div id='chart3' class="chartbox">
 							<div class="chartbox-title">
-								<h2>#월별 대화 변동</h2>
+								<h2># 월별 대화 변동</h2>
 							</div>
 						</div>
 					</td>
 					<td>
 						<div id='chart4' class="chartbox">
 							<div class="chartbox-title">
-								<h2>#요일x시간별 대화량</h2>
+								<h2># 요일x시간별 대화량</h2>
 							</div>
 						</div>
 					</td>
@@ -78,14 +79,14 @@
 					<td>
 						<div id='chart5' class="chartbox">
 							<div class="chartbox-title">
-								<h2>#최빈 사용단어</h2>
+								<h2># 최빈 사용단어</h2>
 							</div>
 						</div>
 					</td>
 					<td>
 						<div id='chart6' class="chartbox">
 							<div class="chartbox-title">
-								<h2>#사용자 대화량</h2>
+								<h2># 사용자 대화량</h2>
 							</div>
 						</div>
 					</td>
@@ -94,20 +95,26 @@
 					<td>
 						<div id='chart7' class="chartbox">
 							<div class="chartbox-title">
-								<h2>#언급 횟수</h2>
+								<h2># 언급 횟수</h2>
 							</div>
 						</div>
 					</td>
 					<td>
 						<div id='chart8' class="chartbox">
 							<div class="chartbox-title">
-								<h2>#언급 횟수</h2>
+								<h2># 언급 횟수</h2>
 							</div>
 						</div>
 					</td>
 				</tr>
 			</tbody>
 		</table>
+	</div>
+	<div class="footer">
+		<div class="footer-info">
+			<p>Created in 2019 by miintto</p>
+			<p>https://github.com/miintto/KAKAO_TEXT_ANALYSIS_PAGE</p>
+		</div>
 	</div>
 	<script src="{% static 'script/charts/chart_functions.js' %}"></script>
 	<script src="{% static 'script/charts/charts_main.js' %}"></script>

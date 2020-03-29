@@ -13,7 +13,9 @@ function load_sample_charts() {
 function LoadFile() {
     var button = document.getElementById("next-check");
     button.click();
+//    $('input#upload').attr('disabled', true);
+//    $('label#upload-space').text("Loding...");
+    loading = '<img src="/static/img/loading.svg" width="100%" height="100%">';
+    $('div.loading').html(loading);
 
-    $('input#upload').attr('disabled', true);
-    $('label#upload-space').text("Loding...");
 }

@@ -1,6 +1,8 @@
 function chart_heatmap(dataset, chart_idx) {
-	var myColor = d3.scaleSequential(d3.interpolateBlues)
-		.domain([0, d3.max(dataset, function(d){ return d.chat**0.5;})])
+//	var myColor = d3.scaleSequential(d3.interpolateBlues)
+//		.domain([0, d3.max(dataset, function(d){ return d.chat**0.5;})])
+	var myColor = d3.scaleLinear()
+		.domain([0, d3.max(dataset, function(d){ return d.chat**0.5;})]).range(["#FFFFFF", "#175C85"])
 
 
 	var margin = {top: 10, right: 10, bottom: 30, left: 80};
@@ -63,8 +65,10 @@ function chart_heatmap(dataset, chart_idx) {
 
 
 function chart_pie(dataset, chart_idx) {
-	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513',
-				'#CB4225', '#969696']
+//	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513',
+//				'#CB4225', '#969696']
+//	var color = ['#1A4357', '#315669', '#486878', '#5F7B8A', '#768D99', '#8CA1AB', '#A3B4BC', '#BAC7CD', '#D3DADE', '#E8ECEE']
+	var color = ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"]
 
 	var margin = 25
 	var width  = 600
@@ -88,7 +92,7 @@ function chart_pie(dataset, chart_idx) {
 	var outerArc = d3.arc()
 		.innerRadius(radius*0.9)
 		.outerRadius(radius*0.9)
-
+    console.log(data_arcs);
 
 	svg.selectAll()
 		.data(data_arcs)
@@ -96,6 +100,7 @@ function chart_pie(dataset, chart_idx) {
 		.attr('d', arc)
 		.attr('class', 'cell')
 		.attr('fill', function(d, i) {return color[i]})
+//        .attr('fill', function(d, i) {return myColor(d.value**2)})
 		.style("opacity", 0.9)
 		.on('mouseover', function() { 
 			tooltip.style("display", null);
@@ -167,8 +172,9 @@ function chart_pie(dataset, chart_idx) {
 
 
 function chart_area(dataset, chart_idx) {
-	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513',
-				'#CB4225', '#969696']
+//	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513',
+//				'#CB4225', '#969696']
+	var color = ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"]
 
 	var margin = {top: 10, right: 10, bottom: 30, left: 60};
 
@@ -249,8 +255,9 @@ function chart_area(dataset, chart_idx) {
 
 
 function chart_stream(dataset, chart_idx) {
-	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513',
-				'#CB4225', '#969696']
+//	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513',
+//				'#CB4225', '#969696']
+	var color = ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"]
 
 	var margin = {top: 10, right: 10, bottom: 30, left: 60};
 
@@ -326,8 +333,10 @@ function chart_stream(dataset, chart_idx) {
 
 
 function chart_bar(dataset, chart_idx) {
-	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513', 
-				'#CB4225', '#969696']
+//	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513',
+//				'#CB4225', '#969696']
+	var myColor = d3.scaleLinear()
+		.domain([0, d3.max(dataset, function(d){ return d.chat**0.5;})]).range(["#FFFFFF", "#175C85"])
 
 	var margin = {top: 10, right: 10, bottom: 30, left: 60};
 
@@ -356,7 +365,8 @@ function chart_bar(dataset, chart_idx) {
 		.data(dataset)
 		.enter().append('rect')
 			.attr('class', 'cell')
-			.attr('fill', function(d, i) {return color[i]})
+//			.attr('fill', function(d, i) {return color[i]})
+			.attr('fill', function(d, i) {return myColor(d.chat**0.5)})
 			.attr('height', function(d, i) {return height-yScale(d.chat)})
 			.attr('width', xScale.bandwidth())					/// xScale 로 bar너비를 자동으로 조정하여 배열
 			.attr('x', function(d, i) {return xScale(d.name)})		/// xScale 로 간격을 자동으로 조정하여 배열
@@ -389,8 +399,10 @@ function chart_bar(dataset, chart_idx) {
 
 
 function chart_wkday(dataset, chart_idx) {
-	var myColor = d3.scaleSequential(d3.interpolateBlues)
-		.domain([0, d3.max(dataset, function(d){ return d.chat**0.5;})])
+//	var myColor = d3.scaleSequential(d3.interpolateBlues)
+//		.domain([0, d3.max(dataset, function(d){ return d.chat**0.5;})])
+	var myColor = d3.scaleLinear()
+		.domain([0, d3.max(dataset, function(d){ return d.chat**0.5;})]).range(["#FFFFFF", "#175C85"])
 
 	var weekDays = {0:'월', 1:'화', 2:'수', 3:'목', 4:'금', 5:'토', 6:'일'}
 
@@ -456,8 +468,9 @@ function chart_wkday(dataset, chart_idx) {
 
 
 function chart_wordcloud(dataset, chart_idx) {
-	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513', 
-				'#CB4225', '#969696']
+//	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513',
+//				'#CB4225', '#969696']
+	var color = ['#1A4357', '#315669', '#486878', '#5F7B8A', '#768D99', '#8CA1AB', '#A3B4BC', '#BAC7CD', '#D3DADE', '#E8ECEE']
 
 	var margin = {top: 10, right: 10, bottom: 10, left: 10}
 	var height = 300 - margin.top - margin.bottom
@@ -530,8 +543,9 @@ function chart_wordcloud(dataset, chart_idx) {
 
 
 function chart_circular_packing(dataset, chart_idx) {
-	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513', 
-				'#CB4225', '#969696']
+//	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513',
+//				'#CB4225', '#969696']
+	var color = ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"]
 
 	var margin = 25
 	var width	= 600

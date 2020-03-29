@@ -196,7 +196,7 @@ $.ajax({
         'text': "삭제된 메시지입니다."
     },
     success: function (data) {
-        title = '<div class="chartbox-title"><h2>"'+data['text']+'" 언급 횟수</h2></div>'
+        title = '<div class="chartbox-title"><h2># "'+data['text']+'" 언급 횟수</h2></div>'
         $('div#chart7').html(title)
         chart_bar(data['data'], '#chart7');
     },
@@ -218,7 +218,7 @@ $.ajax({
         'text': "이모티콘"
     },
     success: function (data) {
-        title = '<div class="chartbox-title"><h2>"'+data['text']+'" 언급 횟수</h2></div>'
+        title = '<div class="chartbox-title"><h2># "'+data['text']+'" 언급 횟수</h2></div>'
         $('div#chart8').html(title)
         chart_bar(data['data'], '#chart8');
     },

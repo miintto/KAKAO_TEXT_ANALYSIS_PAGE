@@ -17,9 +17,9 @@ ul.date-interval li {
 
 p.date-box {
     margin: 0px;
-	color: #FFFFFF;
-	background-color: #9AADBC;
-    width: 150px;
+	color: #404040;
+	background-color: #F6F6F6;
+    width: 120px;
     height: 36px;
     text-align: center;
 	border-radius: 2em;
@@ -28,12 +28,13 @@ p.date-box {
 }
 
 p.date-box:hover {
-	background-color: #8EA0AD;
+	background-color: #879399;
+	color: #FFFFFF;
 }
 
 p.date-join-string {
     margin: 0px;
-	color: #40342F;
+	color: #404040;
     width: 10px;
     height: 36px;
     text-align: center;
@@ -52,14 +53,14 @@ div.chartbox svg {
 .chart-table {
 	margin-left: auto;
 	margin-right: auto;
-	margin-bottom: 80px;
+	margin-bottom: 100px;
 }
 
 .chartbox {
 	width: 630px;
 	height: 360px;
 	border-radius: 1.5em;
-	background-color: #F6F6F6;
+	background-color: #FFFFFF;
 }
 
 .chartbox-title {
@@ -71,7 +72,7 @@ div.chartbox svg {
 .chartbox-title h2 {
 	text-align: left;
 	margin: 0px;
-	color: #06ACBE;
+	color: #4D4D4D;
 }
 
 .cell:hover {

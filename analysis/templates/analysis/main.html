@@ -9,30 +9,32 @@
 </head>
 
 <body>
-	<div class="main-box">
-		<div class="main-margin-top">
-		</div>
-		<div>
-			<div class="main-comment">
-				<h3>카카오톡 텍스트 파일을 올려주세요.</h3>
+	<div class="loading"></div>
+	<div class="main">
+		<div class="main-box">
+			<div class="main-margin-top">
 			</div>
-			<form method="POST" action="{% url 'check' %}" enctype="multipart/form-data">
-				{% csrf_token %}
-				<div class="load-file">
-					<label id="upload-space" for="upload">업로드</label>
-					<input type="file" id="upload" name="uploadfile" onchange="LoadFile()">
+			<div>
+				<div class="main-comment">
+					<h3>카카오톡 텍스트 파일을 올려주세요.</h3>
 				</div>
-				<div class="main-button">
-					<button id="next-check">분석</button>
+				<form method="POST" action="{% url 'check' %}" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="load-space">
+						<label class="upload-space" id="upload-space" for="upload">업로드</label>
+						<input type="file" id="upload" name="uploadfile" onchange="LoadFile()">
+					</div>
+					<div class="hidden-button">
+						<button id="next-check">분석</button>
+					</div>
+				</form>
+			</div>
+			<div class="main-sample">
+				<div class="submit-button">
+					<button onclick="load_sample_charts()">샘플 보기</button>
 				</div>
-			</form>
-		</div>
-		<div class="main-margin-bottom">
-			<div class="submit-button">
-				<button onclick="load_sample_charts()">샘플 보기</button>
 			</div>
 		</div>
-	</div>
-	<br>
+	</div>>
 </body>
 </html>
