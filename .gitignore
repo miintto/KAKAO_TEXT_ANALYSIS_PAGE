@@ -5,6 +5,7 @@ mysite/setting_private.py
 
 ### Virtual Environment
 venv/
+.idea/
 
 ### DB
 mysite.iml
