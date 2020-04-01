@@ -12,20 +12,25 @@
     <script type="text/javascript" src="{% static 'script/jquery-1.12.4.min.js' %}"></script>
 </head>
 <body>
-	<div id="title">
-		<h2></h2>
-	</div>
 	<div class="menu-bar">
-		<div>
+		<div class="menu-title-bar">
+			<center>
+				<h3>카카오톡 대화 분석</h3>
+			</center>
+		</div>
+		<div class="menu-button-bar">
 			<div class="menu-button">
 				<div class="menu-button-text"><a class="sidemenu" href="{% url 'main' %}">Main</a></div>
 			</div>
 			<div class="menu-button-active">
-				<div class="menu-button-text"><a class="sidemenu" href="{% url 'charts_sample' %}">Charts</a></div>
+				<div class="menu-button-text"><a class="sidemenu" href="{% url 'charts' %}">Charts</a></div>
 			</div>
 		</div>
 	</div>
 	<div id="contents">
+		<div id="title">
+			<h2></h2>
+		</div>
 		{% csrf_token %}
 		<table class='chart-table'>
 			<tbody>

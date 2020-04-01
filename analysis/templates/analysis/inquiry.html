@@ -9,11 +9,13 @@
 	<link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap" rel="stylesheet">
 </head>
 <body>
-	<div id="title">
-		<h2>제작자 정보</h2>
-	</div>
 	<div class="menu-bar">
-		<div>
+		<div class="menu-title-bar">
+			<center>
+				<h3>카카오톡 대화 분석</h3>
+			</center>
+		</div>
+		<div class="menu-button-bar">
 			<div class="menu-button">
 				<div class="menu-button-text"><a class="sidemenu" href="{% url 'main' %}">Main</a></div>
 			</div>
@@ -29,7 +31,7 @@
 		<div class="inquiry-contents-box">
 			<div class="my-info">
 				<div class="title">
-					<h1>Profile</h1>
+					<h1>Created by ..</h1>
 				</div>
 				<div class="my-info-img">
 					<img src="{% static 'img/profile.jpg' %}" width="150" height="150">

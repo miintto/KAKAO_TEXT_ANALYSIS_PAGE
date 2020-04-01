@@ -20,7 +20,7 @@ $.ajax({
     success: function (data) {
         console.log(data)
         title = data['title']
-        $('div#title').html("<h2>"+title+"</h2>")
+        $('div#title').html("<center><h2>"+title+"</h2></center>")
     },
     fail: function (err) {
         console.log(err);

@@ -4,7 +4,7 @@
 //
 //////////////////////////////////////////////////
 
-$('div#title').html("<h2>SAMPLE</h2>")
+$('div#title').html("<h2><center>SAMPLE</center></h2>")
 $('p#startdate').text("2019-01-01")
 $('p#enddate').text("2019-12-31")
 
