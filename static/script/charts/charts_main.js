@@ -56,12 +56,15 @@ $.ajax({
     type: 'POST',
     dataType: "JSON",
     beforeSend: function () {
-        console.log('ajax beforeSend - Loading chart')
+//        console.log('ajax beforeSend - Loading chart')
+        img = '<center><img src="/static/img/chart_loading.svg" height="100%"></center>'
+        $('div#chart1-loading').html(img)
     },
     data: {
         'csrfmiddlewaretoken': csrf_token
     },
     success: function (data) {
+        $('div#chart1-loading').hide()
         chart_heatmap(data['data'], '#chart1');
     },
     fail: function (err) {
@@ -76,11 +79,14 @@ $.ajax({
     dataType: "JSON",
     beforeSend: function () {
         console.log('ajax beforeSend - Loading chart')
+        img = '<center><img src="/static/img/chart_loading.svg" height="100%"></center>'
+        $('div#chart2-loading').html(img)
     },
     data: {
         'csrfmiddlewaretoken': csrf_token
     },
     success: function (data) {
+        $('div#chart2-loading').hide()
         chart_pie(data['data'], '#chart2');
     },
     fail: function (err) {
@@ -95,11 +101,14 @@ $.ajax({
     dataType: "JSON",
     beforeSend: function () {
         console.log('ajax beforeSend - Loading chart')
+        img = '<center><img src="/static/img/chart_loading.svg" height="100%"></center>'
+        $('div#chart3-loading').html(img)
     },
     data: {
         'csrfmiddlewaretoken': csrf_token
     },
     success: function (data) {
+        $('div#chart3-loading').hide()
         chart_stream(data['data'], '#chart3');
     },
     fail: function (err) {
@@ -114,11 +123,14 @@ $.ajax({
     dataType: "JSON",
     beforeSend: function () {
         console.log('ajax beforeSend - Loading chart')
+        img = '<center><img src="/static/img/chart_loading.svg" height="100%"></center>'
+        $('div#chart4-loading').html(img)
     },
     data: {
         'csrfmiddlewaretoken': csrf_token
     },
     success: function (data) {
+        $('div#chart4-loading').hide()
         chart_wkday(data['data'], '#chart4');
     },
     fail: function (err) {
@@ -133,11 +145,14 @@ $.ajax({
     dataType: "JSON",
     beforeSend: function () {
         console.log('ajax beforeSend - Loading chart')
+        img = '<center><img src="/static/img/chart_loading.svg" height="100%"></center>'
+        $('div#chart5-loading').html(img)
     },
     data: {
         'csrfmiddlewaretoken': csrf_token
     },
     success: function (data) {
+        $('div#chart5-loading').hide()
         chart_wordcloud(data['data'], '#chart5');
     },
     fail: function (err) {
@@ -152,11 +167,14 @@ $.ajax({
     dataType: "JSON",
     beforeSend: function () {
         console.log('ajax beforeSend - Loading chart')
+        img = '<center><img src="/static/img/chart_loading.svg" height="100%"></center>'
+        $('div#chart6-loading').html(img)
     },
     data: {
         'csrfmiddlewaretoken': csrf_token
     },
     success: function (data) {
+        $('div#chart6-loading').hide()
         chart_circular_packing(data['data'], '#chart6');
     },
     fail: function (err) {
@@ -190,14 +208,17 @@ $.ajax({
     dataType: "JSON",
     beforeSend: function () {
         console.log('ajax beforeSend - Loading chart')
+        img = '<center><img src="/static/img/chart_loading.svg" height="100%"></center>'
+        $('div#chart7-loading').html(img)
     },
     data: {
         'csrfmiddlewaretoken': csrf_token,
         'text': "삭제된 메시지입니다."
     },
     success: function (data) {
-        title = '<div class="chartbox-title"><h2># "'+data['text']+'" 언급 횟수</h2></div>'
+        title = '<div class="chartbox-title"><h2># 텍스트 "'+data['text']+'" 언급 횟수</h2></div>'
         $('div#chart7').html(title)
+        $('div#chart7-loading').hide()
         chart_bar(data['data'], '#chart7');
     },
     fail: function (err) {
@@ -212,14 +233,17 @@ $.ajax({
     dataType: "JSON",
     beforeSend: function () {
         console.log('ajax beforeSend - Loading chart')
+        img = '<center><img src="/static/img/chart_loading.svg" height="100%"></center>'
+        $('div#chart8-loading').html(img)
     },
     data: {
         'csrfmiddlewaretoken': csrf_token,
         'text': "이모티콘"
     },
     success: function (data) {
-        title = '<div class="chartbox-title"><h2># "'+data['text']+'" 언급 횟수</h2></div>'
+        title = '<div class="chartbox-title"><h2># 텍스트 "'+data['text']+'" 언급 횟수</h2></div>'
         $('div#chart8').html(title)
+        $('div#chart8-loading').hide()
         chart_bar(data['data'], '#chart8');
     },
     fail: function (err) {
