@@ -1,4 +1,6 @@
-# KAKAO_TEXT_ANALYSIS_PAGE
+# 카카오톡 대화 분석
+
+[바로가기  (서버 : 52.78.105.24)](http://52.78.105.24:8000/analysis/main)
 
 # 1. Setting
 ### 1.1 Clone
@@ -47,21 +49,22 @@ DATABASES = {
 }
 ~~~
 
-### 1.3 DB Setting
-~~~
-$> mysql -u root
-> CREATE USER 'USER'@'localhost' IDENTIFIED BY 'PASSWORD';
-> GRANT ALL PRIVILEGES ON * . * TO 'USER'@'localhost';
-> quit;
-$> python3 manage.py migrate
-~~~
-
-### 1.4 Virtural Env. Setting
+### 1.3 Virtural Env. Setting
 ~~~bash
 $> pip3 install virtualenv
 $> virtualenv venv
 $> source venv/bin/activate
 $> pip install -r requirements.txt
+~~~
+
+### 1.4 DB Setting
+~~~
+$> mysql -u root
+> CREATE DATABASE DBNAME;
+> CREATE USER 'USER'@'localhost' IDENTIFIED BY 'PASSWORD';
+> GRANT ALL PRIVILEGES ON * . * TO 'USER'@'localhost';
+> quit;
+$> python3 manage.py migrate
 ~~~
 
 ### 1.5 Run Server
