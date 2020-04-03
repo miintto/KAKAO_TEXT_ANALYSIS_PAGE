@@ -18,13 +18,28 @@ function charts_by_date(start_date, end_date){
 
 function show_popup(tag_id) {
     $('div#popup-classify').text(tag_id);
-    $('div.popup-background').show();
-    $('div.popup-chart').show();
+    $('div.popup-word-background').show();
+    $('div.popup-word-search').show();
 }
 
 function close_popup() {
-    $('div.popup-background').hide();
-    $('div.popup-chart').hide();
+    $('div.popup-word-background').hide();
+    $('div.popup-word-search').hide();
+}
+
+function show_date_popup() {
+    var start_date = $('p#startdate').text();
+    var end_date = $('p#enddate').text();
+    $("#search-start_date").val(start_date);
+    $("#search-end_date").val(end_date);
+
+    $('div.popup-date-background').show();
+    $('div.popup-date-range').show();
+}
+
+function close_date_popup() {
+    $('div.popup-date-background').hide();
+    $('div.popup-date-range').hide();
 }
 
 function submit_word() {
@@ -36,6 +51,17 @@ function submit_word() {
     close_popup();
 
     ajax_bar_word(csrf_token, tag_id, start_date, end_date, word);
+}
+
+function submit_date_range() {
+    var start_date = $("#search-start_date").val();
+    var end_date = $("#search-end_date").val();
+
+    close_date_popup();
+
+    $('p#startdate').text(start_date);
+    $('p#enddate').text(end_date);
+    charts_by_date(start_date, end_date);
 }
 
 

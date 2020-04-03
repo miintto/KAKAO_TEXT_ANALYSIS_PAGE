@@ -91,7 +91,7 @@ p.date-join-string {
 	text-align: left;
 	margin: 0px;
 	padding: 5px 15px 5px 15px;
-	border-radius: 0.5em;
+	border-radius: 0.2em;
 	color: #4D4D4D;
 }
 
@@ -107,7 +107,7 @@ p.date-join-string {
 .tooltip {
 	position: absolute;
 	border: 0px solid;
-	border-radius: 8px 8px 8px 8px;
+	border-radius: 8px;
 	/*background-color: #FFEB33;*/
 	background-color: #FFFFFF;
 	padding: 10px;
@@ -115,12 +115,12 @@ p.date-join-string {
 	font-size: 15px;
 }
 
-.popup {
+.popup-word {
     display: block;
     position: absolute;
 }
 
-.popup-background {
+.popup-word-background {
     top: 0px;
     left: 0px;
     height: 100%;
@@ -130,18 +130,18 @@ p.date-join-string {
     opacity: 0.5;
 }
 
-.popup-chart {
+.popup-word-search {
     height: 400px;
     width: 600px;
     top: 50%;
     left: 50%;
-    margin-top: -150px;
+    margin-top: -160px;
     margin-left: -300px;
     position: fixed;
 	background-color: #FCFCFC;
     border: 0.05em #BBBBBB;
     border-style: solid;
-	border-radius: 1.5em;
+	border-radius: 1em;
 }
 
 .popup-close {
@@ -159,4 +159,52 @@ p.date-join-string {
 
 .popup-input input {
     font-size: 25px;
+}
+
+.popup-date {
+    display: block;
+    position: absolute;
+}
+
+.popup-date-background {
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: #000000;
+    position: fixed;
+    opacity: 0.5;
+}
+
+.popup-date-range {
+    height: 480px;
+    width: 600px;
+    top: 50%;
+    left: 50%;
+    margin-top: -200px;
+    margin-left: -300px;
+    position: fixed;
+	background-color: #FCFCFC;
+    border: 0.05em #BBBBBB;
+    border-style: solid;
+	border-radius: 1em;
+}
+
+.date-input-table {
+	margin-left: auto;
+	margin-right: auto;
+    margin-bottom: 40px;
+    margin-bottom: 40px;
+    border-spacing: 20px;
+}
+
+.popup-date-input{
+    margin-left: 15px;
+}
+
+.popup-date-input input {
+	text-align : center;
+    font-size: 25px;
+    width: 200px;
+    height: 40px;
 }
