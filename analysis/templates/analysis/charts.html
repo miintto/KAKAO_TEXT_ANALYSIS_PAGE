@@ -5,6 +5,7 @@
 	<title>차트</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/chartbox.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/menubar.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="https://d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
@@ -54,7 +55,9 @@
 							<div class="chartbox-title">
 								<h2># 월별 대화량</h2>
 							</div>
-							<div id="chart1-loading"></div>
+							<div id="chart1-loading">
+								<center><img src="/static/img/chart_loading.svg" height="100%"></center>
+							</div>
 						</div>
 					</td>
 					<td>
@@ -62,7 +65,9 @@
 							<div class="chartbox-title">
 								<h2># 사용자 점유율</h2>
 							</div>
-							<div id="chart2-loading"></div>
+							<div id="chart2-loading">
+								<center><img src="/static/img/chart_loading.svg" height="100%"></center>
+							</div>
 						</div>
 					</td>
 				</tr>
@@ -72,7 +77,9 @@
 							<div class="chartbox-title">
 								<h2># 월별 대화 변동</h2>
 							</div>
-							<div id="chart3-loading"></div>
+							<div id="chart3-loading">
+								<center><img src="/static/img/chart_loading.svg" height="100%"></center>
+							</div>
 						</div>
 					</td>
 					<td>
@@ -80,7 +87,9 @@
 							<div class="chartbox-title">
 								<h2># 요일x시간별 대화량</h2>
 							</div>
-							<div id="chart4-loading"></div>
+							<div id="chart4-loading">
+								<center><img src="/static/img/chart_loading.svg" height="100%"></center>
+							</div>
 						</div>
 					</td>
 				</tr>
@@ -90,7 +99,9 @@
 							<div class="chartbox-title">
 								<h2># 최빈 사용단어</h2>
 							</div>
-							<div id="chart5-loading"></div>
+							<div id="chart5-loading">
+								<center><img src="/static/img/chart_loading.svg" height="100%"></center>
+							</div>
 						</div>
 					</td>
 					<td>
@@ -98,25 +109,31 @@
 							<div class="chartbox-title">
 								<h2># 사용자 대화량</h2>
 							</div>
-							<div id="chart6-loading"></div>
+							<div id="chart6-loading">
+								<center><img src="/static/img/chart_loading.svg" height="100%"></center>
+							</div>
 						</div>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<div id='chart7' class="chartbox">
-							<div class="chartbox-title">
+							<div id="chart7-title" class="chartbox-title title-click" onclick="show_popup('#chart7')">
 								<h2># 언급 횟수</h2>
 							</div>
-							<div id="chart7-loading"></div>
+							<div id="chart7-loading">
+								<center><img src="/static/img/chart_loading.svg" height="100%"></center>
+							</div>
 						</div>
 					</td>
 					<td>
 						<div id='chart8' class="chartbox">
-							<div class="chartbox-title">
+							<div id="chart8-title" class="chartbox-title title-click" onclick="show_popup('#chart8')">
 								<h2># 언급 횟수</h2>
 							</div>
-							<div id="chart8-loading"></div>
+							<div id="chart8-loading">
+								<center><img src="/static/img/chart_loading.svg" height="100%"></center>
+							</div>
 						</div>
 					</td>
 				</tr>
@@ -130,6 +147,28 @@
 		</div>
 	</div>
 	<script src="{% static 'script/charts/chart_functions.js' %}"></script>
+	<script src="{% static 'script/charts/charts_ajax.js' %}"></script>
 	<script src="{% static 'script/charts/charts_main.js' %}"></script>
+
+	<div class="popup">
+		<div class="popup-background" style="display:none;"></div>
+		<div class="popup-chart" style="display:none;">
+			<div class="popup-close">
+				<img width="40" height="40" align="right" onclick="close_popup()">
+			</div>
+			<div>
+				<center><h2>검색할 단어를 입력하세요</h2></center>
+			</div>
+			<div class="popup-input">
+				<center><input id="search-word"></center>
+			</div>
+			<div class="submit-button">
+				<center>
+					<button onclick="submit_word()">확인</button>
+					<div id="popup-classify" style="display:none;"></div>
+				</center>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

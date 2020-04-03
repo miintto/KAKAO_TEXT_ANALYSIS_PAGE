@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.views.generic.edit import View
 import json
 import pandas as pd
-import datetime as dt
+from datetime import datetime
 
 import logging
 logger = logging.getLogger(__name__)
@@ -30,6 +30,16 @@ class HeatmapMonthly(View):
     def post(self, request):
         file = request.session['filename']
         df = pd.read_csv(file, encoding='utf-8-sig')
+        start_date = self.request.POST.get('start_date')
+        end_date = self.request.POST.get('end_date')
+        logger.debug(f'[API] start_date : {start_date}')
+        logger.debug(f'[API] end_date : {end_date}')
+        try:
+            datetime.strptime(start_date, '%Y-%m-%d')
+            datetime.strptime(end_date, '%Y-%m-%d')
+            df = df[(start_date <= df['date']) & (df['date'] <= end_date)].reset_index()
+        except Exception as e:
+            print(e)
 
         g = df.groupby('name').size().sort_values(ascending=False)
         name_sorted = g[:10].keys()
@@ -45,6 +55,16 @@ class Pie(View):
     def post(self, request):
         file = request.session['filename']
         df = pd.read_csv(file, encoding='utf-8-sig')
+        start_date = self.request.POST.get('start_date')
+        end_date = self.request.POST.get('end_date')
+        logger.debug(f'[API] start_date : {start_date}')
+        logger.debug(f'[API] end_date : {end_date}')
+        try:
+            datetime.strptime(start_date, '%Y-%m-%d')
+            datetime.strptime(end_date, '%Y-%m-%d')
+            df = df[(start_date <= df['date']) & (df['date'] <= end_date)].reset_index()
+        except Exception as e:
+            print(e)
 
         g = df.groupby('name').size().sort_values(ascending=False)
         json_pie = [{'name': k, 'chat': v} for k, v in g[:10].items()]
@@ -56,6 +76,16 @@ class StreamMonthly(View):
     def post(self, request):
         file = request.session['filename']
         df = pd.read_csv(file, encoding='utf-8-sig')
+        start_date = self.request.POST.get('start_date')
+        end_date = self.request.POST.get('end_date')
+        logger.debug(f'[API] start_date : {start_date}')
+        logger.debug(f'[API] end_date : {end_date}')
+        try:
+            datetime.strptime(start_date, '%Y-%m-%d')
+            datetime.strptime(end_date, '%Y-%m-%d')
+            df = df[(start_date <= df['date']) & (df['date'] <= end_date)].reset_index()
+        except Exception as e:
+            print(e)
 
         g = df.groupby('name').size().sort_values(ascending=False)
         name_sorted = g[:10].keys()
@@ -71,6 +101,16 @@ class HeatmapTime(View):
     def post(self, request):
         file = request.session['filename']
         df = pd.read_csv(file, encoding='utf-8-sig')
+        start_date = self.request.POST.get('start_date')
+        end_date = self.request.POST.get('end_date')
+        logger.debug(f'[API] start_date : {start_date}')
+        logger.debug(f'[API] end_date : {end_date}')
+        try:
+            datetime.strptime(start_date, '%Y-%m-%d')
+            datetime.strptime(end_date, '%Y-%m-%d')
+            df = df[(start_date <= df['date']) & (df['date'] <= end_date)].reset_index()
+        except Exception as e:
+            print(e)
 
         df['hour'] = [i[:2] for i in df.time]
 
@@ -93,6 +133,16 @@ class CircularPacking(View):
     def post(self, request):
         file = request.session['filename']
         df = pd.read_csv(file, encoding='utf-8-sig')
+        start_date = self.request.POST.get('start_date')
+        end_date = self.request.POST.get('end_date')
+        logger.debug(f'[API] start_date : {start_date}')
+        logger.debug(f'[API] end_date : {end_date}')
+        try:
+            datetime.strptime(start_date, '%Y-%m-%d')
+            datetime.strptime(end_date, '%Y-%m-%d')
+            df = df[(start_date <= df['date']) & (df['date'] <= end_date)].reset_index()
+        except Exception as e:
+            print(e)
 
         g = df.groupby('name').size().sort_values(ascending=False)
         total_chat = sum(g)
@@ -106,6 +156,16 @@ class BarByUser(View):
     def post(self, request):
         file = request.session['filename']
         df = pd.read_csv(file, encoding='utf-8-sig')
+        start_date = self.request.POST.get('start_date')
+        end_date = self.request.POST.get('end_date')
+        logger.debug(f'[API] start_date : {start_date}')
+        logger.debug(f'[API] end_date : {end_date}')
+        try:
+            datetime.strptime(start_date, '%Y-%m-%d')
+            datetime.strptime(end_date, '%Y-%m-%d')
+            df = df[(start_date <= df['date']) & (df['date'] <= end_date)].reset_index()
+        except Exception as e:
+            print(e)
 
         g = df.groupby('name').size().sort_values(ascending=False)
         json_user = [{'name': k, 'chat': v} for k, v in g[:10].items()]
@@ -113,14 +173,25 @@ class BarByUser(View):
         return JsonResponse(json_res)
 
 
-class TextByUser(View):
+class WordByUser(View):
     def post(self, request):
         file = request.session['filename']
         df = pd.read_csv(file, encoding='utf-8-sig')
-        text = self.request.POST.get('text')
+        word = self.request.POST.get('word')
+        start_date = self.request.POST.get('start_date')
+        end_date = self.request.POST.get('end_date')
+        logger.debug(f'[API] start_date : {start_date}')
+        logger.debug(f'[API] end_date : {end_date}')
+        logger.debug(f'[API] word : {word}')
+        try:
+            datetime.strptime(start_date, '%Y-%m-%d')
+            datetime.strptime(end_date, '%Y-%m-%d')
+            df = df[(start_date <= df['date']) & (df['date'] <= end_date)].reset_index()
+        except Exception as e:
+            print(e)
 
-        df['word_count'] = df['chat'].map(lambda x: text in x).astype(int)
+        df['word_count'] = df['chat'].map(lambda x: word in x).astype(int)
         g = df.loc[:, ['name', 'word_count']].groupby(by='name').sum().sort_values(by='word_count', ascending=False)
         json_user = [{'name': k, 'chat': v} for k, v in g[:10].itertuples()]
-        json_res = {'data': json_user, 'text': text}
+        json_res = {'data': json_user, 'word': word}
         return JsonResponse(json_res)
