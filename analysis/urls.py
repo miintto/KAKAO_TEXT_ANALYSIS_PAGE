@@ -9,4 +9,5 @@ urlpatterns = [
 	path('charts', views.Charts.as_view(), name='charts'),
 	path('charts/sample', views.ChartsSample.as_view(), name='charts_sample'),
 	path('info', views.Inquiry.as_view(), name='info'),
+	path('guide', views.Guide.as_view(), name='guide'),
 ]

@@ -94,3 +94,13 @@ class Inquiry(View):
 
 		template = 'analysis/inquiry.html'
 		return render(request, template)
+
+
+class Guide(View):
+	def get(self, request):
+		ip = get_ip(request)
+		session_key = request.session.session_key
+		logger.debug(f'[USER SESSION] ip: {ip} / session_key: {session_key}')
+
+		template = 'analysis/guideline.html'
+		return render(request, template)
