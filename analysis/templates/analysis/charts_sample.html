@@ -2,14 +2,14 @@
 <html>
 <head>
 	{% load static %}
-	<title>차트</title>
+	<title>카카오톡 대화 분석</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/chartbox.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/menubar.css' %}">
+    <script type="text/javascript" src="{% static 'script/jquery-1.12.4.min.js' %}"></script>
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="https://d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
-    <script type="text/javascript" src="{% static 'script/jquery-1.12.4.min.js' %}"></script>
 </head>
 <body>
 	<div class="menu-bar">
@@ -19,12 +19,9 @@
 			</center>
 		</div>
 		<div class="menu-button-bar">
-			<div class="menu-button">
-				<div class="menu-button-text"><a class="sidemenu" href="{% url 'main' %}">Main</a></div>
-			</div>
-			<div class="menu-button-active">
-				<div class="menu-button-text"><a class="sidemenu" href="{% url 'charts' %}">Charts</a></div>
-			</div>
+			<div class="menu-button"><a href="{% url 'main' %}">Main</a></div>
+			<div class="menu-button-active"><a href="{% url 'charts_sample' %}">Charts</a></div>
+			<div class="menu-button"><a>Guideline</a></div>
 		</div>
 	</div>
 	<div id="contents">
@@ -38,9 +35,9 @@
 					<td>
 						<div class="date-box">
 							<ul class="date-interval">
-								<li><p id="startdate" class="date-box"></p></li>
+								<li><p id="startdate" class="date-box-unit"></p></li>
 								<li><p class="date-join-string">~</p></li>
-								<li><p id="enddate"class="date-box"></p></li>
+								<li><p id="enddate"class="date-box-unit"></p></li>
 							</ul>
 						</div>
 					</td>
@@ -49,14 +46,14 @@
 					<td>
 						<div id='chart1' class="chartbox">
 							<div class="chartbox-title">
-								<h2>#월별 대화량</h2>
+								<h1># 월별 대화량</h1>
 							</div>
 						</div>
 					</td>
 					<td>
 						<div id='chart2' class="chartbox">
 							<div class="chartbox-title">
-								<h2>#사용자 점유율</h2>
+								<h1># 사용자 점유율</h1>
 							</div>
 						</div>
 					</td>
@@ -65,14 +62,14 @@
 					<td>
 						<div id='chart3' class="chartbox">
 							<div class="chartbox-title">
-								<h2>#월별 대화 변동</h2>
+								<h1># 월별 대화 변동</h1>
 							</div>
 						</div>
 					</td>
 					<td>
 						<div id='chart4' class="chartbox">
 							<div class="chartbox-title">
-								<h2>#요일x시간별 대화량</h2>
+								<h1># 요일x시간별 대화량</h1>
 							</div>
 						</div>
 					</td>
@@ -81,14 +78,14 @@
 					<td>
 						<div id='chart5' class="chartbox">
 							<div class="chartbox-title">
-								<h2>#최빈 사용단어</h2>
+								<h1># 최빈 사용단어</h1>
 							</div>
 						</div>
 					</td>
 					<td>
 						<div id='chart6' class="chartbox">
 							<div class="chartbox-title">
-								<h2>#사용자 대화량</h2>
+								<h1># 사용자 대화량</h1>
 							</div>
 						</div>
 					</td>
@@ -97,14 +94,14 @@
 					<td>
 						<div id='chart7' class="chartbox">
 							<div class="chartbox-title">
-								<h2>#잉여력 랭킹</h2>
+								<h1># 잉여력 랭킹</h1>
 							</div>
 						</div>
 					</td>
 					<td>
 						<div id='chart8' class="chartbox">
 							<div class="chartbox-title">
-								<h2>#Chart 8</h2>
+								<h1># Chart 8</h1>
 							</div>
 						</div>
 					</td>
@@ -112,6 +109,7 @@
 			</tbody>
 		</table>
 	</div>
+
 	<script src="{% static 'script/charts/chart_functions.js' %}"></script>
 	<script src="{% static 'script/charts/sample_json.js' %}"></script>
 	<script src="{% static 'script/charts/charts_sample.js' %}"></script>

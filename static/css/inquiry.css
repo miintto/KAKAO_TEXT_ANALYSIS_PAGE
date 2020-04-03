@@ -1,17 +1,14 @@
-/*div.inquiry-contents-box {
-    margin-top: 100px;
-	margin-left: auto;
-	margin-right: auto;
-    margin-bottom: 100px;
-	*//*padding: 10px;*//*
-    height: 600px;
-    width: auto;
-    overflow: hidden;
-	border-radius: 1.5em;
+body {
+	margin: 0px auto;
 	background-color: #F6F6F6;
-}*/
+	font-family: 'Noto Sans KR', sans-serif;
+}
 
-div.my-info {
+
+/*
+제작자 정보 CSS
+*/
+.my-info {
     width: 500px;
     height: auto;
     overflow: hidden;
@@ -25,12 +22,12 @@ div.my-info {
 	font-family: 'Noto Serif KR', serif;
 }
 
-div.title h1 {
+.title h1 {
     color: #545454;
     margin-bottom: 100px
 }
 
-div.my-info-img {
+.my-info-img {
     display: block;
     float: left;
     width: 30%;
@@ -38,35 +35,39 @@ div.my-info-img {
     overflow: hidden;
 }
 
-div.my-info-content {
+.my-info-content {
     float: right;
     width: 70%;
     font-size: 13px;
 }
 
-div.my-name {
+.my-name {
     padding-left: 50px;
 }
 
-div.my-name-kr {
+.my-name-kr {
     float: left;
     width: 20%;
     height: 60px;
 }
 
-div.my-name-eng {
+.my-name-eng {
     float: left;
     width: 80%;
     height: 60px;
 }
 
-div.my-name-eng p {
+.my-name-eng p {
     display: inline-block;
     line-height: 36px;
     vertical-align: middle;
 }
 
-div.my-info-contact {
+ul.profile-list {
+    list-style:none;
+}
+
+.my-info-contact {
 	margin-top: 20px;
     float: left;
     width: 100%;
@@ -74,19 +75,15 @@ div.my-info-contact {
     font-size: 15px;
 }
 
-div.my-info-tags {
+.my-info-tags {
 	margin-top: 20px;
     float: right;
     width: 100%;
     font-size: 12px;
 }
 
-div.comment {
+.comment {
 	margin-top: 50px;
     float: left;
     width: 100%;
-}
-
-ul.profile-list {
-    list-style:none;
 }

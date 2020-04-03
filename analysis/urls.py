@@ -8,5 +8,5 @@ urlpatterns = [
 	path('check', views.Check.as_view(), name='check'),
 	path('charts', views.Charts.as_view(), name='charts'),
 	path('charts/sample', views.ChartsSample.as_view(), name='charts_sample'),
-	path('inquiry', views.Inquiry.as_view(), name='inquiry'),
+	path('info', views.Inquiry.as_view(), name='info'),
 ]

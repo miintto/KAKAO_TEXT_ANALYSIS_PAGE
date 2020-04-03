@@ -12,7 +12,7 @@ function chart_heatmap(dataset, chart_idx) {
 
 
 	var svg = d3.select(chart_idx)
-				.append('svg').attr('width', 600).attr('height', 300)
+				.append('svg').attr('class', 'chart-d3').attr('width', 600).attr('height', 300)
 				.append('g').attr('transform', "translate("+margin.left+","+margin.top+")");
 
 	var xScale = d3.scaleBand()		/// 고정된 문자열일때
@@ -76,7 +76,7 @@ function chart_pie(dataset, chart_idx) {
 	var radius = height/2
 
 	var svg = d3.select(chart_idx)
-				.append('svg').attr('class', 'background').attr('width', width).attr('height', height)
+				.append('svg').attr('class', 'chart-d3').attr('width', width).attr('height', height)
 				.append('g').attr('transform', "translate("+width/2+","+height/2+")")
 
 	var pie = d3.pie()
@@ -182,7 +182,7 @@ function chart_area(dataset, chart_idx) {
 	var height = 300 - margin.top-margin.bottom;	// height = 300-20 = 280
 
 	var svg = d3.select(chart_idx)
-				.append('svg').attr('class', 'background').attr('width', 600).attr('height', 300)
+				.append('svg').attr('class', 'chart-d3').attr('width', 600).attr('height', 300)
 				.append('g').attr('transform', "translate("+margin.left+","+margin.top+")");
 
 	var sumstat = d3.nest()
@@ -265,7 +265,7 @@ function chart_stream(dataset, chart_idx) {
 	var height = 300 - margin.top-margin.bottom;	// height = 300-20 = 280
 
 	var svg = d3.select(chart_idx)
-				.append('svg').attr('class', 'background').attr('width', 600).attr('height', 300)
+				.append('svg').attr('class', 'chart-d3').attr('width', 600).attr('height', 300)
 				.append('g').attr('transform', "translate("+margin.left+","+margin.top+")");
 
 	var keys = Object.getOwnPropertyNames(dataset[0]).slice(1)
@@ -344,7 +344,7 @@ function chart_bar(dataset, chart_idx) {
 	var height = 300 - margin.top-margin.bottom;	// height = 300-20 = 280
 
 	var svg = d3.select(chart_idx)
-				.append('svg').attr('class', 'background').attr('width', 600).attr('height', 300)
+				.append('svg').attr('class', 'chart-d3').attr('width', 600).attr('height', 300)
 				.append('g').attr('transform', "translate("+margin.left+","+margin.top+")");
 
 	var xScale = d3.scaleBand()		/// 고정된 문자열일때
@@ -413,7 +413,7 @@ function chart_wkday(dataset, chart_idx) {
 
 
 	var svg = d3.select(chart_idx)
-				.append('svg').attr('width', 600).attr('height', 300)
+				.append('svg').attr('class', 'chart-d3').attr('width', 600).attr('height', 300)
 				.append('g').attr('transform', "translate("+margin.left+","+margin.top+")");
 
 	var xScale = d3.scaleBand()		/// 고정된 문자열일때
@@ -477,7 +477,7 @@ function chart_wordcloud(dataset, chart_idx) {
 	var width = 600 - margin.right - margin.right
 
 	var svg = d3.select(chart_idx)
-				.append('svg').attr('width', 600).attr('height', 300)
+				.append('svg').attr('class', 'chart-d3').attr('width', 600).attr('height', 300)
 				.append('g').attr('transform', "translate("+margin.left+","+margin.top+")")
 
 
@@ -552,7 +552,7 @@ function chart_circular_packing(dataset, chart_idx) {
 	var height = 300
 
 	var svg = d3.select(chart_idx)
-				.append('svg').attr('class', 'background').attr('width', width).attr('height', height)
+				.append('svg').attr('class', 'chart-d3').attr('width', width).attr('height', height)
 
 	var node = svg.append('g')
 				.selectAll()

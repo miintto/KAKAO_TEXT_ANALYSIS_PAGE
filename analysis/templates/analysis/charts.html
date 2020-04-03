@@ -2,15 +2,15 @@
 <html>
 <head>
 	{% load static %}
-	<title>차트</title>
+	<title>카카오톡 대화 분석</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/chartbox.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/menubar.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="{% static 'script/jquery-1.12.4.min.js' %}"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="https://d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
-    <script type="text/javascript" src="{% static 'script/jquery-1.12.4.min.js' %}"></script>
 </head>
 <body>
 	<div class="menu-bar">
@@ -20,15 +20,9 @@
 			</center>
 		</div>
 		<div class="menu-button-bar">
-			<div class="menu-button">
-				<div class="menu-button-text"><a class="sidemenu" href="{% url 'main' %}">Main</a></div>
-			</div>
-			<div class="menu-button-active">
-				<div class="menu-button-text"><a class="sidemenu" href="{% url 'charts' %}">Charts</a></div>
-			</div>
-			<div class="menu-button">
-				<div class="menu-button-text"><a class="sidemenu" href="{% url 'inquiry' %}">Info</a></div>
-			</div>
+			<div class="menu-button"><a href="{% url 'main' %}">Main</a></div>
+			<div class="menu-button-active"><a href="{% url 'charts' %}">Charts</a></div>
+			<div class="menu-button"><a href="{% url 'info' %}">Info</a></div>
 		</div>
 	</div>
 	<div id="contents">
@@ -42,9 +36,9 @@
 					<td>
 						<div class="date-box">
 							<ul class="date-interval">
-								<li><p id="startdate" class="date-box" onclick="show_date_popup()"></p></li>
+								<li><p id="startdate" class="date-box-unit" onclick="show_date_popup()"></p></li>
 								<li><p class="date-join-string">~</p></li>
-								<li><p id="enddate"class="date-box" onclick="show_date_popup()"></p></li>
+								<li><p id="enddate"class="date-box-unit" onclick="show_date_popup()"></p></li>
 							</ul>
 						</div>
 					</td>
@@ -53,7 +47,7 @@
 					<td>
 						<div id='chart1' class="chartbox">
 							<div class="chartbox-title">
-								<h2># 월별 대화량</h2>
+								<h1># 월별 대화량</h1>
 							</div>
 							<div id="chart1-loading">
 								<center><img src="/static/img/chart_loading.svg" height="100%"></center>
@@ -63,7 +57,7 @@
 					<td>
 						<div id='chart2' class="chartbox">
 							<div class="chartbox-title">
-								<h2># 사용자 점유율</h2>
+								<h1># 사용자 점유율</h1>
 							</div>
 							<div id="chart2-loading">
 								<center><img src="/static/img/chart_loading.svg" height="100%"></center>
@@ -75,7 +69,7 @@
 					<td>
 						<div id='chart3' class="chartbox">
 							<div class="chartbox-title">
-								<h2># 월별 대화 변동</h2>
+								<h1># 월별 대화 변동</h1>
 							</div>
 							<div id="chart3-loading">
 								<center><img src="/static/img/chart_loading.svg" height="100%"></center>
@@ -85,7 +79,7 @@
 					<td>
 						<div id='chart4' class="chartbox">
 							<div class="chartbox-title">
-								<h2># 요일x시간별 대화량</h2>
+								<h1># 요일x시간별 대화량</h1>
 							</div>
 							<div id="chart4-loading">
 								<center><img src="/static/img/chart_loading.svg" height="100%"></center>
@@ -97,7 +91,7 @@
 					<td>
 						<div id='chart5' class="chartbox">
 							<div class="chartbox-title">
-								<h2># 최빈 사용단어</h2>
+								<h1># 최빈 사용단어</h1>
 							</div>
 							<div id="chart5-loading">
 								<center><img src="/static/img/chart_loading.svg" height="100%"></center>
@@ -107,7 +101,7 @@
 					<td>
 						<div id='chart6' class="chartbox">
 							<div class="chartbox-title">
-								<h2># 사용자 대화량</h2>
+								<h1># 사용자 대화량</h1>
 							</div>
 							<div id="chart6-loading">
 								<center><img src="/static/img/chart_loading.svg" height="100%"></center>
@@ -119,7 +113,7 @@
 					<td>
 						<div id='chart7' class="chartbox">
 							<div id="chart7-title" class="chartbox-title title-click" onclick="show_popup('#chart7')">
-								<h2># 언급 횟수</h2>
+								<h1># 언급 횟수</h1>
 							</div>
 							<div id="chart7-loading">
 								<center><img src="/static/img/chart_loading.svg" height="100%"></center>
@@ -129,7 +123,7 @@
 					<td>
 						<div id='chart8' class="chartbox">
 							<div id="chart8-title" class="chartbox-title title-click" onclick="show_popup('#chart8')">
-								<h2># 언급 횟수</h2>
+								<h1># 언급 횟수</h1>
 							</div>
 							<div id="chart8-loading">
 								<center><img src="/static/img/chart_loading.svg" height="100%"></center>
@@ -146,26 +140,24 @@
 			<p>https://github.com/miintto/KAKAO_TEXT_ANALYSIS_PAGE</p>
 		</div>
 	</div>
-	<script src="{% static 'script/charts/chart_functions.js' %}"></script>
-	<script src="{% static 'script/charts/charts_ajax.js' %}"></script>
-	<script src="{% static 'script/charts/charts_main.js' %}"></script>
 
 	<!--날짜 선택 팝업창-->
 	<div class="popup-date">
 		<div class="popup-date-background" style="display:none;"></div>
 		<div class="popup-date-range" style="display:none;">
 			<div class="popup-close">
-				<img width="40" height="40" align="right" onclick="close_date_popup()">
+				<img src="/static/img/close_window.png" width="40" height="40" align="right" onclick="close_date_popup()">
 			</div>
-			<div>
-				<center><h2>검색할 날짜 구간을 입력하세요.</h2></center>
+			<div class="popup-title">
+				<center><h2>분석할 날짜 구간을 입력하세요.</h2></center>
 			</div>
 			<div class="popup-date-inputbox">
 				<table class='date-input-table'>
 					<tbody>
 						<tr>
 							<td>
-								<div><center><h3>시작날짜</h3></center></div>
+								<div class="date-input-sec"><center><h3>시작날짜</h3></center>
+								</div>
 							</td>
 							<td>
 								<div class="popup-date-input">
@@ -175,7 +167,8 @@
 						</tr>
 						<tr>
 							<td>
-								<div><center><h3>종료날짜</h3></center></div>
+								<div class="date-input-sec"><center><h3>종료날짜</h3></center
+								></div>
 							</td>
 							<td>
 								<div class="popup-date-input">
@@ -185,22 +178,6 @@
 						</tr>
 					</tbody>
 				</table>
-<!--				<div class="popup-date-partition">-->
-<!--					<div>-->
-<!--						<center><h2>시작날짜</h2></center>-->
-<!--					</div>-->
-<!--					<div class="popup-date-input">-->
-<!--						<center><input id="search-start_date"></center>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--				<div class="popup-date-partition">-->
-<!--					<div>-->
-<!--						<center><h2>종료날짜</h2></center>-->
-<!--					</div>-->
-<!--					<div class="popup-date-input">-->
-<!--						<center><input id="search-end_date"></center>-->
-<!--					</div>-->
-<!--				</div>-->
 			</div>
 			<div class="submit-button">
 				<center>
@@ -210,15 +187,15 @@
 		</div>
 	</div>
 
-	<!--검색할 단어 선택 팝업창-->
+	<!--분석할 단어 선택 팝업창-->
 	<div class="popup-word">
 		<div class="popup-word-background" style="display:none;"></div>
 		<div class="popup-word-search" style="display:none;">
 			<div class="popup-close">
-				<img width="40" height="40" align="right" onclick="close_popup()">
+				<img src="/static/img/close_window.png" width="40" height="40" align="right" onclick="close_popup()">
 			</div>
-			<div>
-				<center><h2>검색할 단어를 입력하세요.</h2></center>
+			<div class="popup-title">
+				<center><h2>분석할 단어를 입력하세요.</h2></center>
 			</div>
 			<div class="popup-input">
 				<center><input id="search-word"></center>
@@ -231,5 +208,8 @@
 			</div>
 		</div>
 	</div>
+	<script src="{% static 'script/charts/chart_functions.js' %}"></script>
+	<script src="{% static 'script/charts/charts_ajax.js' %}"></script>
+	<script src="{% static 'script/charts/charts_main.js' %}"></script>
 </body>
 </html>

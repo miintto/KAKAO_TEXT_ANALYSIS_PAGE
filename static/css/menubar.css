@@ -1,8 +1,6 @@
-body{
-	margin: 0px auto;
-	background-color: #F6F6F6;
-	font-family: 'Noto Sans KR', sans-serif;
-}
+/*
+전체 사이즈
+*/
 .menu-bar {
 	width: 100%;
 	background-color: #FCFCFC;
@@ -12,6 +10,15 @@ body{
 	height: 75px;
 }
 
+.menu-title-bar h3 {
+    margin: 0px;
+    display: block;
+    vertical-align: middle;
+    line-height: 75px;
+    text-align: center;
+	font-weight: normal;
+}
+
 .menu-button-bar {
 	height: 50px;
     /*border: 0.1em #879399;*/
@@ -19,24 +26,20 @@ body{
     border-style: solid hidden;
 }
 
-.menu-title-bar h3 {
-    margin: 0px;
-    display: block;
-    vertical-align: middle;
-    line-height: 75px;
-    text-align: center;
-}
 
+
+/*
+버튼 설정
+*/
 .menu-button {
 	width: 125px;
 	height: 50px;
-	color: #404040;
-	display: table;
 	float: left;
 }
 
 .menu-button a {
     display: block;
+	width: 125px;
     height: 100%;
     line-height: 50px;
     font-size: 20px;
@@ -50,13 +53,13 @@ body{
 	width: 125px;
 	height: 50px;
 	color: #40342F;
-	display: table;
 	float: left;
 	background-color: #404040;
 }
 
 .menu-button-active a{
     display: block;
+	width: 125px;
     height: 100%;
     line-height: 50px;
     font-size: 20px;
@@ -66,36 +69,15 @@ body{
 	color: #FFFFFF;
 }
 
-.menu-button-text {
-	display: table-cell;
-	vertical-align: middle;
-}
-
 .menu-button a:hover{
-	background-color: #E6E6E6
-;
-}
-
-.range-date {
-	padding-left: 20px;
-	width: 100%
+	background-color: #E6E6E6;
 }
 
 
-/*#contents {
-	width: 100%;
-	height: 100%;
-}
+
+/*
+페이지 하단 Footer CSS
 */
-
-.sidemenu {
-	list-style: none;
-}
-.sidemenu li{	
-	height: 50px;
-	margin: 1px;
-}
-
 .footer {
 	background-color: #404040;
 	color: #FFFFFF;

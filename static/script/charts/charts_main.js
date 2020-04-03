@@ -57,11 +57,16 @@ function submit_date_range() {
     var start_date = $("#search-start_date").val();
     var end_date = $("#search-end_date").val();
 
-    close_date_popup();
+    var date_format = /[0-9]{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/;
+    if (date_format.test(start_date) & date_format.test(end_date)) {
+        close_date_popup();
 
-    $('p#startdate').text(start_date);
-    $('p#enddate').text(end_date);
-    charts_by_date(start_date, end_date);
+        $('p#startdate').text(start_date);
+        $('p#enddate').text(end_date);
+        charts_by_date(start_date, end_date);
+    } else {
+        alert('올바른 날짜를 입력해주세요.');
+    }
 }
 
 

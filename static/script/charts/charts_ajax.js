@@ -233,7 +233,7 @@ function ajax_bar_word(csrf_token, tag_id, start_date, end_date, word) {
             'word': word
         },
         success: function (data) {
-            $(title).html('<h2># 언급 횟수 : "'+data['word']+'"</h2>');
+            $(title).html('<h1># 언급 횟수 : "'+data['word']+'"</h1>');
             $(loading).hide();
             chart_bar(data['data'], tag_id);
         },

@@ -1,9 +1,11 @@
-body{
+/*
+메인 박스 전체 틀 CSS
+*/
+body {
 	background-color: #F6F6F6;
-	/*background-color: #FFFFFF;*/
 }
 
-div.main-box {
+.main-box {
 	text-align : center;
 	margin : auto;
 	background-color: #F6F6F6;
@@ -12,26 +14,95 @@ div.main-box {
 	border-radius: 1.5em;
 }
 
-div.main-margin-top {
+.main-margin-top {
 	height: 80px;
 }
 
-div.main-comment {
+.main-comment {
 	padding: 30px;
 }
 
-div.main-sample {
+.main-sample {
     margin: 50px;
+	padding: 50px;
 }
 
-div.hidden-button{
+
+
+/*
+파일 업로드 CSS
+*/
+label.upload-space {
+    width: 360px;
+    height: 150px;
+    display: inline-block;
+	background-color: #F6F6F6;
+    color: #BBBBBB;
+    border: 0.1em dashed #BBBBBB;
+    text-align:center;
+    vertical-align: middle;
+    line-height: 150px;
+    cursor: pointer;
+    border-radius: .3em;
+}
+
+label.upload-space:hover {
+    background-color: #FCFCFC;
+}
+
+.load-space input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip:rect(0,0,0,0);
+    border: 0;
+}
+
+.hidden-button{
     padding: 30px;
     visibility:hidden;
 }
 
-div.main-sample {
-	padding: 50px;
+
+
+/*
+[공통] : 확인버튼 CSS
+*/
+.submit-button button {
+    margin: 0;
+    border: 0;
+    display: inline-block;
+	background-color: #262626;
+	width: 200px;
+	height: 40px;
+	border-radius: 0.25em;
+	color: #FFFFFF;
+    cursor: pointer;
 }
+
+.submit-button button:hover {
+	background-color: #879399;
+}
+
+
+
+/*
+이미지 로딩 CSS
+*/
+.loading img{
+    display: block;
+    position: absolute;
+    opacity: 0.5;
+}
+
+
+
+/*
+파일 체크 화면 CSS
+*/
 .status-box {
 	height: 80px;
 }
@@ -50,58 +121,3 @@ div.main-sample {
 	padding-bottom: 50px;
 }
 
-label.upload-space {
-    width: 360px;
-    height: 150px;
-    display: inline-block;
-	background-color: #F6F6F6;
-    color: #BBBBBB;
-    border: 0.1em dashed #BBBBBB;
-    text-align:center;
-    vertical-align: middle;
-    line-height: 150px;
-    cursor: pointer;
-    border-radius: .25em;
-}
-
-label.upload-space:hover {
-    background-color: #FCFCFC;
-}
-
-.load-space input {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip:rect(0,0,0,0);
-    border: 0;
-}
-
-.submit-button button {
-    margin: 0;
-    border: 0;
-    display: inline-block;
-	background-color: #262626;
-	width: 200px;
-	height: 40px;
-	border-radius: 0.25em;
-	color: #FFFFFF;
-    cursor: pointer;
-}
-
-.submit-button button:hover {
-	background-color: #879399;
-}
-
-.inquiry-contents {
-	padding-left: 20px;
-	width: 100%
-}
-
-.loading img{
-    display: block;
-    position: absolute;
-    opacity: 0.5;
-}
