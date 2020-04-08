@@ -92,7 +92,6 @@ function chart_pie(dataset, chart_idx) {
 	var outerArc = d3.arc()
 		.innerRadius(radius*0.9)
 		.outerRadius(radius*0.9)
-    console.log(data_arcs);
 
 	svg.selectAll()
 		.data(data_arcs)
