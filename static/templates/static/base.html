@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<title>카카오톡 대화 분석</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/chartbox.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/inquiry.css' %}">
+    <script type="text/javascript" src="{% static 'script/jquery-1.12.4.min.js' %}"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
+</head>
+<body>
+    {% block content %}
+    {% endblock content %}
+	{% include "static/footer.html" %}
+</body>
+</html>

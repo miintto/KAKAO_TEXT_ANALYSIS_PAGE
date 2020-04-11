@@ -1,5 +1,13 @@
+body {
+	margin: 0px auto;
+	background-color: #F6F6F6;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+
+
 /*
-전체 사이즈
+메뉴바 전체 사이즈
 */
 .menu-bar {
 	width: 100%;
@@ -30,7 +38,7 @@
 
 
 /*
-버튼 설정
+메뉴바 버튼 설정
 */
 .menu-button {
 	width: 125px;
@@ -72,6 +80,27 @@
 
 .menu-button a:hover{
 	background-color: #E6E6E6;
+}
+
+
+
+/*
+공통 버튼 형태
+*/
+.submit-button button {
+    margin: 20px;
+    border: 0;
+    display: inline-block;
+	background-color: #262626;
+	width: 150px;
+	height: 40px;
+	border-radius: 0.25em;
+	color: #FFFFFF;
+    cursor: pointer;
+}
+
+.submit-button button:hover {
+	background-color: #879399;
 }
 
 

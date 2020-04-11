@@ -4,7 +4,7 @@
 	{% load static %}
 	<title>카카오톡 대화 분석</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/menubar.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}">
     <script type="text/javascript" src="{% static 'script/jquery-1.12.4.min.js' %}"></script>
 	<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
 </head>
@@ -95,24 +95,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="footer">
-		<div class="footer-contents">
-			<div class="footer-info footer-container">
-				<h1>MIINTTO</h1>
-				<p>Created in 2019 by miintto</p>
-			</div>
-			<div class="footer-site footer-container">
-				<h3>Links</h3>
-				<p><a href="https://github.com/miintto" target="_blank">Github</a></p>
-				<p><a href="https://blog.naver.com/mj93m" target="_blank">Naver Blog</a></p>
-			</div>
-			<div class="footer-contact footer-container">
-				<h3>Contact</h3>
-				<p>minjp93@gmail.com</p>
-			</div>
-		</div>
-	</div>
     <script type="text/javascript" src="{% static 'script/common.js' %}"></script>
     <script type="text/javascript" src="{% static 'script/main.js' %}"></script>
+	{% include "static/footer.html" %}
 </body>
 </html>

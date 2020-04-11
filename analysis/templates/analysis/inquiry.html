@@ -1,94 +1,70 @@
-<!DOCTYPE html>
-<html>
-<head>
-	{% load static %}
-	<title>카카오톡 대화 분석</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/inquiry.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/menubar.css' %}">
-	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
-</head>
-<body>
-	<div class="menu-bar">
-		<div class="menu-title-bar">
-			<center>
-				<h3>카카오톡 대화 분석</h3>
-			</center>
+{% extends "static/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="menu-bar">
+	<div class="menu-title-bar">
+		<center>
+			<h3>카카오톡 대화 분석</h3>
+		</center>
+	</div>
+	<div class="menu-button-bar">
+		<div class="menu-button">
+			<div class="menu-button-text"><a class="sidemenu" href="{% url 'main' %}">Main</a></div>
 		</div>
-		<div class="menu-button-bar">
-			<div class="menu-button">
-				<div class="menu-button-text"><a class="sidemenu" href="{% url 'main' %}">Main</a></div>
-			</div>
-			<div class="menu-button">
-				<div class="menu-button-text"><a class="sidemenu" href="{% url 'charts' %}">Charts</a></div>
-			</div>
-			<div class="menu-button-active">
-				<div class="menu-button-text"><a class="sidemenu" href="{% url 'info' %}">Info</a></div>
-			</div>
+		<div class="menu-button">
+			<div class="menu-button-text"><a class="sidemenu" href="{% url 'charts' %}">Charts</a></div>
+		</div>
+		<div class="menu-button-active">
+			<div class="menu-button-text"><a class="sidemenu" href="{% url 'info' %}">Info</a></div>
 		</div>
 	</div>
-	<div class="inquiry-contents" id="contents">
-		<div class="inquiry-contents-box">
-			<div class="my-info">
-				<div class="title">
-					<h1>Created by ..</h1>
-				</div>
-				<div class="my-info-img">
-					<img src="{% static 'img/profile.jpg' %}" width="150" height="150">
-				</div>
-				<div class="my-info-content">
-					<div class="my-info-name">
-						<div class="my-name">
-							<div class="my-name-kr">
-								<h2>박민재</h2>
-							</div>
-							<div class="my-name-eng">
-								<p>(Park Minjae)</p>
-							</div>
+</div>
+<div class="inquiry-contents" id="contents">
+	<div class="inquiry-contents-box">
+		<div class="my-info">
+			<div class="title">
+				<h1>Created by ..</h1>
+			</div>
+			<div class="my-info-img">
+				<img src="{% static 'img/profile.jpg' %}" width="150" height="150">
+			</div>
+			<div class="my-info-content">
+				<div class="my-info-name">
+					<div class="my-name">
+						<div class="my-name-kr">
+							<h2>박민재</h2>
+						</div>
+						<div class="my-name-eng">
+							<p>(Park Minjae)</p>
 						</div>
 					</div>
-					<div>
-						<ul class="profile-list">
-							<li><p>인하대학교 수학 / 통계학 전공 (2012 ~ 2019)</p></li>
-							<li><p>(주)데이터마케팅코리아 R&D센터 데이터기술연구소 전임 데이터 엔지니어 (2020 ~ )</p></li>
-						</ul>
-					</div>
 				</div>
-				<div class="my-info-contact">
+				<div>
 					<ul class="profile-list">
-						<li><p>E-mail: minjp93@gmail.com</p></li>
-						<li><p>Github: https://github.com/miintto</p></li>
-						<li><p>Blog: https://blog.naver.com/mj93m</p></li>
+						<li><p>인하대학교 수학 / 통계학 전공 (2012 ~ 2019)</p></li>
+						<li><p>(주)데이터마케팅코리아 R&D센터 데이터기술연구소 전임 데이터 엔지니어 (2020 ~ )</p></li>
 					</ul>
 				</div>
-				<div class="my-info-tags">
-					<div>
-						<p>#Data Analysis #Statistics #Mathematics #Machine Learning #Deep Learning #Textmining #Data Science #Data Engineer
-							#Python #R #SAS #Postgresql #Mysql #Elasticsearch #Django #Tensorflow #Keras</p>
-					</div>
+			</div>
+			<div class="my-info-contact">
+				<ul class="profile-list">
+					<li><p>E-mail: minjp93@gmail.com</p></li>
+					<li><p>Github: https://github.com/miintto</p></li>
+					<li><p>Blog: https://blog.naver.com/mj93m</p></li>
+				</ul>
+			</div>
+			<div class="my-info-tags">
+				<div>
+					<p>#Data Analysis #Statistics #Mathematics #Machine Learning #Deep Learning #Textmining #Data Science #Data Engineer
+						#Python #R #SAS #Postgresql #Mysql #Elasticsearch #Django #Tensorflow #Keras</p>
 				</div>
-				<div class="comment">
-					<p>문의 및 건의사항은 상단 이메일로 연락 바랍니다.</p>
-				</div>
+			</div>
+			<div class="comment">
+				<p>문의 및 건의사항은 상단 이메일로 연락 바랍니다.</p>
 			</div>
 		</div>
 	</div>
-	<div class="footer">
-		<div class="footer-contents">
-			<div class="footer-info footer-container">
-				<h1>MIINTTO</h1>
-				<p>Created in 2019 by miintto</p>
-			</div>
-			<div class="footer-site footer-container">
-				<h3>Links</h3>
-				<p><a href="https://github.com/miintto" target="_blank">Github</a></p>
-				<p><a href="https://blog.naver.com/mj93m" target="_blank">Naver Blog</a></p>
-			</div>
-			<div class="footer-contact footer-container">
-				<h3>Contact</h3>
-				<p>minjp93@gmail.com</p>
-			</div>
-		</div>
-	</div>
-</body>
+</div>
+{% endblock content %}
