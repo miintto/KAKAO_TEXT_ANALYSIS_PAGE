@@ -4,8 +4,9 @@
 	{% load static %}
 	<title>카카오톡 대화 분석</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-    <script type="text/javascript" src="{% static 'script/common.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/menubar.css' %}">
     <script type="text/javascript" src="{% static 'script/jquery-1.12.4.min.js' %}"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -29,12 +30,89 @@
 					</div>
 				</form>
 			</div>
-			<div class="main-sample">
-				<div class="submit-button">
-					<button onclick="load_sample_charts()">샘플 보기</button>
+			<div class="main-button">
+				<div class="button-box">
+					<div class="submit-button button-flex">
+						<button onclick="load_sample_charts()">샘플 보기</button>
+					</div>
+					<div class="submit-button button-flex">
+						<button onclick="show_guide()">가이드</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="sub-box">
+			<div class="guide">
+				<div id="guide-title">
+					<center><h1>가이드</h1></center>
+				</div>
+				<div id="guide-pc" class="guide-contents">
+					<div>
+						<h2>PC 버전</h2>
+					</div>
+					<div class="slide-contents">
+						<div class="slide-button">
+							<img src="{% static 'img/slide_button_prev.png' %}" id="slide_prev-pc" width="24" height="50">
+						</div>
+						<div class="slide-box">
+							<ul id="slide-pc">
+								<li><img src="{% static 'img/guide_pc_01.jpg' %}" width="360" height="360"></li>
+								<li><img src="{% static 'img/guide_pc_02.jpg' %}" width="360" height="360"></li>
+								<li><img src="{% static 'img/guide_pc_03.jpg' %}" width="360" height="360"></li>
+							</ul>
+						</div>
+						<div class="slide-button">
+							<img src="{% static 'img/slide_button_next.png' %}" id="slide_next-pc" width="24" height="50">
+						</div>
+					</div>
+					<div id="guide-text-pc">
+						<center><p>1. 채팅창 상단의 메뉴 버튼 클릭</p></center>
+					</div>
+				</div>
+				<div id="guide-mobile" class="guide-contents">
+					<div>
+						<h2>모바일 버전</h2>
+					</div>
+					<div class="slide-contents">
+						<div class="slide-button">
+							<img src="{% static 'img/slide_button_prev.png' %}" id="slide_prev-mobile" width="24" height="50">
+						</div>
+						<div class="slide-box">
+							<ul id="slide-mobile">
+								<li><img src="{% static 'img/guide_mobile_01.jpg' %}" width="360" height="360"></li>
+								<li><img src="{% static 'img/guide_mobile_02.jpg' %}" width="360" height="360"></li>
+								<li><img src="{% static 'img/guide_mobile_03.jpg' %}" width="360" height="360"></li>
+							</ul>
+						</div>
+						<div class="slide-button">
+							<img src="{% static 'img/slide_button_next.png' %}" id="slide_next-mobile" width="24" height="50">
+						</div>
+					</div>
+					<div id="guide-text-mobile">
+						<center><p>1. 채팅창 메뉴에서 설정 버튼 클릭</p></center>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="footer">
+		<div class="footer-contents">
+			<div class="footer-info footer-container">
+				<h1>MIINTTO</h1>
+				<p>Created in 2019 by miintto</p>
+			</div>
+			<div class="footer-site footer-container">
+				<h3>Links</h3>
+				<p><a href="https://github.com/miintto" target="_blank">Github</a></p>
+				<p><a href="https://blog.naver.com/mj93m" target="_blank">Naver Blog</a></p>
+			</div>
+			<div class="footer-contact footer-container">
+				<h3>Contact</h3>
+				<p>minjp93@gmail.com</p>
+			</div>
+		</div>
+	</div>
+    <script type="text/javascript" src="{% static 'script/common.js' %}"></script>
+    <script type="text/javascript" src="{% static 'script/main.js' %}"></script>
 </body>
 </html>

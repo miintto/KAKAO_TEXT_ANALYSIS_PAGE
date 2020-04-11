@@ -19,3 +19,9 @@ function LoadFile() {
     $('div.loading').html(loading);
 
 }
+
+function show_guide() {
+//    document.getElementById("guide-title")
+    var title = $("#guide-title").offset().top;
+    $('html, body').animate({scrollTop: title}, 150);
+}

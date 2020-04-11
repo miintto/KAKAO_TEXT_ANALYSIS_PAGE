@@ -2,6 +2,7 @@
 메인 박스 전체 틀 CSS
 */
 body {
+	margin: 0px auto;
 	background-color: #F6F6F6;
 }
 
@@ -9,8 +10,7 @@ body {
 	text-align : center;
 	margin : auto;
 	background-color: #F6F6F6;
-	width: 400px;
-	height: 600px;
+	width: 720px;
 	border-radius: 1.5em;
 }
 
@@ -22,9 +22,9 @@ body {
 	padding: 30px;
 }
 
-.main-sample {
-    margin: 50px;
-	padding: 50px;
+.main-button {
+    margin: 50px 0px;
+	padding: 50px 0px;
 }
 
 
@@ -71,12 +71,22 @@ label.upload-space:hover {
 /*
 [공통] : 확인버튼 CSS
 */
+.button-box {
+    display: flex;
+    width: 400px;
+    margin: 0px auto;
+}
+
+.button-flex {
+    width: 50%;
+}
+
 .submit-button button {
-    margin: 0;
+    margin: 20px;
     border: 0;
     display: inline-block;
 	background-color: #262626;
-	width: 200px;
+	width: 150px;
 	height: 40px;
 	border-radius: 0.25em;
 	color: #FFFFFF;
@@ -121,3 +131,57 @@ label.upload-space:hover {
 	padding-bottom: 50px;
 }
 
+
+/*
+가이드 문서
+*/
+.sub-box {
+    width: 630px;
+    margin-top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100px;
+}
+
+#guide-title h1 {
+    padding: 50px;
+}
+
+.guide-contents {
+    padding-bottom: 100px;
+}
+
+.slide-contents {
+    display: flex;
+    width: 480px;
+    margin: 0px auto;
+}
+
+.slide-button {
+    vertical-align: middle;
+    line-height: 400px;
+}
+
+.slide-button img {
+    cursor: pointer;
+}
+
+.slide-box {
+    position: relative;
+    width: 360px;
+    height: 360px;
+    overflow: hidden;
+    margin: 25px;
+}
+
+.slide-box ul {
+    position: absolute;
+    width: 1080px;
+    margin: 0px;
+    padding: 0px;
+    font-size: 0px;
+}
+
+.slide-box ul li {
+    display: inline-block;
+}
