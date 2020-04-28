@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////
 //
-//  차트 페이지 진입시 ajax를 이용하여 그래프 생성
+//  차트 페이지 진입시 그래프 생성
 //
 //////////////////////////////////////////////////
 
@@ -16,13 +16,13 @@ function charts_by_date(start_date, end_date){
     ajax_bar_word(csrf_token, '#chart8', start_date, end_date, "이모티콘");
 }
 
-function show_popup(tag_id) {
+function show_word_popup(tag_id) {
     $('div#popup-classify').text(tag_id);
     $('div.popup-word-background').show();
     $('div.popup-word-search').show();
 }
 
-function close_popup() {
+function close_word_popup() {
     $('div.popup-word-background').hide();
     $('div.popup-word-search').hide();
 }
@@ -48,7 +48,7 @@ function submit_word() {
     var start_date = $('p#startdate').text();
     var end_date = $('p#enddate').text();
 
-    close_popup();
+    close_word_popup();
 
     ajax_bar_word(csrf_token, tag_id, start_date, end_date, word);
 }

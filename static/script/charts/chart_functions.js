@@ -1,6 +1,19 @@
+//////////////////////////////////////////////////
+//
+//  D3 차트 생성
+//
+//////////////////////////////////////////////////
+
+
 function chart_heatmap(dataset, chart_idx) {
-//	var myColor = d3.scaleSequential(d3.interpolateBlues)
-//		.domain([0, d3.max(dataset, function(d){ return d.chat**0.5;})])
+//	Input Format:
+//		dataset : [
+//			{"month": "19-01", "name": "name1", "chat": 90},
+//			{"month": "19-01", "name": "name2", "chat": 45},
+//			{"month": "19-01", "name": "name3", "chat": 15},
+//			...
+//		]
+
 	var myColor = d3.scaleLinear()
 		.domain([0, d3.max(dataset, function(d){ return d.chat**0.5;})]).range(["#FFFFFF", "#175C85"])
 
@@ -65,9 +78,14 @@ function chart_heatmap(dataset, chart_idx) {
 
 
 function chart_pie(dataset, chart_idx) {
-//	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513',
-//				'#CB4225', '#969696']
-//	var color = ['#1A4357', '#315669', '#486878', '#5F7B8A', '#768D99', '#8CA1AB', '#A3B4BC', '#BAC7CD', '#D3DADE', '#E8ECEE']
+//	Input Format:
+//		dataset : [
+//			{"name": "name1", "chat": 90},
+//			{"name": "name2", "chat": 45},
+//			{"name": "name3", "chat": 15},
+//			...
+//		]
+
 	var color = ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"]
 
 	var margin = 25
@@ -83,7 +101,7 @@ function chart_pie(dataset, chart_idx) {
 				.value(function(d) {return d.chat})
 	var data_arcs = pie(dataset)
 
-    var sum = d3.sum(dataset, function(d) {return d.chat})
+	var sum = d3.sum(dataset, function(d) {return d.chat})
 
 	var arc = d3.arc()
 		.innerRadius(radius*0.3)
@@ -99,7 +117,6 @@ function chart_pie(dataset, chart_idx) {
 		.attr('d', arc)
 		.attr('class', 'cell')
 		.attr('fill', function(d, i) {return color[i]})
-//        .attr('fill', function(d, i) {return myColor(d.value**2)})
 		.style("opacity", 0.9)
 		.on('mouseover', function() { 
 			tooltip.style("display", null);
@@ -171,8 +188,6 @@ function chart_pie(dataset, chart_idx) {
 
 
 function chart_area(dataset, chart_idx) {
-//	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513',
-//				'#CB4225', '#969696']
 	var color = ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"]
 
 	var margin = {top: 10, right: 10, bottom: 30, left: 60};
@@ -210,7 +225,6 @@ function chart_area(dataset, chart_idx) {
 	svg.append("g")
 		.call(d3.axisLeft(yScale));
 
-	console.log(d3.max(dataset, function(d) { return d.chat;}));
 	var colormap = d3.scaleOrdinal()
 		.domain(mygroups)
 		.range(color)
@@ -243,8 +257,7 @@ function chart_area(dataset, chart_idx) {
 			tooltip.style("left", (d3.event.pageX + 10) + "px")
 				.style("top", (d3.event.pageY - 10) + "px")
 				.html('<br>채팅 <b>'+d+'</b> 건')
-			})
-		console.log(stacked_data);
+			})``
 
 	var tooltip = d3.select('body').append('div')
 					.attr('class', 'tooltip')
@@ -254,8 +267,14 @@ function chart_area(dataset, chart_idx) {
 
 
 function chart_stream(dataset, chart_idx) {
-//	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513',
-//				'#CB4225', '#969696']
+//	Input Format:
+//		dataset : [
+//			{"month": "19-01", "name1": 18, "name2": 12, "name3": 8},
+//			{"month": "19-01", "name1": 13, "name2": 11, "name3": 7},
+//			{"month": "19-01", "name1": 10, "name2": 9, "name3": 5},
+//			...
+//		]
+
 	var color = ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"]
 
 	var margin = {top: 10, right: 10, bottom: 30, left: 60};
@@ -274,15 +293,18 @@ function chart_stream(dataset, chart_idx) {
 		.keys(keys.reverse())
 		(dataset)
 
-    var limit = d3.max(stacked_data[0], function(d) {return -d[0]})
+	var limit = d3.max(stacked_data[0], function(d) {return -d[0]})   // y축 상한선
 
-	var xScale = d3.scaleBand()
-		.domain(dataset.map(function(d) { return d.month;} ))
-//		.domain(d3.extent(dataset, function(d) { return d.month; }))
-		.range([0, width]).padding(0.01);
+	var parseTime  = d3.timeParse("%y-%m");
+	var xScale = d3.scaleTime()
+		.domain(d3.extent(dataset, function(d) { month=parseTime(d.month); return month; }))
+		.range([0, width]);
 	svg.append("g")
 		.attr("transform", "translate(0,"+height+")")	/// (0, 280)에 axis 그리기
-		.call(d3.axisBottom(xScale));
+		.call(d3.axisBottom(xScale)
+			.ticks(d3.timeMonth)
+			.tickFormat(d3.timeFormat("%y-%m"))
+		);
 
 	var yScale = d3.scaleLinear()
 		.domain([-limit, limit])
@@ -301,7 +323,7 @@ function chart_stream(dataset, chart_idx) {
 			.style('fill', function(d) { return colormap(d.key); })
 			.attr('d', d3.area()
 						.curve(d3.curveMonotoneX)
-						.x(function(d, i) { return xScale(d.data.month); })
+						.x(function(d, i) { month=parseTime(d.data.month); return xScale(month); })
 						.y0(function(d) { return yScale(d[0]); })
 						.y1(function(d) { return yScale(d[1]); })
 				)
@@ -332,8 +354,14 @@ function chart_stream(dataset, chart_idx) {
 
 
 function chart_bar(dataset, chart_idx) {
-//	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513',
-//				'#CB4225', '#969696']
+//	Input Format:
+//		dataset : [
+//			{"name": "name1", "chat": 90},
+//			{"name": "name2", "chat": 45},
+//			{"name": "name3", "chat": 15},
+//			...
+//		]
+
 	var myColor = d3.scaleLinear()
 		.domain([0, d3.max(dataset, function(d){ return d.chat**0.5;})]).range(["#FFFFFF", "#175C85"])
 
@@ -364,7 +392,6 @@ function chart_bar(dataset, chart_idx) {
 		.data(dataset)
 		.enter().append('rect')
 			.attr('class', 'cell')
-//			.attr('fill', function(d, i) {return color[i]})
 			.attr('fill', function(d, i) {return myColor(d.chat**0.5)})
 			.attr('height', function(d, i) {return height-yScale(d.chat)})
 			.attr('width', xScale.bandwidth())					/// xScale 로 bar너비를 자동으로 조정하여 배열
@@ -398,8 +425,14 @@ function chart_bar(dataset, chart_idx) {
 
 
 function chart_wkday(dataset, chart_idx) {
-//	var myColor = d3.scaleSequential(d3.interpolateBlues)
-//		.domain([0, d3.max(dataset, function(d){ return d.chat**0.5;})])
+//	Input Format:
+//		dataset : [
+//			{"hour": "00", "wkday": 0, "chat": 3},
+//			{"hour": "00", "wkday": 1, "chat": 13},
+//			{"hour": "00", "wkday": 2, "chat": 11},
+//			...
+//		]
+
 	var myColor = d3.scaleLinear()
 		.domain([0, d3.max(dataset, function(d){ return d.chat**0.5;})]).range(["#FFFFFF", "#175C85"])
 
@@ -467,8 +500,14 @@ function chart_wkday(dataset, chart_idx) {
 
 
 function chart_wordcloud(dataset, chart_idx) {
-//	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513',
-//				'#CB4225', '#969696']
+//	Input Format:
+//		dataset : [
+//			{"word": "word1", "count": 45},
+//			{"word": "word1", "count": 37},
+//			{"word": "word1", "count": 19},
+//			...
+//		]
+
 	var color = ['#1A4357', '#315669', '#486878', '#5F7B8A', '#768D99', '#8CA1AB', '#A3B4BC', '#BAC7CD', '#D3DADE', '#E8ECEE']
 
 	var margin = {top: 10, right: 10, bottom: 10, left: 10}
@@ -532,9 +571,9 @@ function chart_wordcloud(dataset, chart_idx) {
 //				  .attr('rx', 10)
 //				  .attr('ry', 10)
 //				  .attr('class', 'label-background-strong');
-//  }
+//	}
 //
-//  function handleMouseOut(d) {
+//	function handleMouseOut(d) {
 //	d3.select('#story-titles').remove();
   }
 }
@@ -542,8 +581,14 @@ function chart_wordcloud(dataset, chart_idx) {
 
 
 function chart_circular_packing(dataset, chart_idx) {
-//	var color = ['#DB992C', '#FDC7C7', '#7390AF', '#AB8144', '#FFFFFF', '#308E42', '#FFD200', '#443513',
-//				'#CB4225', '#969696']
+//	Input Format:
+//		dataset : [
+//			{"name": "name1", "chat": 90, "area": 6000},
+//			{"name": "name2", "chat": 45, "area": 3000},
+//			{"name": "name3", "chat": 15, "area": 1000},
+//			...
+//		]
+
 	var color = ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"]
 
 	var margin = 25
