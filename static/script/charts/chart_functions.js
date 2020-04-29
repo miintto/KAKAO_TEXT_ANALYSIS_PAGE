@@ -366,11 +366,10 @@ function chart_stream(dataset, chart_idx) {
 				idx = invertedx.getMonth();
 				chat = d[idx][1] - d[idx][0]
 				var formatTime = d3.timeFormat("%y-%m")
-				console.log(d3.event.pageY - 10)
 	            vertical.style("left", d3.event.pageX - 100 + "px" )
 				tooltip.style("left", (d3.event.pageX + 20) + "px")
 					.style("top", (d3.event.pageY - 10) + "px")
-					.html(formatTime(invertedx)+' '+d.key+'<br><h3>'+chat+' 건</h3>')
+					.html('20'+formatTime(invertedx)+' '+d.key+'<br><h3>'+chat+' 건</h3>')
 				})
 
 	var vertical = d3.select(chart_idx).append("div")
@@ -443,8 +442,15 @@ function chart_stacked_bar(dataset, chart_idx) {
         .enter()
         .append("g")
 			.style('fill', function(d) { return colormap(d.key); })
+        .append("rect")
+			.attr('class', 'cell-bar-stacked')
+	        .attr("x", function(d) {  console.log(d[0]); return xScale(d[0].data.month); })
+	        .attr("y", function(d) { return yScale(d[0][1]); })
+	        .attr("height", function(d) { return yScale(d[0][0]) - yScale(d[0][1]); })
+	        .attr("width", xScale.bandwidth())
 			.on('mouseover', function() {
 				tooltip.style("display", null);
+				d3.selectAll('.cell-bar-stacked').style('opacity', 0.3)
 				d3.select(this)
 					.style('stroke', 'black')
 					.style('stroke-width', 1.5)
@@ -452,6 +458,7 @@ function chart_stacked_bar(dataset, chart_idx) {
 				})
 			.on('mouseout', function() {
 				tooltip.style("display", "none");
+				d3.selectAll('.cell-bar-stacked').style('opacity', 1)
 				d3.select(this)
 					.style('stroke', 'none')
 					.style('opacity', 1)
@@ -460,15 +467,8 @@ function chart_stacked_bar(dataset, chart_idx) {
 				chat = d[0][1] - d[0][0];
 				tooltip.style("left", (d3.event.pageX + 20) + "px")
 					.style("top", (d3.event.pageY - 10) + "px")
-					.html(d.key+'<br><h3>'+chat+' 건</h3>')
+					.html('20'+d[0].data.month+' '+d.key+'<br><h3>'+chat+' 건</h3>')
 				})
-		.selectAll("rect")
-        .data(function(d) { return d; })
-        .enter().append("rect")
-	        .attr("x", function(d) { return xScale(d.data.month); })
-	        .attr("y", function(d) { return yScale(d[1]); })
-	        .attr("height", function(d) { return yScale(d[0]) - yScale(d[1]); })
-	        .attr("width", xScale.bandwidth())
 
 	var tooltip = d3.select('body').append('div')
 					.attr('class', 'tooltip')
