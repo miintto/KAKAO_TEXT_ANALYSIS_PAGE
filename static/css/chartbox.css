@@ -99,6 +99,7 @@ ul.date-interval li {
 	height: 540px;
 	border-radius: 1.5em;
 	background-color: #F6F6F6;
+	position: relative;
 }
 
 .chartbox-title {
@@ -146,6 +147,8 @@ D3 차트 CSS
 	padding: 10px;
 	text-align: center;
 	font-size: 15px;
+	min-width: 120px;
+	min-height: 80px;
 }
 
 

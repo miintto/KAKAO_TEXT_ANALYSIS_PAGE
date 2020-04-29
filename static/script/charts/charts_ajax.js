@@ -127,7 +127,11 @@ function ajax_stream_monthly(csrf_token, tag_id, start_date, end_date) {
         },
         success: function (data) {
             $(loading).hide();
-            chart_stream(data['data'], tag_id);
+            if (data['data'].length==1) {
+				chart_stacked_bar(data['data'], tag_id);
+            } else {
+	            chart_stream(data['data'], tag_id);
+            }
         },
         fail: function (err) {
             console.log(err);

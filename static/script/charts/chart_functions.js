@@ -20,8 +20,8 @@ function chart_heatmap(dataset, chart_idx) {
 
 	var margin = {top: 10, right: 10, bottom: 30, left: 80};
 
-	var width  = 560 - margin.right-margin.left;	// width = 560-30 = 530
-	var height = 300 - margin.top-margin.bottom;	// height = 300-20 = 280
+	var width  = 560 - margin.right-margin.left;	// width = 560-90 = 470
+	var height = 300 - margin.top-margin.bottom;	// height = 300-40 = 260
 
 
 	var svg = d3.select(chart_idx)
@@ -44,35 +44,37 @@ function chart_heatmap(dataset, chart_idx) {
 	svg.selectAll()
 		.data(dataset)
 		.enter().append('rect')
-			.attr('class', 'cell')
+			.attr('class', 'cell-user-month')
 			.attr('fill', function(d, i) {return myColor(d.chat**0.5)})
 			.attr('height', yScale.bandwidth())
 			.attr('width', xScale.bandwidth())					/// xScale 로 bar너비를 자동으로 조정하여 배열
 			.attr('x', function(d, i) {return xScale(d.month)})		/// xScale 로 간격을 자동으로 조정하여 배열
 			.attr('y', function(d, i) {return yScale(d.name)})
-			.style('opacity', 0.8)
 		.on('mouseover', function() {
 			tooltip.style("display", null);
+			d3.selectAll('.cell-user-month').style('opacity', 0.3)
 			d3.select(this)
 				.style('stroke', 'black')
-				.style('stroke-width', 3)
+				.style('stroke-width', 1.5)
 				.style('opacity', 1)
 			})
 		.on('mouseout', function() {
 			tooltip.style("display", "none");
+			d3.selectAll('.cell-user-month').style('opacity', 1)
 			d3.select(this)
 				.style('stroke', 'none')
-				.style('opacity', 0.8)
+				.style('opacity', 1)
 			})
 		.on('mousemove', function(d) {
-			tooltip.style("left", (d3.event.pageX + 10) + "px")
+			tooltip.style("left", (d3.event.pageX + 20) + "px")
 				.style("top", (d3.event.pageY - 10) + "px")
-				.html('20'+d.month+' '+d.name+'<br>채팅 <b>'+d.chat+'</b> 건')
+				.html('20'+d.month+' '+d.name+'<br><h3>'+d.chat+' 건</h3>')
 			});
 
 	var tooltip = d3.select('body').append('div')
 					.attr('class', 'tooltip')
 					.style('display', 'none')
+                    .style("opacity", "0.85")
 }
 
 
@@ -115,26 +117,27 @@ function chart_pie(dataset, chart_idx) {
 		.data(data_arcs)
 		.enter().append('path')
 		.attr('d', arc)
-		.attr('class', 'cell')
+		.attr('class', 'cell-pie')
 		.attr('fill', function(d, i) {return color[i]})
-		.style("opacity", 0.9)
 		.on('mouseover', function() { 
 			tooltip.style("display", null);
+			d3.selectAll('.cell-pie').style('opacity', 0.3)
 			d3.select(this)
 				.style('stroke', 'black')
-				.style('stroke-width', 3)
+				.style('stroke-width', 1.5)
 				.style('opacity', 1) 
 			})
-		.on('mouseout',	function() { 
+		.on('mouseout',	function() {
+			d3.selectAll('.cell-pie').style('opacity', 1)
 			tooltip.style("display", "none");
 			d3.select(this)
 				.style('stroke', 'none')
-				.style('opacity', 0.9) 
+				.style('opacity', 1)
 			})
 		.on('mousemove', function(d) {
-			tooltip.style("left", (d3.event.pageX + 10) + "px")
+			tooltip.style("left", (d3.event.pageX + 20) + "px")
 				.style("top", (d3.event.pageY - 10) + "px")
-				.html(d.data.name+'<br>채팅 <b>'+d.value+'</b> 건  ( '+(d.value/sum*100).toFixed(1)+'% )')
+				.html(d.data.name+' ('+(d.value/sum*100).toFixed(1)+'%)<br><h3>'+d.value+' 건</h3>')
 			});
 
 	svg.selectAll()
@@ -183,6 +186,7 @@ function chart_pie(dataset, chart_idx) {
 	var tooltip = d3.select('body').append('div')
 					.attr('class', 'tooltip')
 					.style('display', 'none')
+                    .style("opacity", "0.85")
 }
 
 
@@ -192,8 +196,8 @@ function chart_area(dataset, chart_idx) {
 
 	var margin = {top: 10, right: 10, bottom: 30, left: 60};
 
-	var width  = 600 - margin.right-margin.left;	// width = 500-30 = 470
-	var height = 300 - margin.top-margin.bottom;	// height = 300-20 = 280
+	var width  = 600 - margin.right-margin.left;	// width = 600-70 = 530
+	var height = 300 - margin.top-margin.bottom;	// height = 300-40 = 260
 
 	var svg = d3.select(chart_idx)
 				.append('svg').attr('class', 'chart-d3').attr('width', 600).attr('height', 300)
@@ -254,14 +258,15 @@ function chart_area(dataset, chart_idx) {
 				.style('opacity', 0.9)
 			})
 		.on('mousemove', function(d) {
-			tooltip.style("left", (d3.event.pageX + 10) + "px")
+			tooltip.style("left", (d3.event.pageX + 20) + "px")
 				.style("top", (d3.event.pageY - 10) + "px")
-				.html('<br>채팅 <b>'+d+'</b> 건')
-			})``
+				.html('<br><h3>'+d+' 건</h3>')
+			})
 
 	var tooltip = d3.select('body').append('div')
 					.attr('class', 'tooltip')
 					.style('display', 'none')
+                    .style("opacity", "0.85")
 }
 
 
@@ -279,8 +284,8 @@ function chart_stream(dataset, chart_idx) {
 
 	var margin = {top: 10, right: 10, bottom: 30, left: 60};
 
-	var width  = 560 - margin.right-margin.left;	// width = 500-30 = 470
-	var height = 300 - margin.top-margin.bottom;	// height = 300-20 = 280
+	var width  = 560 - margin.right-margin.left;	// width = 560-70 = 490
+	var height = 300 - margin.top-margin.bottom;	// height = 300-40 = 260
 
 	var svg = d3.select(chart_idx)
 				.append('svg').attr('class', 'chart-d3').attr('width', 600).attr('height', 300)
@@ -316,10 +321,20 @@ function chart_stream(dataset, chart_idx) {
 		.domain(keys.reverse())
 		.range(color)
 
+	function xTip(n) {
+		if (n < width - 50) {
+            xTooltip = d3.event.pageX - 90
+		} else {
+            xTooltip = d3.event.pageX - 250
+		}
+		return xTooltip
+	}
+
 	svg.selectAll('area')
 		.data(stacked_data)
 		.enter()
 		.append('path')
+			.attr('class', 'cell-stream')
 			.style('fill', function(d) { return colormap(d.key); })
 			.attr('d', d3.area()
 						.curve(d3.curveMonotoneX)
@@ -328,27 +343,137 @@ function chart_stream(dataset, chart_idx) {
 						.y1(function(d) { return yScale(d[1]); })
 				)
 			.on('mouseover', function() {
+				vertical.style("display", null);
+				tooltip.style("display", null);
+				d3.selectAll('.cell-stream').style('opacity', 0.3)
+				d3.select(this)
+					.style('stroke', 'black')
+					.style('stroke-width', 1.5)
+					.style('opacity', 1)
+				})
+			.on('mouseout', function() {
+				vertical.style("display", "none");
+				tooltip.style("display", "none");
+				d3.selectAll('.cell-stream').style('opacity', 1)
+				d3.select(this)
+					.style('stroke', 'none')
+					.style('opacity', 1)
+				})
+			.on('mousemove', function(d) {
+				mouse = d3.mouse(this);
+				mousex = mouse[0] + width*0.5/(d.length-1) - 5;
+				var invertedx = xScale.invert(mousex);
+				idx = invertedx.getMonth();
+				chat = d[idx][1] - d[idx][0]
+				var formatTime = d3.timeFormat("%y-%m")
+				console.log(d3.event.pageY - 10)
+	            vertical.style("left", d3.event.pageX - 100 + "px" )
+				tooltip.style("left", (d3.event.pageX + 20) + "px")
+					.style("top", (d3.event.pageY - 10) + "px")
+					.html(formatTime(invertedx)+' '+d.key+'<br><h3>'+chat+' 건</h3>')
+				})
+
+	var vertical = d3.select(chart_idx).append("div")
+			        .attr("class", "remove")
+			        .style("position", "absolute")
+			        .style("z-index", "19")
+			        .style("width", "1.5px")
+			        .style("height", "270px")
+			        .style("top", "117px")
+			        .style("bottom", "30px")
+			        .style("left", "0px")
+			        .style("background", "#F6F6F6");
+
+	var tooltip = d3.select('body').append('div')
+					.attr('class', 'tooltip')
+					.style('display', 'none')
+                    .style("opacity", "0.85")
+}
+
+
+
+function chart_stacked_bar(dataset, chart_idx) {
+//	Input Format:
+//		dataset : [
+//			{"month": "19-01", "name1": 18, "name2": 12, "name3": 8},
+//			{"month": "19-01", "name1": 13, "name2": 11, "name3": 7},
+//			{"month": "19-01", "name1": 10, "name2": 9, "name3": 5},
+//			...
+//		]
+
+	var color = ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"]
+
+	var margin = {top: 10, right: 10, bottom: 30, left: 60};
+
+	var width  = 560 - margin.right-margin.left;	// width = 560-70 = 490
+	var height = 300 - margin.top-margin.bottom;	// height = 300-40 = 260
+
+	var svg = d3.select(chart_idx)
+				.append('svg').attr('class', 'chart-d3').attr('width', 600).attr('height', 300)
+				.append('g').attr('transform', "translate("+margin.left+","+margin.top+")");
+
+	var subgroups = Object.getOwnPropertyNames(dataset[0]).slice(1)
+	var groups = d3.map(dataset, function(d){return(d.month)}).keys()
+
+	var stacked_data = d3.stack()
+		.keys(subgroups.reverse())
+		(dataset)
+
+	var limit = stacked_data.slice(-1)[0][0][1]
+
+	var xScale = d3.scaleBand()
+		.domain(dataset.map(function(d) { return d.month;} ))
+		.range([0, width]);
+	svg.append("g")
+		.attr("transform", "translate(0,"+height+")")	/// (0, 280)에 axis 그리기
+		.call(d3.axisBottom(xScale));
+
+	var yScale = d3.scaleLinear()
+		.domain([0, limit])
+		.range([height, 0]);
+	svg.append("g")
+		.call(d3.axisLeft(yScale));
+
+	var colormap = d3.scaleOrdinal()
+		.domain(subgroups.reverse())
+		.range(color)
+
+	svg.selectAll('area')
+		.data(stacked_data)
+        .enter()
+        .append("g")
+			.style('fill', function(d) { return colormap(d.key); })
+			.on('mouseover', function() {
 				tooltip.style("display", null);
 				d3.select(this)
 					.style('stroke', 'black')
-					.style('stroke-width', 3)
+					.style('stroke-width', 1.5)
 					.style('opacity', 1)
 				})
 			.on('mouseout', function() {
 				tooltip.style("display", "none");
 				d3.select(this)
 					.style('stroke', 'none')
-					.style('opacity', 0.9)
+					.style('opacity', 1)
 				})
 			.on('mousemove', function(d) {
-				tooltip.style("left", (d3.event.pageX + 10) + "px")
+				chat = d[0][1] - d[0][0];
+				tooltip.style("left", (d3.event.pageX + 20) + "px")
 					.style("top", (d3.event.pageY - 10) + "px")
-					.html('<b>'+d.key+'</b>')
+					.html(d.key+'<br><h3>'+chat+' 건</h3>')
 				})
+		.selectAll("rect")
+        .data(function(d) { return d; })
+        .enter().append("rect")
+	        .attr("x", function(d) { return xScale(d.data.month); })
+	        .attr("y", function(d) { return yScale(d[1]); })
+	        .attr("height", function(d) { return yScale(d[0]) - yScale(d[1]); })
+	        .attr("width", xScale.bandwidth())
 
 	var tooltip = d3.select('body').append('div')
 					.attr('class', 'tooltip')
 					.style('display', 'none')
+                    .style("opacity", "0.85")
 }
 
 
@@ -367,8 +492,8 @@ function chart_bar(dataset, chart_idx) {
 
 	var margin = {top: 10, right: 10, bottom: 30, left: 60};
 
-	var width  = 560 - margin.right-margin.left;	// width = 500-30 = 470
-	var height = 300 - margin.top-margin.bottom;	// height = 300-20 = 280
+	var width  = 560 - margin.right-margin.left;	// width = 560-70 = 490
+	var height = 300 - margin.top-margin.bottom;	// height = 300-40 = 260
 
 	var svg = d3.select(chart_idx)
 				.append('svg').attr('class', 'chart-d3').attr('width', 600).attr('height', 300)
@@ -391,35 +516,37 @@ function chart_bar(dataset, chart_idx) {
 	svg.selectAll('bar')
 		.data(dataset)
 		.enter().append('rect')
-			.attr('class', 'cell')
+			.attr('class', 'cell-bar'+chart_idx.slice(-1))
 			.attr('fill', function(d, i) {return myColor(d.chat**0.5)})
 			.attr('height', function(d, i) {return height-yScale(d.chat)})
 			.attr('width', xScale.bandwidth())					/// xScale 로 bar너비를 자동으로 조정하여 배열
 			.attr('x', function(d, i) {return xScale(d.name)})		/// xScale 로 간격을 자동으로 조정하여 배열
 			.attr('y', function(d, i) {return yScale(d.chat)})
-			.style('opacity', 0.9)
 		.on('mouseover', function() { 
 			tooltip.style("display", null);
+			d3.selectAll('.cell-bar'+chart_idx.slice(-1)).style('opacity', 0.3)
 			d3.select(this)
 				.style('stroke', 'black')
-				.style('stroke-width', 3)
+				.style('stroke-width', 1.5)
 				.style('opacity', 1) 
 			})
 		.on('mouseout', function() {
 			tooltip.style("display", "none");
+			d3.selectAll('.cell-bar'+chart_idx.slice(-1)).style('opacity', 1)
 			d3.select(this)
 				.style('stroke', 'none')
-				.style('opacity', 0.9) 
+				.style('opacity', 1)
 			})
 		.on('mousemove', function(d) {
-			tooltip.style("left", (d3.event.pageX + 10) + "px")
+			tooltip.style("left", (d3.event.pageX + 20) + "px")
 				.style("top", (d3.event.pageY - 10) + "px")
-				.html(d.name+'<br>채팅 <b>'+d.chat+'</b> 건')
+				.html(d.name+'<br><h3>'+d.chat+' 건</h3>')
 			})
 
 	var tooltip = d3.select('body').append('div')
 					.attr('class', 'tooltip')
 					.style('display', 'none')
+                    .style("opacity", "0.85")
 }
 
 
@@ -440,8 +567,8 @@ function chart_wkday(dataset, chart_idx) {
 
 	var margin = {top: 10, right: 10, bottom: 30, left: 40};
 
-	var width  = 575 - margin.right-margin.left;	// width = 500-30 = 470
-	var height = 300 - margin.top-margin.bottom;	// height = 300-20 = 280
+	var width  = 575 - margin.right-margin.left;	// width = 575-50 = 525
+	var height = 300 - margin.top-margin.bottom;	// height = 300-40 = 260
 
 
 	var svg = d3.select(chart_idx)
@@ -466,35 +593,37 @@ function chart_wkday(dataset, chart_idx) {
 	svg.selectAll()
 		.data(dataset)
 		.enter().append('rect')
-			.attr('class', 'cell')
+			.attr('class', 'cell-wkday-hour')
 			.attr('fill', function(d, i) {return myColor(d.chat**0.5)})
 			.attr('height', yScale.bandwidth())
 			.attr('width', xScale.bandwidth())					/// xScale 로 bar너비를 자동으로 조정하여 배열
 			.attr('x', function(d, i) {return xScale(d.hour)})		/// xScale 로 간격을 자동으로 조정하여 배열
 			.attr('y', function(d, i) {return yScale(weekDays[d.wkday])})
-			.style('opacity', 0.8)
 		.on('mouseover', function() { 
 			tooltip.style("display", null);
+			d3.selectAll('.cell-wkday-hour').style('opacity', 0.3)
 			d3.select(this)
 				.style('stroke', 'black')
-				.style('stroke-width', 3)
+				.style('stroke-width', 1.5)
 				.style('opacity', 1) 
 			})
 		.on('mouseout', function() {
 			tooltip.style("display", "none");
+			d3.selectAll('.cell-wkday-hour').style('opacity', 1)
 			d3.select(this)
 				.style('stroke', 'none')
-				.style('opacity', 0.8) 
+				.style('opacity', 1)
 			})
 		.on('mousemove', function(d) {
-			tooltip.style("left", (d3.event.pageX + 10) + "px")
+			tooltip.style("left", (d3.event.pageX + 20) + "px")
 				.style("top", (d3.event.pageY - 10) + "px")
-				.html(weekDays[d.wkday]+'요일  '+d.hour+'시<br>채팅 <b>'+d.chat+'</b> 건')
+				.html(weekDays[d.wkday]+'요일  '+d.hour+'시<br><h3>'+d.chat+' 건</h3>')
 			});
 
 	var tooltip = d3.select('body').append('div')
 					.attr('class', 'tooltip')
 					.style('display', 'none')
+                    .style("opacity", "0.85")
 }
 
 
@@ -511,8 +640,8 @@ function chart_wordcloud(dataset, chart_idx) {
 	var color = ['#1A4357', '#315669', '#486878', '#5F7B8A', '#768D99', '#8CA1AB', '#A3B4BC', '#BAC7CD', '#D3DADE', '#E8ECEE']
 
 	var margin = {top: 10, right: 10, bottom: 10, left: 10}
-	var height = 300 - margin.top - margin.bottom
-	var width = 600 - margin.right - margin.right
+	var width = 600 - margin.right - margin.right	// width = 600-20 = 580
+	var height = 300 - margin.top - margin.bottom	// height = 300-20 = 280
 
 	var svg = d3.select(chart_idx)
 				.append('svg').attr('class', 'chart-d3').attr('width', 600).attr('height', 300)
@@ -592,7 +721,7 @@ function chart_circular_packing(dataset, chart_idx) {
 	var color = ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"]
 
 	var margin = 25
-	var width	= 600
+	var width = 600
 	var height = 300
 
 	var svg = d3.select(chart_idx)
@@ -612,7 +741,7 @@ function chart_circular_packing(dataset, chart_idx) {
 						tooltip.style("display", null);
 						d3.select(this)
 							.style('stroke', 'black')
-							.style('stroke-width', 3)
+							.style('stroke-width', 1.5)
 							.style('opacity', 1) 
 						})
 					.on('mouseout', function() {
@@ -624,7 +753,7 @@ function chart_circular_packing(dataset, chart_idx) {
 					.on('mousemove', function(d) {
 						tooltip.style("left", (d3.event.pageX + 10) + "px")
 							.style("top", (d3.event.pageY - 10) + "px")
-							.html(d.name+'<br>채팅 <b>'+d.chat+'</b> 건')
+							.html(d.name+'<br><h3>'+d.chat+' 건</h3>')
 						})
 					.call(d3.drag()
 						.on("start", dragstarted)
@@ -662,4 +791,5 @@ function chart_circular_packing(dataset, chart_idx) {
 	var tooltip = d3.select('body').append('div')
 					.attr('class', 'tooltip')
 					.style('display', 'none')
+                    .style("opacity", "0.85")
 }
