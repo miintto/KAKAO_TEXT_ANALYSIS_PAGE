@@ -1,3 +1,14 @@
+.inquiry-contents {
+	margin-top: 80px;
+}
+
+.info-contents-box {
+    width: 840px;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: 'Noto Serif KR', serif;
+}
+
 /*
 제작자 정보 CSS
 */
@@ -5,19 +16,18 @@
     width: 500px;
     height: auto;
     overflow: hidden;
-	margin-top: 50px;
-	margin-bottom: 150px;
+	margin-top: 100px;
+	margin-bottom: 200px;
 	margin-left: auto;
 	margin-right: auto;
 	padding: 20px;
-	border-radius: 1.5em;
-	background-color: #F6F6F6;
-	font-family: 'Noto Serif KR', serif;
+/*	border-radius: 1.5em;*/
+/*	background-color: #F6F6F6;*/
 }
 
 .title h1 {
     color: #545454;
-    margin-bottom: 100px
+    margin-bottom: 50px
 }
 
 .my-info-img {
@@ -79,4 +89,43 @@ ul.profile-list {
 	margin-top: 50px;
     float: left;
     width: 100%;
+}
+
+
+/*
+히스토리 CSS
+*/
+.info-history {
+    width: 840px;
+    height: auto;
+    overflow: hidden;
+	margin-top: 50px;
+	margin-bottom: 150px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px;
+/*	border-radius: 1.5em;*/
+/*	background-color: #F6F6F6;*/
+}
+
+.info-sub-title h2 {
+    color: #545454;
+    margin-bottom: 30px
+}
+
+.history-box {
+	margin-bottom: 100px;
+}
+
+.history-img-box {
+	display: block;
+    margin: 20px auto;
+}
+.history-text {
+	list-style: circle;
+}
+
+.history-text a {
+	color: #175C85;
+	text-decoration: none;
 }

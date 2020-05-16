@@ -343,7 +343,7 @@ function chart_stream(dataset, chart_idx) {
 						.y1(function(d) { return yScale(d[1]); })
 				)
 			.on('mouseover', function() {
-				vertical.style("display", null);
+//				vertical.style("display", null);
 				tooltip.style("display", null);
 				d3.selectAll('.cell-stream').style('opacity', 0.3)
 				d3.select(this)
@@ -352,7 +352,7 @@ function chart_stream(dataset, chart_idx) {
 					.style('opacity', 1)
 				})
 			.on('mouseout', function() {
-				vertical.style("display", "none");
+//				vertical.style("display", "none");
 				tooltip.style("display", "none");
 				d3.selectAll('.cell-stream').style('opacity', 1)
 				d3.select(this)
@@ -366,22 +366,22 @@ function chart_stream(dataset, chart_idx) {
 				idx = invertedx.getMonth();
 				chat = d[idx][1] - d[idx][0]
 				var formatTime = d3.timeFormat("%y-%m")
-	            vertical.style("left", d3.event.pageX - 100 + "px" )
+//	            vertical.style("left", d3.event.pageX - 100 + "px" )
 				tooltip.style("left", (d3.event.pageX + 20) + "px")
 					.style("top", (d3.event.pageY - 10) + "px")
 					.html('20'+formatTime(invertedx)+' '+d.key+'<br><h3>'+chat+' 건</h3>')
 				})
 
-	var vertical = d3.select(chart_idx).append("div")
-			        .attr("class", "remove")
-			        .style("position", "absolute")
-			        .style("z-index", "19")
-			        .style("width", "1.5px")
-			        .style("height", "270px")
-			        .style("top", "117px")
-			        .style("bottom", "30px")
-			        .style("left", "0px")
-			        .style("background", "#F6F6F6");
+//	var vertical = d3.select(chart_idx).append("div")
+//			        .attr("class", "remove")
+//			        .style("position", "absolute")
+//			        .style("z-index", "19")
+//			        .style("width", "1.5px")
+//			        .style("height", "270px")
+//			        .style("top", "117px")
+//			        .style("bottom", "30px")
+//			        .style("left", "0px")
+//			        .style("background", "#F6F6F6");
 
 	var tooltip = d3.select('body').append('div')
 					.attr('class', 'tooltip')
