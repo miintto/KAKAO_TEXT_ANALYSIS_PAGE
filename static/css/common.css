@@ -61,7 +61,6 @@ body {
 .menu-button-active {
 	width: 125px;
 	height: 50px;
-	color: #40342F;
 	float: left;
 	background-color: #404040;
 }
@@ -82,6 +81,9 @@ body {
 	background-color: #E6E6E6;
 }
 
+.menu-button-active a:hover{
+	background-color: #262626;
+}
 
 
 /*
@@ -91,7 +93,7 @@ body {
     margin: 20px;
     border: 0;
     display: inline-block;
-	background-color: #262626;
+	background-color: #404040;
 	width: 150px;
 	height: 40px;
 	border-radius: 0.25em;
@@ -100,7 +102,7 @@ body {
 }
 
 .submit-button button:hover {
-	background-color: #879399;
+	background-color: #262626;
 }
 
 

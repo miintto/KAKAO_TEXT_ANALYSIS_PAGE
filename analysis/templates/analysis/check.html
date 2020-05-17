@@ -1,41 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-	{% load static %}
-	<title>카카오톡 대화 분석</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}">
-    <script type="text/javascript" src="{% static 'script/common.js' %}"></script>
-</head>
+{% extends "static/base.html" %}
 
-<body>
-	<div class="main">
-		<div class="main-box">
-			<div class="main-margin-top">
-			</div>
-			<div id="status-box" class="status-box">
-				<h2>{{ message }}</h2>
-				{% csrf_token %}
-			</div>
-			<div id="status-contents">
+{% load static %}
 
-				{% if is_load %}
-				<div class="main-contents">
-					<div class="submit-button">
-						<button onclick="load_charts()" class='charts'>분석</button>
-					</div>
+{% block content %}
+<div class="main">
+	<div class="main-box">
+		<div class="main-margin-top">
+		</div>
+		<div id="status-box" class="status-box">
+			<h2>{{ message }}</h2>
+			{% csrf_token %}
+		</div>
+		<div id="status-contents">
+
+			{% if is_load %}
+			<div class="main-contents">
+				<div class="submit-button">
+					<button onclick="load_charts()" class='charts'>분석</button>
 				</div>
-
-				{% else %}
-				<div class="main-contents">
-					<div class="submit-button">
-						<button onclick="load_main()" class='main'>처음으로</button>
-					</div>
-				</div>
-				{% endif %}
-
 			</div>
+
+			{% else %}
+			<div class="main-contents">
+				<div class="submit-button">
+					<button onclick="load_main()" class='main'>처음으로</button>
+				</div>
+			</div>
+			{% endif %}
+
 		</div>
 	</div>
-</body>
-</html>
+</div>
+<script type="text/javascript" src="{% static 'script/common.js' %}"></script>
+{% endblock content %}
