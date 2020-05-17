@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import datetime as dt
+import re
 
 import logging
 logger = logging.getLogger(__name__)
@@ -8,8 +9,18 @@ logger = logging.getLogger(__name__)
 
 class Convertor:
 	'''
-	카카오톡 채팅 내용이 담긴 텍스트파일을 입력받아 pandas DataFrame 형태로 변환
-	(PC버전만 유효)
+	카카오톡 채팅 내용이 담긴 텍스트 파일을 가공하여 pandas DataFrame 형태로 변환
+
+	Args:
+		file <str>: 카카오톡 채팅 내용이 포함된 .txt 포맷 파일 경로
+
+	Returns:
+		df_chat <pandas DataFrame>: 가공한 데이터프레임
+
+	Examples
+		file = 'KakaoTalk_20200428_1729_00_450_group.txt'
+		conv = Convertor()
+		df = conv.run(file)
 	'''
 	def __init__(self):
 		self.title = None
@@ -18,7 +29,7 @@ class Convertor:
 		self.chat_list = list()
 
 
-	def _load_file(self, file):
+	def _load_file(self, file: str):
 		"""
 		유저가 업로드한 텍스트파일을 Pandas Dataframe 형식으로 가져옴
 		"""
@@ -46,30 +57,28 @@ class Convertor:
 		"""
 		PC버전 카카오톡 대화 메시지를 field별로 파싱
 		"""
+		pattern_chat = re.compile('^\[(.+)\] \[(오\w{1}\s\d+:\d{2})\] (.+)')
+		pattern_date = re.compile('-{15} (.+) \w요일 -{15}')
 		self.date = None
 		for line in self.df_input[0].values:
-			try:
-				split1 = line.find('] [')
-				split2 = line.find(':')
-				name = line[1:split1]
-				time = line[(split1+3):(split2+3)].replace('오전', 'AM').replace('오후', 'PM')
+			chat_group = pattern_chat.search(line)
+			if chat_group:
+				name = chat_group.group(1)
+				time = chat_group.group(2).replace('오전', 'AM').replace('오후', 'PM')
+				chat = chat_group.group(3)
 				time = dt.datetime.strftime(dt.datetime.strptime(time, "%p %I:%M"), "%H:%M")
-				chat = line[(split2+5):]
 				self.chat_list.append([self.date, time, name, chat])
-			except:
-				if '--------------- ' in line:
-					n = line.find('요일')
-					self.date = str(dt.datetime.strptime(line[:n-2], '--------------- %Y년 %m월 %d일').date())
-					pass
-				else:
-					self.chat_list.append([self.date, None, None, line])
+			elif pattern_date.search(line):
+				date_str = pattern_date.search(line).group(1)
+				self.date = str(dt.datetime.strptime(date_str, '%Y년 %m월 %d일').date())
+			else:
+				self.chat_list.append([self.date, None, None, line])
 		logger.debug(f'[Convertor] _append_by_pc() : chat_list.__len__ = {len(self.chat_list)}')
 
 
 	def _append_by_mobile(self):
 		"""
 		모바일버전 카카오톡 대화 메시지를 field별로 파싱
-		:return:
 		"""
 		for line in self.df_input[0].values:
 			try:
@@ -125,7 +134,7 @@ class Convertor:
 		return df_chat
 
 
-	def run(self, file):
+	def run(self, file: str):
 		logger.debug(f'[Convertor]  START')
 		self._load_file(file)
 		self._check_type()
