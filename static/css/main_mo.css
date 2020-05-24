@@ -1,3 +1,10 @@
+@media screen and (max-width: 630px) {
+	body {
+        width: 630px;
+	}
+}
+
+
 /*
 메인 박스 전체 틀 CSS
 */
