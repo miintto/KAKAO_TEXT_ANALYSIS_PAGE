@@ -1,0 +1,166 @@
+/*
+메인 박스 전체 틀 CSS
+*/
+.main-box {
+	text-align : center;
+	margin : auto;
+	background-color: #F6F6F6;
+	width: 720px;
+	border-radius: 1.5em;
+}
+
+.main-margin-top {
+	height: 80px;
+}
+
+.main-comment {
+	padding: 30px;
+}
+
+.main-button {
+    margin: 50px 0px;
+	padding: 50px 0px;
+}
+
+
+
+/*
+파일 업로드 CSS
+*/
+label.upload-space {
+    width: 360px;
+    height: 150px;
+    display: inline-block;
+	background-color: #F6F6F6;
+    color: #BBBBBB;
+    border: 0.1em dashed #BBBBBB;
+    text-align:center;
+    vertical-align: middle;
+    line-height: 150px;
+    cursor: pointer;
+    border-radius: .3em;
+}
+
+label.upload-space:hover {
+    background-color: #FCFCFC;
+}
+
+.load-space input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip:rect(0,0,0,0);
+    border: 0;
+}
+
+.hidden-button{
+    padding: 30px;
+    visibility:hidden;
+}
+
+
+
+/*
+[공통] : 확인버튼 CSS
+*/
+.button-box {
+    display: flex;
+    width: 400px;
+    margin: 0px auto;
+}
+
+.button-flex {
+    width: 50%;
+}
+
+
+
+/*
+이미지 로딩 CSS
+*/
+.loading img{
+    display: block;
+    position: absolute;
+    opacity: 0.5;
+}
+
+
+
+/*
+파일 체크 화면 CSS
+*/
+.status-box {
+	height: 80px;
+}
+
+.status-box h2 {
+	text-align : center;
+	color: #40342F;
+}
+
+.main-contents {
+    padding: 50px;
+}
+
+.main-contents form {
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+
+/*
+가이드 문서
+*/
+.sub-box {
+    width: 630px;
+    margin-top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100px;
+}
+
+#guide-title h1 {
+    padding: 50px;
+}
+
+.guide-contents {
+    padding-bottom: 100px;
+}
+
+.slide-contents {
+    display: flex;
+    width: 480px;
+    margin: 0px auto;
+}
+
+.slide-button {
+    vertical-align: middle;
+    line-height: 400px;
+}
+
+.slide-button img {
+    cursor: pointer;
+}
+
+.slide-box {
+    position: relative;
+    width: 360px;
+    height: 360px;
+    overflow: hidden;
+    margin: 25px;
+}
+
+.slide-box ul {
+    position: absolute;
+    width: 1080px;
+    margin: 0px;
+    padding: 0px;
+    font-size: 0px;
+}
+
+.slide-box ul li {
+    display: inline-block;
+}

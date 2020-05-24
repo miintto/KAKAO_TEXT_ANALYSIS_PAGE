@@ -13,6 +13,16 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+class MainMo(View):
+	def get(self, request):
+		ip = get_ip(request)
+		session_key = request.session.session_key
+		logger.debug(f'[USER SESSION] ip: {ip} / session_key: {session_key}')
+
+		template = 'analysis/main_mo.html'
+		return render(request, template)
+
+
 class Main(View):
 	def get(self, request):
 		ip = get_ip(request)

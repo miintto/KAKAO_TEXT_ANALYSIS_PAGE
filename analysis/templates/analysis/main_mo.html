@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>카카오톡 대화 분석</title>
+	{% load static %}
+	<!-- META -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, min-width=700">
+	<meta name="author" content="박민재 (Minjae Park)" />
+    <meta name="description" content="카카오톡 채팅 파일만 있으면 클릭 한번에 분석 및 시각화~" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="카카오톡 대화 분석" />
+	<meta property="og:description" content="카카오톡 채팅 파일만 있으면 클릭 한번에 분석 및 시각화~" />
+	<meta property="og:image" content="{% static 'img/meta_main.png' %}" />
+	<!--<meta http-equiv="Cache-Control" content="no-cache" />-->
+	<!--<meta http-equiv="Pragma" content="no-cache" />-->
+	<!-- CSS -->
+	<link type="text/css" href="{% static 'css/chartbox.css' %}" rel="stylesheet">
+	<link type="text/css" href="{% static 'css/common.css' %}" rel="stylesheet">
+	<link type="text/css" href="{% static 'css/main_mo.css' %}" rel="stylesheet">
+	<link type="text/css" href="{% static 'css/inquiry.css' %}" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+	<!-- JS -->
+    <script type="text/javascript" src="viewport-min-width.js"></script>
+    <script type="text/javascript" src="{% static 'script/jquery-1.12.4.min.js' %}"></script>
+	<script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+	<script type="text/javascript" src="https://d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
+</head>
+<body>
+<div class="loading"></div>
+<div class="main">
+	<div class="main-box">
+		<div class="main-margin-top">
+		</div>
+		<div>
+			<div class="main-comment">
+				<h3>카카오톡 텍스트 파일을 올려주세요.</h3>
+			</div>
+			<form method="POST" action="{% url 'check' %}" enctype="multipart/form-data">
+				{% csrf_token %}
+				<div class="load-space">
+					<label class="upload-space" id="upload-space" for="upload">업로드</label>
+					<input type="file" id="upload" name="uploadfile" onchange="LoadFile()">
+				</div>
+				<div class="hidden-button">
+					<button id="next-check">분석</button>
+				</div>
+			</form>
+		</div>
+		<div class="main-button">
+			<div class="button-box">
+				<div class="submit-button button-flex">
+					<button onclick="load_sample_charts()">샘플 보기</button>
+				</div>
+				<div class="submit-button button-flex">
+					<button onclick="show_guide()">가이드</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="sub-box">
+		<div class="guide">
+			<div id="guide-title">
+				<center><h1>가이드</h1></center>
+			</div>
+			<div id="guide-pc" class="guide-contents">
+				<div>
+					<h2>PC 버전</h2>
+				</div>
+				<div class="slide-contents">
+					<div class="slide-button">
+						<img src="{% static 'img/slide_button_prev.png' %}" id="slide_prev-pc" width="24" height="50">
+					</div>
+					<div class="slide-box">
+						<ul id="slide-pc">
+							<li><img src="{% static 'img/guide_pc_01.jpg' %}" width="360" height="320"></li>
+							<li><img src="{% static 'img/guide_pc_02.jpg' %}" width="360" height="320"></li>
+							<li><img src="{% static 'img/guide_pc_03.jpg' %}" width="360" height="320"></li>
+						</ul>
+					</div>
+					<div class="slide-button">
+						<img src="{% static 'img/slide_button_next.png' %}" id="slide_next-pc" width="24" height="50">
+					</div>
+				</div>
+				<div id="guide-text-pc">
+					<center><p>1. 채팅창 상단의 메뉴 버튼 클릭</p></center>
+				</div>
+			</div>
+			<div id="guide-mobile" class="guide-contents">
+				<div>
+					<h2>모바일 버전</h2>
+				</div>
+				<div class="slide-contents">
+					<div class="slide-button">
+						<img src="{% static 'img/slide_button_prev.png' %}" id="slide_prev-mobile" width="24" height="50">
+					</div>
+					<div class="slide-box">
+						<ul id="slide-mobile">
+							<li><img src="{% static 'img/guide_mobile_01.jpg' %}" width="360" height="320"></li>
+							<li><img src="{% static 'img/guide_mobile_02.jpg' %}" width="360" height="320"></li>
+							<li><img src="{% static 'img/guide_mobile_03.jpg' %}" width="360" height="320"></li>
+						</ul>
+					</div>
+					<div class="slide-button">
+						<img src="{% static 'img/slide_button_next.png' %}" id="slide_next-mobile" width="24" height="50">
+					</div>
+				</div>
+				<div id="guide-text-mobile">
+					<center><p>1. 채팅창 메뉴에서 설정 버튼 클릭</p></center>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--{% include "static/footer.html" %}-->
+
+<script type="text/javascript" src="{% static 'script/common.js' %}"></script>
+<script type="text/javascript" src="{% static 'script/main.js' %}"></script>
+</body>
