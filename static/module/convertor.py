@@ -12,15 +12,18 @@ class Convertor:
 	카카오톡 채팅 내용이 담긴 텍스트 파일을 가공하여 pandas DataFrame 형태로 변환
 
 	Args:
-		file <str>: 카카오톡 채팅 내용이 포함된 .txt 포맷 파일 경로
+		file <str> : 카카오톡 채팅 내용이 포함된 .txt 포맷 파일 경로
 
 	Returns:
-		df_chat <pandas DataFrame>: 가공한 데이터프레임
-
-	Examples
-		file = 'KakaoTalk_20200428_1729_00_450_group.txt'
-		conv = Convertor()
-		df = conv.run(file)
+		df_chat <pandas DataFrame> : 가공한 데이터프레임
+			Data columns (total 5 columns):
+			 #   Column  Dtype
+			---  ------  -----
+			 0   date    object
+			 1   time    object
+			 2   name    object
+			 3   chat    object
+			 4   wkday   int64
 	'''
 	def __init__(self):
 		self.title = None
