@@ -1,6 +1,12 @@
-{% extends "static/base.html" %}
+{% extends "common/base.html" %}
 
 {% load static %}
+
+{% block javascripts %}
+<script type="text/javascript" src="{% static 'script/charts/chart_functions.js' %}"></script>
+<script type="text/javascript" src="{% static 'script/charts/charts_ajax.js' %}"></script>
+<script type="text/javascript" src="{% static 'script/charts/charts_main.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 <div class="menu-bar">
@@ -98,76 +104,11 @@
 	</div>
 </div>
 
-<!--날짜 선택 팝업창-->
-<div class="popup-date">
-	<div class="popup-date-background" style="display:none;"></div>
-	<div class="popup-date-range" style="display:none;">
-		<div class="popup-close">
-			<img src="/static/img/close_window.png" width="40" height="40" align="right" onclick="close_date_popup()">
-		</div>
-		<div class="popup-title">
-			<center><h2>분석할 날짜 구간을 입력하세요.</h2></center>
-		</div>
-		<div class="popup-date-inputbox">
-			<table class='date-input-table'>
-				<tbody>
-					<tr>
-						<td>
-							<div class="date-input-sec"><center><h3>시작날짜</h3></center>
-							</div>
-						</td>
-						<td>
-							<div class="popup-date-input">
-								<center><input id="search-start_date"></center>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<div class="date-input-sec"><center><h3>종료날짜</h3></center
-							></div>
-						</td>
-						<td>
-							<div class="popup-date-input">
-								<center><input id="search-end_date"></center>
-							</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div class="submit-button">
-			<center>
-				<button onclick="submit_date_range()">확인</button>
-			</center>
-		</div>
-	</div>
-</div>
+{% include "analysis/popup_date.html" %}
 
-<!--분석할 단어 선택 팝업창-->
-<div class="popup-word">
-	<div class="popup-word-background" style="display:none;"></div>
-	<div class="popup-word-search" style="display:none;">
-		<div class="popup-close">
-			<img src="/static/img/close_window.png" width="40" height="40" align="right" onclick="close_word_popup()">
-		</div>
-		<div class="popup-title">
-			<center><h2>분석할 단어를 입력하세요.</h2></center>
-		</div>
-		<div class="popup-input">
-			<center><input id="search-word"></center>
-		</div>
-		<div class="submit-button">
-			<center>
-				<button onclick="submit_word()">확인</button>
-				<div id="popup-classify" style="display:none;"></div>
-			</center>
-		</div>
-	</div>
-</div>
-{% include "static/footer.html" %}
+{% include "analysis/popup_anal_word.html" %}
 
-<script src="{% static 'script/charts/chart_functions.js' %}"></script>
-<script src="{% static 'script/charts/charts_ajax.js' %}"></script>
-<script src="{% static 'script/charts/charts_main.js' %}"></script>
+{% include "common/footer.html" %}
+
 {% endblock content %}
+s

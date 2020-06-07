@@ -1,6 +1,11 @@
-{% extends "static/base.html" %}
+{% extends "common/base.html" %}
 
 {% load static %}
+
+{% block javascripts %}
+<script type="text/javascript" src="{% static 'script/common.js' %}"></script>
+<script type="text/javascript" src="{% static 'script/main.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 <div class="loading"></div>
@@ -88,8 +93,6 @@
 		</div>
 	</div>
 </div>
-{% include "static/footer.html" %}
+{% include "common/footer.html" %}
 
-<script type="text/javascript" src="{% static 'script/common.js' %}"></script>
-<script type="text/javascript" src="{% static 'script/main.js' %}"></script>
 {% endblock content %}

@@ -1,6 +1,10 @@
-{% extends "static/base.html" %}
+{% extends "common/base.html" %}
 
 {% load static %}
+
+{% block javascripts %}
+<script type="text/javascript" src="{% static 'script/common.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 <div class="main">
@@ -31,5 +35,4 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="{% static 'script/common.js' %}"></script>
 {% endblock content %}

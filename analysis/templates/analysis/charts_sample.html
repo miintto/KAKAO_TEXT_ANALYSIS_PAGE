@@ -1,6 +1,12 @@
-{% extends "static/base.html" %}
+{% extends "common/base.html" %}
 
 {% load static %}
+
+{% block javascripts %}
+<script type="text/javascript" src="{% static 'script/charts/chart_functions.js' %}"></script>
+<script type="text/javascript" src="{% static 'script/charts/sample_json.js' %}"></script>
+<script type="text/javascript" src="{% static 'script/charts/charts_sample.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 <div class="menu-bar">
@@ -73,9 +79,6 @@
 		</div>
 	</div>
 </div>
-{% include "static/footer.html" %}
+{% include "common/footer.html" %}
 
-<script src="{% static 'script/charts/chart_functions.js' %}"></script>
-<script src="{% static 'script/charts/sample_json.js' %}"></script>
-<script src="{% static 'script/charts/charts_sample.js' %}"></script>
 {% endblock content %}
