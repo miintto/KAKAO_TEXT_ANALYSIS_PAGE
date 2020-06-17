@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import datetime as dt
 import re
+from common.models import UserChat
 
 import logging
 logger = logging.getLogger(__name__)
@@ -26,9 +27,11 @@ class Convertor:
 			 4   wkday   int64
 	'''
 	def __init__(self):
+		self.status = 500
 		self.title = None
 		self.df_input = None
 		self.type = None
+		self.uid = None
 		self.chat_list = list()
 
 
@@ -134,15 +137,31 @@ class Convertor:
 		df_chat = df_chat[is_name]
 		df_chat['wkday'] = df_chat['date'].map(lambda x: dt.datetime.weekday(dt.datetime.strptime(x, '%Y-%m-%d')))
 		logger.debug(f'[Convertor] _make_dateframe() : df_chat.shape = {df_chat.shape}')
-		return df_chat
+		self.df_chat = df_chat
+
+	def _insert(self):
+		bulk_list = []
+		uid = str(dt.datetime.now())
+		self.uid = uid
+		for line in self.df_chat.values:
+			user_chat = UserChat(uid=uid, date=line[0], time=line[1], name=line[2], chat=line[3], wkday=line[4])
+			bulk_list.append(user_chat)
+		UserChat.objects.bulk_create(bulk_list)
+		self.status = 200
+		logger.debug(f'[Convertor] _insert() : uid = {uid}')
 
 
 	def run(self, file: str):
 		logger.debug(f'[Convertor]  START')
-		self._load_file(file)
-		self._check_type()
-		self._append_chat()
-		self._join_chat()
-		df_chat = self._make_dateframe()
-		logger.debug(f'[Convertor]  END')
-		return df_chat
+		try:
+			self._load_file(file)
+			self._check_type()
+			self._append_chat()
+			self._join_chat()
+			self._make_dateframe()
+			self._insert()
+			logger.debug(f'[Convertor]  END')
+			return self.status
+		except:
+			logger.debug(f'[Convertor]  ERROR')
+			return self.status

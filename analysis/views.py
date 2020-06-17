@@ -2,8 +2,9 @@ from django.http import HttpResponseRedirect
 from django.views.generic.edit import View
 from django.shortcuts import render
 from django.urls import reverse
-from static.module.convertor import Convertor
-from static.module.utils import get_ip
+from common.module.convertor import Convertor
+from common.module.utils import get_ip
+from common.models import UserChat
 import datetime as dt
 import pandas as pd
 import numpy as np
@@ -47,29 +48,28 @@ class Check(View):
 		logger.debug(f'[USER SESSION] ip: {ip} / session_key: {session_key}')
 
 		template = 'analysis/check.html'
-		message = None
-		try:
-			message = '파일이 존재하지 않습니다...'
-			file = request.FILES['uploadfile']
 
-			message = '파일을 읽을 수 없습니다...'
-			conv = Convertor()
-			df = conv.run(file)
+		conv = Convertor()
+		file = request.FILES['uploadfile']
+		status = conv.run(file)
+		if status==200:
+			### TODO : DB로 대체
+			df = conv.df_chat
 			filename = f'./uploads/csv/{file}.csv'
 			df.to_csv(filename, index=False, encoding='utf8')
 
 			is_load = True
 			request.session['filename'] = filename
+			request.session['user_chat_uid'] = conv.uid
 			request.session['is_file'] = True
 			request.session['file_title'] = conv.title
 			logger.debug(f'[SUCCESS] Save file : {filename}')
 
 			message = '파일을 성공적으로 불러왔습니다.'
 			return render(request, template, {'message':message, 'is_load':is_load})
-
-		except Exception as e:
-			logger.debug(f'[EXCEPTION] : {e}')
+		else:
 			is_load = False
+			message = '파일을 읽을 수 없습니다...'
 			return render(request, template, {'message':message, 'is_load':is_load})
 
 

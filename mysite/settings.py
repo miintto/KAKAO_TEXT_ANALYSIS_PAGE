@@ -162,7 +162,7 @@ LOGGING = {
             'handlers': ['file', 'console'],
             'level': 'DEBUG'
         },
-        'static': {
+        'common': {
             'handlers': ['file', 'console'],
             'level': 'DEBUG'
         }
