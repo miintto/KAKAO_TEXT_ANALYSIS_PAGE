@@ -1,5 +1,8 @@
 from django.http import JsonResponse
 from django.views.generic.edit import View
+from django.db.models import Min, Max
+from common.models import UserChat
+from . import queries
 import json
 import pandas as pd
 from datetime import datetime
@@ -30,167 +33,173 @@ class DateInterval(View):
             start_date <str> : 시작 날짜
             end_date <str> : 종료 날짜
         """
-        file = request.session['filename']
-        df = pd.read_csv(file, encoding='utf-8-sig')
+        uid = request.session['user_chat_uid']
+        start_date = UserChat.objects.filter(uid=uid).aggregate(date=Min('date'))
+        end_date = UserChat.objects.filter(uid=uid).aggregate(date=Max('date'))
 
-        start_date = df['date'].values[0]
-        end_date = df['date'].values[-1]
-        json_res = {'start_date': start_date, 'end_date': end_date}
+        json_res = {'start_date': start_date['date'], 'end_date': end_date['date']}
         return JsonResponse(json_res)
 
 
-class HeatmapMonthly(View):
+class UserCount(View):
+    """
+    Params:
+        uid        <str>
+        start_date <str>
+        end_date   <str>
+        user_limit <int>
+
+    JsonResponse:
+    """
     def post(self, request):
-        """
-        Params:
-            start_date <str> : 시작 날짜
-            end_date <str> : 종료 날짜
+        uid = request.session['user_chat_uid']
+        start_date = request.POST.get('start_date')
+        end_date = request.POST.get('end_date')
+        user_limit = request.POST.get('user_limit')
+        logger.debug(f'[API] UserCount uid : {uid}')
+        logger.debug(f'[API] UserCount start_date : {start_date}')
+        logger.debug(f'[API] UserCount end_date : {end_date}')
+        logger.debug(f'[API] UserCount user_limit : {user_limit}')
 
-        JsonResponse:
-            data <list> : 각 월의 이용자별 말풍선 수 count
+        queryset = queries.get_user_count(uid=uid, start_date=start_date, end_date=end_date)
 
-        Examples:
-            data : [
-                {"month": "19-01", "name": "name1", "chat": 90},
-                {"month": "19-01", "name": "name2", "chat": 45},
-                {"month": "19-01", "name": "name3", "chat": 15}
-            ]
-        """
-        file = request.session['filename']
-        df = pd.read_csv(file, encoding='utf-8-sig')
-        start_date = self.request.POST.get('start_date')
-        end_date = self.request.POST.get('end_date')
-        logger.debug(f'[API] start_date : {start_date}')
-        logger.debug(f'[API] end_date : {end_date}')
-        try:
-            datetime.strptime(start_date, '%Y-%m-%d')
-            datetime.strptime(end_date, '%Y-%m-%d')
-            df = df[(start_date <= df['date']) & (df['date'] <= end_date)].reset_index()
-        except Exception as e:
-            print(e)
-
-        g = df.groupby('name').size().sort_values(ascending=False)
-        name_sorted = g[:10].keys()
-
-        df['month'] = [i[2:7] for i in df.date]
-        g = df.pivot_table(index='name', columns='month', aggfunc="size", fill_value=0).reindex(name_sorted)
-        json_heatmap = [{'month': month, 'name': k, 'chat': v} for month, gp in g.items() for k, v in gp.items()]
-        json_res = {'data': json_heatmap}
+        count_list = list()
+        for q in queryset[:int(user_limit)]:
+            count_list.append({'name': q.name, 'chat': q.chat})
+        json_res = {'data': count_list}
+        logger.debug(f'[API] UserCount json_res : {json_res}')
         return JsonResponse(json_res)
 
 
-class Pie(View):
+class UserCountScore(View):
+    """
+    Params:
+        uid        <str>
+        start_date <str>
+        end_date   <str>
+        user_limit <int>
+
+    JsonResponse:
+    """
     def post(self, request):
-        """
-        Params:
-            start_date <str> : 시작 날짜
-            end_date <str> : 종료 날짜
+        uid = request.session['user_chat_uid']
+        start_date = request.POST.get('start_date')
+        end_date = request.POST.get('end_date')
+        user_limit = request.POST.get('user_limit')
+        logger.debug(f'[API] UserCountScore uid : {uid}')
+        logger.debug(f'[API] UserCountScore start_date : {start_date}')
+        logger.debug(f'[API] UserCountScore end_date : {end_date}')
+        logger.debug(f'[API] UserCountScore user_limit : {user_limit}')
 
-        JsonResponse:
-            data <list> : 이용자별 말풍선 수 count
+        queryset = queries.get_user_count(uid=uid, start_date=start_date, end_date=end_date)
 
-        Examples:
-            data : [
-                {"name": "name1", "chat": 90},
-                {"name": "name2", "chat": 45},
-                {"name": "name3", "chat": 15}
-            ]
-        """
-        file = request.session['filename']
-        df = pd.read_csv(file, encoding='utf-8-sig')
-        start_date = self.request.POST.get('start_date')
-        end_date = self.request.POST.get('end_date')
-        logger.debug(f'[API] start_date : {start_date}')
-        logger.debug(f'[API] end_date : {end_date}')
-        try:
-            datetime.strptime(start_date, '%Y-%m-%d')
-            datetime.strptime(end_date, '%Y-%m-%d')
-            df = df[(start_date <= df['date']) & (df['date'] <= end_date)].reset_index()
-        except Exception as e:
-            print(e)
-
-        g = df.groupby('name').size().sort_values(ascending=False)
-        json_pie = [{'name': k, 'chat': v} for k, v in g[:10].items()]
-        json_res = {'data': json_pie}
+        df = pd.DataFrame.from_records([item.__dict__ for item in queryset[:int(user_limit)]])
+        total_chat = sum(df['chat'].values)
+        weight = 20000
+        df['score'] = df['chat'].values/total_chat*weight
+        count_list = df.loc[:, ['name', 'chat', 'score']].to_dict('records')
+        json_res = {'data': count_list}
+        logger.debug(f'[API] UserCountScore json_res : {json_res}')
         return JsonResponse(json_res)
 
 
-class StreamMonthly(View):
+class UserCountMonthly(View):
+    """
+    Params:
+        uid        <str>
+        start_date <str>
+        end_date   <str>
+        user_limit <int>
+
+    JsonResponse:
+    """
     def post(self, request):
-        """
-        Params:
-            start_date <str> : 시작 날짜
-            end_date <str> : 종료 날짜
+        uid = request.session['user_chat_uid']
+        start_date = request.POST.get('start_date')
+        end_date = request.POST.get('end_date')
+        user_limit = request.POST.get('user_limit')
+        logger.debug(f'[API] UserCountMonthly uid : {uid}')
+        logger.debug(f'[API] UserCountMonthly start_date : {start_date}')
+        logger.debug(f'[API] UserCountMonthly end_date : {end_date}')
+        logger.debug(f'[API] UserCountMonthly user_limit : {user_limit}')
 
-        JsonResponse:
-            data <list> : 월별 이용자들의 말풍선 수 count
+        queryset = queries.get_user_count_monthly(uid=uid, start_date=start_date, end_date=end_date)
 
-        Examples:
-            data : [
-                {"month": "19-01", "name1": 18, "name2": 12, "name3": 8},
-                {"month": "19-01", "name1": 13, "name2": 11, "name3": 7},
-                {"month": "19-01", "name1": 10, "name2": 9, "name3": 5}
-            ]
-        """
-        file = request.session['filename']
-        df = pd.read_csv(file, encoding='utf-8-sig')
-        start_date = self.request.POST.get('start_date')
-        end_date = self.request.POST.get('end_date')
-        logger.debug(f'[API] start_date : {start_date}')
-        logger.debug(f'[API] end_date : {end_date}')
-        try:
-            datetime.strptime(start_date, '%Y-%m-%d')
-            datetime.strptime(end_date, '%Y-%m-%d')
-            df = df[(start_date <= df['date']) & (df['date'] <= end_date)].reset_index()
-        except Exception as e:
-            print(e)
-
-        g = df.groupby('name').size().sort_values(ascending=False)
-        name_sorted = g[:10].keys()
-
-        df['month'] = [i[2:7] for i in df.date]
-        g = df.pivot_table(index='name', columns='month', aggfunc="size", fill_value=0).reindex(name_sorted)
-        json_stream = [dict({'month': month}, **{k: v for k, v in gp.items()}) for month, gp in g.items()]
-        json_res = {'data': json_stream}
+        df = pd.DataFrame.from_records([item.__dict__ for item in queryset])
+        name_sorted = df.groupby('name').sum() \
+                        .sort_values(by='chat', ascending=False).index[:int(user_limit)]
+        df_pivot = df.pivot_table(index='name', columns='month', values='chat', aggfunc=sum, fill_value=0) \
+                     .reindex(name_sorted) \
+                     .reset_index()
+        df_unpivot = df_pivot.melt(id_vars='name', var_name='month', value_name='chat')
+        count_list = df_unpivot.to_dict('records')
+        json_res = {'data': count_list}
+        logger.debug(f'[API] UserCountMonthly json_res : {json_res}')
         return JsonResponse(json_res)
 
 
-class HeatmapTime(View):
+class UserCountMonthlyNames(View):
+    """
+    Params:
+        uid        <str>
+        start_date <str>
+        end_date   <str>
+        user_limit <int>
+
+    JsonResponse:
+    """
     def post(self, request):
-        """
-        Params:
-            start_date <str> : 시작 날짜
-            end_date <str> : 종료 날짜
+        uid = request.session['user_chat_uid']
+        start_date = request.POST.get('start_date')
+        end_date = request.POST.get('end_date')
+        user_limit = request.POST.get('user_limit')
+        logger.debug(f'[API] UserCountMonthlyNames uid : {uid}')
+        logger.debug(f'[API] UserCountMonthlyNames start_date : {start_date}')
+        logger.debug(f'[API] UserCountMonthlyNames end_date : {end_date}')
+        logger.debug(f'[API] UserCountMonthlyNames user_limit : {user_limit}')
 
-        JsonResponse:
-            data <list> : 각 시간대 x 요일별 총 말풍선 수 count
+        queryset = queries.get_user_count_monthly(uid=uid, start_date=start_date, end_date=end_date)
 
-        Examples:
-            data : [
-                {"hour": "00", "wkday": 0, "chat": 3},
-                {"hour": "00", "wkday": 1, "chat": 13},
-                {"hour": "00", "wkday": 2, "chat": 11}
-        ]
-        """
-        file = request.session['filename']
-        df = pd.read_csv(file, encoding='utf-8-sig')
-        start_date = self.request.POST.get('start_date')
-        end_date = self.request.POST.get('end_date')
-        logger.debug(f'[API] start_date : {start_date}')
-        logger.debug(f'[API] end_date : {end_date}')
-        try:
-            datetime.strptime(start_date, '%Y-%m-%d')
-            datetime.strptime(end_date, '%Y-%m-%d')
-            df = df[(start_date <= df['date']) & (df['date'] <= end_date)].reset_index()
-        except Exception as e:
-            print(e)
+        df = pd.DataFrame.from_records([item.__dict__ for item in queryset])
+        name_sorted = df.groupby('name').sum() \
+                        .sort_values(by='chat', ascending=False).index[:int(user_limit)]
+        df_pivot = df.pivot_table(index='name', columns='month', values='chat', aggfunc=sum, fill_value=0) \
+                     .reindex(name_sorted)
+        count_list = df_pivot.T.reset_index().to_dict('records')
+        json_res = {'data': count_list}
+        logger.debug(f'[API] UserCountMonthlyNames json_res : {json_res}')
+        return JsonResponse(json_res)
 
-        df['hour'] = [i[:2] for i in df.time]
 
-        g = df.pivot_table(index='wkday', columns='hour', aggfunc="size", fill_value=0)
-        g = g.reindex(index=range(7), columns=[str(i).zfill(2) for i in range(24)]).fillna(0)
-        json_wkday = [{'hour': month, 'wkday': k, 'chat': v} for month, gp in g.items() for k, v in gp.items()]
-        json_res = {'data': json_wkday}
+class GroupHourWeekdays(View):
+    """
+    Params:
+        uid        <str>
+        start_date <str>
+        end_date   <str>
+
+    JsonResponse:
+    """
+    def post(self, request):
+        uid = request.session['user_chat_uid']
+        start_date = request.POST.get('start_date')
+        end_date = request.POST.get('end_date')
+        logger.debug(f'[API] GroupHourWeekdays uid : {uid}')
+        logger.debug(f'[API] GroupHourWeekdays start_date : {start_date}')
+        logger.debug(f'[API] GroupHourWeekdays end_date : {end_date}')
+
+        queryset = UserChat.objects.filter(uid=uid, date__range=(start_date, end_date))
+
+        df = pd.DataFrame.from_records([item.__dict__ for item in queryset])
+        df['hour'] = [i.hour for i in df['time'].values]
+        df_pivot = df.pivot_table(index='wkday', columns='hour', aggfunc="size") \
+                     .reindex(index=range(7), columns=range(24)) \
+                     .fillna(0) \
+                     .reset_index()
+        df_unpivot = df_pivot.melt(id_vars='wkday', var_name='hour', value_name='chat')
+        group_list = df_unpivot.to_dict('records')
+        json_res = {'data': group_list}
+        logger.debug(f'[API] GroupHourWeekdays json_res : {json_res}')
         return JsonResponse(json_res)
 
 
@@ -202,100 +211,34 @@ class WordCloud(View):
         return JsonResponse(json_res)
 
 
-class CircularPacking(View):
+class UserCountWord(View):
+    """
+    Params:
+        uid        <str>
+        start_date <str>
+        end_date   <str>
+        user_limit <int>
+        word       <str>
+
+    JsonResponse:
+    """
     def post(self, request):
-        """
-        Params:
-            start_date <str> : 시작 날짜
-            end_date <str> : 종료 날짜
+        uid = request.session['user_chat_uid']
+        start_date = request.POST.get('start_date')
+        end_date = request.POST.get('end_date')
+        user_limit = request.POST.get('user_limit')
+        word = request.POST.get('word')
+        logger.debug(f'[API] UserCountWord uid : {uid}')
+        logger.debug(f'[API] UserCountWord start_date : {start_date}')
+        logger.debug(f'[API] UserCountWord end_date : {end_date}')
+        logger.debug(f'[API] UserCountWord user_limit : {user_limit}')
+        logger.debug(f'[API] UserCountWord word : {word}')
 
-        JsonResponse:
-            data <list> : 이용자별 말풍선 수 및 상대면적 크기
+        queryset = queries.get_user_count_word(uid=uid, start_date=start_date, end_date=end_date, word=word)
 
-        Examples:
-            data : [
-                {"name": "name1", "chat": 90, "area": 6000},
-                {"name": "name2", "chat": 45, "area": 3000},
-                {"name": "name3", "chat": 15, "area": 1000}
-        ]
-        """
-        file = request.session['filename']
-        df = pd.read_csv(file, encoding='utf-8-sig')
-        start_date = self.request.POST.get('start_date')
-        end_date = self.request.POST.get('end_date')
-        logger.debug(f'[API] start_date : {start_date}')
-        logger.debug(f'[API] end_date : {end_date}')
-        try:
-            datetime.strptime(start_date, '%Y-%m-%d')
-            datetime.strptime(end_date, '%Y-%m-%d')
-            df = df[(start_date <= df['date']) & (df['date'] <= end_date)].reset_index()
-        except Exception as e:
-            print(e)
-
-        g = df.groupby('name').size().sort_values(ascending=False)
-        total_chat = sum(g)
-        json_pie = [{'name': k, 'chat': v} for k, v in g[:10].items()]
-        json_packing = [{'name': user.get('name'), 'chat': user.get('chat'), 'area': user.get('chat')/total_chat*15000} for user in json_pie]
-        json_res = {'data': json_packing}
-        return JsonResponse(json_res)
-
-
-class BarByUser(View):
-    def post(self, request):
-        file = request.session['filename']
-        df = pd.read_csv(file, encoding='utf-8-sig')
-        start_date = self.request.POST.get('start_date')
-        end_date = self.request.POST.get('end_date')
-        logger.debug(f'[API] start_date : {start_date}')
-        logger.debug(f'[API] end_date : {end_date}')
-        try:
-            datetime.strptime(start_date, '%Y-%m-%d')
-            datetime.strptime(end_date, '%Y-%m-%d')
-            df = df[(start_date <= df['date']) & (df['date'] <= end_date)].reset_index()
-        except Exception as e:
-            print(e)
-
-        g = df.groupby('name').size().sort_values(ascending=False)
-        json_user = [{'name': k, 'chat': v} for k, v in g[:10].items()]
-        json_res = {'data': json_user}
-        return JsonResponse(json_res)
-
-
-class WordByUser(View):
-    def post(self, request):
-        """
-        Params:
-            word <str> : 집계할 단어
-            start_date <str> : 시작 날짜
-            end_date <str> : 종료 날짜
-
-        JsonResponse:
-            data <list> : 이용자별 말풍선 수 count
-
-        Examples:
-            data : [
-                {"name": "name1", "chat": 90},
-                {"name": "name2", "chat": 45},
-                {"name": "name3", "chat": 15}
-            ]
-        """
-        file = request.session['filename']
-        df = pd.read_csv(file, encoding='utf-8-sig')
-        word = self.request.POST.get('word')
-        start_date = self.request.POST.get('start_date')
-        end_date = self.request.POST.get('end_date')
-        logger.debug(f'[API] start_date : {start_date}')
-        logger.debug(f'[API] end_date : {end_date}')
-        logger.debug(f'[API] word : {word}')
-        try:
-            datetime.strptime(start_date, '%Y-%m-%d')
-            datetime.strptime(end_date, '%Y-%m-%d')
-            df = df[(start_date <= df['date']) & (df['date'] <= end_date)].reset_index()
-        except Exception as e:
-            print(e)
-
-        df['word_count'] = df['chat'].map(lambda x: word in x).astype(int)
-        g = df.loc[:, ['name', 'word_count']].groupby(by='name').sum().sort_values(by='word_count', ascending=False)
-        json_user = [{'name': k, 'chat': v} for k, v in g[:10].itertuples()]
-        json_res = {'data': json_user, 'word': word}
+        count_list = list()
+        for q in queryset[:int(user_limit)]:
+            count_list.append({'name': q.name, 'chat': q.chat})
+        json_res = {'data': count_list, 'word': word}
+        logger.debug(f'[API] UserCountWord json_res : {json_res}')
         return JsonResponse(json_res)

@@ -53,24 +53,15 @@ class Check(View):
 		file = request.FILES['uploadfile']
 		status = conv.run(file)
 		if status==200:
-			### TODO : DB로 대체
-			df = conv.df_chat
-			filename = f'./uploads/csv/{file}.csv'
-			df.to_csv(filename, index=False, encoding='utf8')
-
 			is_load = True
-			request.session['filename'] = filename
 			request.session['user_chat_uid'] = conv.uid
 			request.session['is_file'] = True
 			request.session['file_title'] = conv.title
-			logger.debug(f'[SUCCESS] Save file : {filename}')
-
 			message = '파일을 성공적으로 불러왔습니다.'
-			return render(request, template, {'message':message, 'is_load':is_load})
 		else:
 			is_load = False
 			message = '파일을 읽을 수 없습니다...'
-			return render(request, template, {'message':message, 'is_load':is_load})
+		return render(request, template, {'message': message, 'is_load': is_load})
 
 
 class Charts(View):

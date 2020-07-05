@@ -40,9 +40,9 @@ class Convertor:
 		유저가 업로드한 텍스트파일을 Pandas Dataframe 형식으로 가져옴
 		"""
 		self.df_input = pd.read_csv(file, sep='\n', header=None, encoding='utf-8', error_bad_lines=False)
-		logger.debug(f'[Convertor] _load_file() : df_input.__len__ = {len(self.df_input)}')
+		logger.debug(f'[CONVORTOR] _load_file : df_input.__len__ = {len(self.df_input)}')
 		self.title = self.df_input.values[0, 0]
-		logger.debug(f'[Convertor] _load_file() : title = {self.title}')
+		logger.debug(f'[CONVORTOR] _load_file : title = {self.title}')
 
 
 	def _check_type(self):
@@ -56,7 +56,7 @@ class Convertor:
 				self.type = 'Mobile'
 		else:
 			pass
-		logger.debug(f'[Convertor] _check_type() : type = {self.type}')
+		logger.debug(f'[CONVORTOR] _check_type : type = {self.type}')
 
 
 	def _append_by_pc(self):
@@ -79,7 +79,7 @@ class Convertor:
 				self.date = str(dt.datetime.strptime(date_str, '%Y년 %m월 %d일').date())
 			else:
 				self.chat_list.append([self.date, None, None, line])
-		logger.debug(f'[Convertor] _append_by_pc() : chat_list.__len__ = {len(self.chat_list)}')
+		logger.debug(f'[CONVORTOR] _append_by_pc : chat_list.__len__ = {len(self.chat_list)}')
 
 
 	def _append_by_mobile(self):
@@ -100,7 +100,7 @@ class Convertor:
 					self.chat_list.append([date, time, name, chat])
 			except:
 				self.chat_list.append([None, None, None, line])
-		logger.debug(f'[Convertor] _append_by_mobile() : chat_list.__len__ = {len(self.chat_list)}')
+		logger.debug(f'[CONVORTOR] _append_by_mobile  : chat_list.__len__ = {len(self.chat_list)}')
 
 	def _append_chat(self):
 		"""
@@ -124,7 +124,7 @@ class Convertor:
 				del array[i]
 		del array[0]
 		self.chat_list = array
-		logger.debug(f'[Convertor] _join_chat() : chat_list.__len__ = {len(self.chat_list)}')
+		logger.debug(f'[CONVORTOR] _join_chat : chat_list.__len__ = {len(self.chat_list)}')
 
 	def _make_dateframe(self):
 		"""
@@ -136,7 +136,7 @@ class Convertor:
 												('최신버전으로 업데이트해주세요' not in x) & ('삭제된 메시지입니다' not in x))
 		df_chat = df_chat[is_name]
 		df_chat['wkday'] = df_chat['date'].map(lambda x: dt.datetime.weekday(dt.datetime.strptime(x, '%Y-%m-%d')))
-		logger.debug(f'[Convertor] _make_dateframe() : df_chat.shape = {df_chat.shape}')
+		logger.debug(f'[CONVORTOR] _make_dateframe : df_chat.shape = {df_chat.shape}')
 		self.df_chat = df_chat
 
 	def _insert(self):
@@ -148,11 +148,11 @@ class Convertor:
 			bulk_list.append(user_chat)
 		UserChat.objects.bulk_create(bulk_list)
 		self.status = 200
-		logger.debug(f'[Convertor] _insert() : uid = {uid}')
+		logger.debug(f'[CONVORTOR] _insert : uid = {uid}')
 
 
 	def run(self, file: str):
-		logger.debug(f'[Convertor]  START')
+		logger.debug(f'[CONVORTOR]  START')
 		try:
 			self._load_file(file)
 			self._check_type()
@@ -160,8 +160,8 @@ class Convertor:
 			self._join_chat()
 			self._make_dateframe()
 			self._insert()
-			logger.debug(f'[Convertor]  END')
+			logger.debug(f'[CONVORTOR]  END')
 			return self.status
-		except:
-			logger.debug(f'[Convertor]  ERROR')
+		except Exception as e:
+			logger.debug(f'[CONVORTOR]  ERROR : {e}')
 			return self.status

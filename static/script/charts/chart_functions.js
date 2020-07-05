@@ -444,7 +444,7 @@ function chart_stacked_bar(dataset, chart_idx) {
 			.style('fill', function(d) { return colormap(d.key); })
         .append("rect")
 			.attr('class', 'cell-bar-stacked')
-	        .attr("x", function(d) {  console.log(d[0]); return xScale(d[0].data.month); })
+	        .attr("x", function(d) { return xScale(d[0].data.month); })
 	        .attr("y", function(d) { return yScale(d[0][1]); })
 	        .attr("height", function(d) { return yScale(d[0][0]) - yScale(d[0][1]); })
 	        .attr("width", xScale.bandwidth())
@@ -712,9 +712,9 @@ function chart_wordcloud(dataset, chart_idx) {
 function chart_circular_packing(dataset, chart_idx) {
 //	Input Format:
 //		dataset : [
-//			{"name": "name1", "chat": 90, "area": 6000},
-//			{"name": "name2", "chat": 45, "area": 3000},
-//			{"name": "name3", "chat": 15, "area": 1000},
+//			{"name": "name1", "chat": 90, "score": 6000},
+//			{"name": "name2", "chat": 45, "score": 3000},
+//			{"name": "name3", "chat": 15, "score": 1000},
 //			...
 //		]
 
@@ -732,23 +732,23 @@ function chart_circular_packing(dataset, chart_idx) {
 				.data(dataset)
 				.enter().append('circle')
 					.attr('class', 'cell')
-					.attr('r', function(d) {return d.area**0.5})
+					.attr('r', function(d) {return d.score**0.5})
 					.attr("cx", width / 2)
 					.attr("cy", height / 2)
 					.style("fill", function(d, i){return color[i]})
-					.style("fill-opacity", 0.8)
-					.on('mouseover', function() { 
+					.style("opacity", 0.8)
+					.on('mouseover', function() {
 						tooltip.style("display", null);
 						d3.select(this)
 							.style('stroke', 'black')
 							.style('stroke-width', 1.5)
-							.style('opacity', 1) 
+							.style('opacity', 1)
 						})
 					.on('mouseout', function() {
 						tooltip.style("display", "none");
 						d3.select(this)
 							.style('stroke', 'none')
-							.style('opacity', 0.8) 
+							.style('opacity', 0.8)
 						})
 					.on('mousemove', function(d) {
 						tooltip.style("left", (d3.event.pageX + 10) + "px")
@@ -762,11 +762,11 @@ function chart_circular_packing(dataset, chart_idx) {
 						)
 
 	var simulation = d3.forceSimulation()
-		.force("forceX", d3.forceX().strength(.05).x(width * .5))  // 가운데로 몰리도록 x축
-		.force("forceY", d3.forceY().strength(.05).y(height * .5))  // 가운데로 몰리도록 y축
+		.force("forceX", d3.forceX().strength(.05).x(width * .5))  // 가운데로 몰리도록 x축 force
+		.force("forceY", d3.forceY().strength(.05).y(height * .5))  // 가운데로 몰리도록 y축 force
 		.force("center", d3.forceCenter().x(width / 2).y(height / 2))
 		.force("charge", d3.forceManyBody().strength(.1))
-		.force("collide", d3.forceCollide().strength(.5).radius(function(d){return d.area**0.5}).iterations(1)) // node끼리 밀어내는 힘
+		.force("collide", d3.forceCollide().strength(.5).radius(function(d){return d.score**0.5}).iterations(1)) // node끼리 밀어내는 힘
 
 	simulation.nodes(dataset)
 			.on("tick", function(d){

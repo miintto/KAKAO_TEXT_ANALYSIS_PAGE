@@ -57,7 +57,7 @@ function ajax_heatmap_monthly(csrf_token, tag_id, start_date, end_date) {
     var loading = 'div'+tag_id+'-loading';
 
     $.ajax({
-        url: '/api/heatmap/monthly',
+        url: '/api/user/count/monthly',
         type: 'POST',
         dataType: "JSON",
         beforeSend: function () {
@@ -67,7 +67,8 @@ function ajax_heatmap_monthly(csrf_token, tag_id, start_date, end_date) {
         data: {
             'csrfmiddlewaretoken': csrf_token,
             'start_date': start_date,
-            'end_date': end_date
+            'end_date': end_date,
+            'user_limit': 10
         },
         success: function (data) {
             $(loading).hide();
@@ -85,7 +86,7 @@ function ajax_pie_total(csrf_token, tag_id, start_date, end_date) {
     var loading = 'div'+tag_id+'-loading';
 
     $.ajax({
-        url: '/api/pie/total',
+        url: '/api/user/count',
         type: 'POST',
         dataType: "JSON",
         beforeSend: function () {
@@ -95,7 +96,8 @@ function ajax_pie_total(csrf_token, tag_id, start_date, end_date) {
         data: {
             'csrfmiddlewaretoken': csrf_token,
             'start_date': start_date,
-            'end_date': end_date
+            'end_date': end_date,
+            'user_limit': 10
         },
         success: function (data) {
             $(loading).hide();
@@ -113,7 +115,7 @@ function ajax_stream_monthly(csrf_token, tag_id, start_date, end_date) {
     var loading = 'div'+tag_id+'-loading';
 
     $.ajax({
-        url: '/api/stream/monthly',
+        url: '/api/user/count/monthly/names',
         type: 'POST',
         dataType: "JSON",
         beforeSend: function () {
@@ -123,7 +125,8 @@ function ajax_stream_monthly(csrf_token, tag_id, start_date, end_date) {
         data: {
             'csrfmiddlewaretoken': csrf_token,
             'start_date': start_date,
-            'end_date': end_date
+            'end_date': end_date,
+            'user_limit': 10
         },
         success: function (data) {
             $(loading).hide();
@@ -145,7 +148,7 @@ function ajax_heatmap_time(csrf_token, tag_id, start_date, end_date) {
     var loading = 'div'+tag_id+'-loading';
 
     $.ajax({
-        url: '/api/heatmap/time',
+        url: '/api/group/hour/weekdays',
         type: 'POST',
         dataType: "JSON",
         beforeSend: function () {
@@ -201,7 +204,7 @@ function ajax_circularpacking(csrf_token, tag_id, start_date, end_date) {
     var loading = 'div'+tag_id+'-loading';
 
     $.ajax({
-        url: '/api/circularpacking',
+        url: '/api/user/count/score',
         type: 'POST',
         dataType: "JSON",
         beforeSend: function () {
@@ -211,7 +214,8 @@ function ajax_circularpacking(csrf_token, tag_id, start_date, end_date) {
         data: {
             'csrfmiddlewaretoken': csrf_token,
             'start_date': start_date,
-            'end_date': end_date
+            'end_date': end_date,
+            'user_limit': 50
         },
         success: function (data) {
             $(loading).hide();
@@ -230,7 +234,7 @@ function ajax_bar_word(csrf_token, tag_id, start_date, end_date, word) {
     var title = 'div'+tag_id+'-title';
 
     $.ajax({
-        url: '/api/bar/word',
+        url: '/api/user/count/words',
         type: 'POST',
         dataType: "JSON",
         beforeSend: function () {
@@ -241,6 +245,7 @@ function ajax_bar_word(csrf_token, tag_id, start_date, end_date, word) {
             'csrfmiddlewaretoken': csrf_token,
             'start_date': start_date,
             'end_date': end_date,
+            'user_limit': 10,
             'word': word
         },
         success: function (data) {

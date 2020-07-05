@@ -12,6 +12,5 @@ class UserChat(models.Model):
     class Meta:
         db_table = 'user_chat'
         indexes = [
-            models.Index(fields=['uid'], name='user_chat_index_uid'),
             models.Index(fields=['uid', 'date'], name='user_chat_index_uid_date'),
         ]

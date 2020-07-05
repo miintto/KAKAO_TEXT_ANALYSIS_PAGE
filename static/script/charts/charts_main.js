@@ -5,7 +5,7 @@
 //////////////////////////////////////////////////
 
 
-function charts_by_date(start_date, end_date){
+function charts_by_date(start_date, end_date) {
     ajax_heatmap_monthly(csrf_token, '#chart1', start_date, end_date);
     ajax_pie_total(csrf_token, '#chart2', start_date, end_date);
     ajax_stream_monthly(csrf_token, '#chart3', start_date, end_date);
@@ -72,9 +72,9 @@ function submit_date_range() {
 
 var csrf_token = $('[name=csrfmiddlewaretoken]').val();
 
-start_date = '';
+start_date = '2019-06-30';
 console.log(start_date);
-end_date = '';
+end_date = '2020-06-30';
 console.log(end_date);
 
 ajax_title(csrf_token);
