@@ -8,7 +8,7 @@ urlpatterns = [
 	path('user/count/score', views.UserCountScore.as_view()),
 	path('user/count/monthly', views.UserCountMonthly.as_view()),
 	path('user/count/monthly/names', views.UserCountMonthlyNames.as_view()),
-	path('group/hour/weekdays', views.GroupHourWeekdays.as_view()),
+	path('group/hour/weekdays', views.GroupbyHourWeekdays.as_view()),
 	path('wordcloud', views.WordCloud.as_view(), name='wordcloud'),
 	path('user/count/words', views.UserCountWord.as_view()),
 ]
