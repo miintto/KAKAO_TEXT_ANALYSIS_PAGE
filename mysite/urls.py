@@ -18,7 +18,7 @@ from django.urls import path, include
 from analysis import views
 
 urlpatterns = [
-	path('', views.MainMo.as_view(), name='main_mo'),
+	path('', views.Main.as_view(), name='default'),
 	path('admin/', admin.site.urls),
 	path('analysis/', include('analysis.urls')),
 	path('api/', include('api.urls')),

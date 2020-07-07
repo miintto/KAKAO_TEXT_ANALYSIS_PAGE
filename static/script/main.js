@@ -1,3 +1,4 @@
+/// 메인화면 가이드 모바일 버전 설명 화면 슬라이드 넘어가도록
 $(document).ready(function() {
     var img_position = 1;
 
@@ -42,6 +43,7 @@ $(document).ready(function() {
     }
 })
 
+/// 메인화면 가이드 PC버전 설명 화면 슬라이드 넘어가도록
 $(document).ready(function() {
     var img_position = 1;
 

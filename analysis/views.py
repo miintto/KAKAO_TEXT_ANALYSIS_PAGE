@@ -14,16 +14,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class MainMo(View):
-	def get(self, request):
-		ip = get_ip(request)
-		session_key = request.session.session_key
-		logger.debug(f'[USER SESSION] ip: {ip} / session_key: {session_key}')
-
-		template = 'analysis/main_mo.html'
-		return render(request, template)
-
-
 class Main(View):
 	def get(self, request):
 		ip = get_ip(request)
@@ -47,7 +37,7 @@ class Check(View):
 		session_key = request.session.session_key
 		logger.debug(f'[USER SESSION] ip: {ip} / session_key: {session_key}')
 
-		template = 'analysis/check.html'
+		template = 'analysis/main_check.html'
 
 		conv = Convertor()
 		file = request.FILES['uploadfile']
@@ -87,7 +77,7 @@ class ChartsSample(View):
 		return render(request, template)
 
 
-class Inquiry(View):
+class Info(View):
 	def get(self, request):
 		ip = get_ip(request)
 		session_key = request.session.session_key
@@ -97,11 +87,11 @@ class Inquiry(View):
 		return render(request, template)
 
 
-class Guide(View):
-	def get(self, request):
-		ip = get_ip(request)
-		session_key = request.session.session_key
-		logger.debug(f'[USER SESSION] ip: {ip} / session_key: {session_key}')
-
-		template = 'analysis/guideline.html'
-		return render(request, template)
+# class Guide(View):
+# 	def get(self, request):
+# 		ip = get_ip(request)
+# 		session_key = request.session.session_key
+# 		logger.debug(f'[USER SESSION] ip: {ip} / session_key: {session_key}')
+#
+# 		template = 'analysis/guideline.html'
+# 		return render(request, template)
