@@ -139,6 +139,7 @@ LOGGING = {
             'class': 'logging.handlers.TimedRotatingFileHandler',
             'filename': os.path.join(BASE_DIR, 'logs/kakao.log'),
             'formatter': 'standard',
+            'encoding': 'utf-8',
         },
         'console': {
             'level': 'DEBUG',

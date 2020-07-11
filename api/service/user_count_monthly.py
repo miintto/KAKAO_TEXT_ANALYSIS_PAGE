@@ -49,7 +49,6 @@ class Service:
             self._get_params(params)
             self._make_user_count()
             json_res = {'data': self.count_list}
-            logger.debug(f'[API] UserCountMonthly json_res : {json_res}')
             return json_res
         except Exception as e:
             return {'Error': e}

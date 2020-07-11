@@ -42,7 +42,6 @@ class Service:
             self._make_user_count()
             self.calc_user_score()
             json_res = {'data': self.count_list}
-            logger.debug(f'[API] UserCountScore json_res : {json_res}')
             return json_res
         except Exception as e:
             return {'Error': e}

@@ -23,6 +23,7 @@ class Title(View):
         """
         title = request.session['file_title']
         json_res = {'title': title}
+        logger.debug(f'[API] Title json_res : {json_res}')
         return JsonResponse(json_res)
 
 
@@ -40,6 +41,7 @@ class DateInterval(View):
         end_date = UserChat.objects.filter(uid=uid).aggregate(date=Max('date'))
 
         json_res = {'start_date': start_date['date'], 'end_date': end_date['date']}
+        logger.debug(f'[API] DateInterval json_res : {json_res}')
         return JsonResponse(json_res)
 
 
