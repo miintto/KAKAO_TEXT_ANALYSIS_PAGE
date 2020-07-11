@@ -72,10 +72,9 @@ function submit_date_range() {
 
 var csrf_token = $('[name=csrfmiddlewaretoken]').val();
 
-start_date = '2019-06-30';
-console.log(start_date);
-end_date = '2020-06-30';
-console.log(end_date);
+// TODO: 초기 시작 종료일 default 값 설정
+start_date = '2009-01-01';
+end_date = '2099-12-31';
 
 ajax_title(csrf_token);
 ajax_date_range(csrf_token);
