@@ -13,25 +13,19 @@
 		<meta property="og:description" content="카카오톡 채팅 파일만 있으면 클릭 한번에 분석 및 시각화~" />
 		<meta property="og:image" content="{% static 'img/meta_main.png' %}" />
 		<!-- CSS -->
-		<link type="text/css" href="{% static 'css/chartbox.css' %}" rel="stylesheet">
 		<link type="text/css" href="{% static 'css/common.css' %}" rel="stylesheet">
-		<link type="text/css" href="{% static 'css/main.css' %}" rel="stylesheet">
-		<link type="text/css" href="{% static 'css/inquiry.css' %}" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
 		{% block css %}
 		{% endblock %}
-		<!-- JS -->
-		<script type="text/javascript" src="{% static 'script/jquery-1.12.4.min.js' %}"></script>
-		<script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
-		<script type="text/javascript" src="https://d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
-		<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
 	</head>
 	<body>
 		{% block content %}
 		{% endblock content %}
 	</body>
+	<!-- JS -->
+	<script type="text/javascript" src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
 	{% block javascripts %}
 	{% endblock %}
 </html>

@@ -2,8 +2,12 @@
 
 {% load static %}
 
+{% block css %}
+<link type="text/css" href="{% static 'css/main.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block javascripts %}
-<script type="text/javascript" src="{% static 'script/common.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/analysis/main.js' %}"></script>
 {% endblock %}
 
 {% block content %}

@@ -1,7 +1,7 @@
 ### Ignore File ###
 
 ### Setting Files
-mysite/setting_private.py
+KAKAO_ANAL/setting_private.py
 
 ### Virtual Environment
 venv/

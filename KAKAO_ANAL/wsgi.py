@@ -16,6 +16,6 @@ path = '/home/centos/kakao/KAKAO_TEXT_ANALYSIS_PAGE'
 if path not in sys.path:
     sys.path.append(path)
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'KAKAO_ANAL.settings')
 
 application = get_wsgi_application()

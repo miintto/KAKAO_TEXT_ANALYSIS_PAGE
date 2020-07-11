@@ -98,7 +98,7 @@ class Info(View):
 	"""
 	INFO 화면
 	"""
-	template_name = 'analysis/inquiry.html'
+	template_name = 'analysis/info.html'
 
 	def get(self, request):
 		ip = get_ip(request)
@@ -106,13 +106,3 @@ class Info(View):
 		logger.debug(f'[USER SESSION] ip: {ip} / session_key: {session_key}')
 
 		return render(request, self.template_name)
-
-
-# class Guide(View):
-# 	def get(self, request):
-# 		ip = get_ip(request)
-# 		session_key = request.session.session_key
-# 		logger.debug(f'[USER SESSION] ip: {ip} / session_key: {session_key}')
-#
-# 		template = 'analysis/guideline.html'
-# 		return render(request, template)

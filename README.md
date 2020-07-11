@@ -9,23 +9,26 @@ $> git clone https://github.com/miintto/KAKAO_TEXT_ANALYSIS_PAGE.git
 $> cd KAKAO_TEXT_ANALYSIS_PAGE/
 $> tree
 .
-├─ mysite
-├─ analysis
+├─ KAKAO_ANAL        ### 세팅 
+├─ analysis          ### Front 화면
 │   ├─ migrations
 │   └─ templates
 │       └─ analysis
-├─ static
+├─ api               ### API 
 │   ├─ migrations
-│   ├─ script
-│   │   └─ charts
+│   └─ service
+├─ common            ### 공통 파일 (HTML, Python 모듈)
+│   ├─ migrations
+│   ├─ module
+│   └─ templates
+│       └─ common
+├─ static            ### Static 파일 (CSS, Javacsript, image)
 │   ├─ css
-│   └─ analysis
-├─ uploads
-│   └─ csv
-├─ api
+│   ├─ img
+│   ├─ js
+│   │   └─ analysis
 │   └─ migrations
-├─ venv
-└─ logs
+└─ logs              ### 로그
 ~~~
 
 ### 1.2 Set Config File
@@ -42,9 +45,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'DBNAME',
         'USER': 'USER',
-	'PASSWORD': 'PASSWORD',
-	'HOST': 'localhost',
-	'PORT': '3306'
+	    'PASSWORD': 'PASSWORD',
+	    'HOST': 'localhost',
+	    'PORT': '3306'
+        'OPTIONS': {'charset': 'utf8mb4'}
     }
 }
 ~~~

@@ -2,10 +2,16 @@
 
 {% load static %}
 
+{% block css %}
+<link type="text/css" href="{% static 'css/chartbox.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block javascripts %}
-<script type="text/javascript" src="{% static 'script/charts/chart_functions.js' %}"></script>
-<script type="text/javascript" src="{% static 'script/charts/charts_ajax.js' %}"></script>
-<script type="text/javascript" src="{% static 'script/charts/charts_main.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/d3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/d3.layout.cloud.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/analysis/chart_functions.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/analysis/charts_ajax.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/analysis/charts_main.js' %}"></script>
 {% endblock %}
 
 {% block content %}

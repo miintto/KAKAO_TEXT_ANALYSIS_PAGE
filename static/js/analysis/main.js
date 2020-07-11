@@ -1,3 +1,31 @@
+/// 텍스트 파일 업로드시 로딩
+function LoadFile() {
+    var button = document.getElementById("next-check");
+    button.click();
+    loading = '<img src="/static/img/loading.svg" width="100%" height="100%">';
+    $('div.loading').html(loading);
+}
+
+
+/// 메인 화면 가이드 버튼 클릭시 하단으로 이동
+function show_guide() {
+    var title = $("#guide-title").offset().top;
+    $('html, body').animate({scrollTop: title}, 150);
+}
+
+
+/// 샘플 버튼 클릭 이벤트
+function load_sample_charts() {
+    location.href="/analysis/charts/sample";
+}
+
+
+/// 파일 업로드 실패시 메인 화면 이동 버튼
+function load_main() {
+    location.href="/analysis/main";
+}
+
+
 /// 메인화면 가이드 모바일 버전 설명 화면 슬라이드 넘어가도록
 $(document).ready(function() {
     var img_position = 1;
@@ -8,7 +36,6 @@ $(document).ready(function() {
     $('#slide_next-mobile').click(function(){
         slide_next();
     })
-
 
     function slide_prev() {
         if (1<img_position) {
@@ -42,6 +69,7 @@ $(document).ready(function() {
         }
     }
 })
+
 
 /// 메인화면 가이드 PC버전 설명 화면 슬라이드 넘어가도록
 $(document).ready(function() {

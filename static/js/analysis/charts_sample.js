@@ -4,10 +4,6 @@
 //
 //////////////////////////////////////////////////
 
-$('div#title').html("<h2><center>SAMPLE</center></h2>");
-$('p#startdate').text("2019-01-01");
-$('p#enddate').text("2019-12-31");
-
 chart_heatmap(json_count_by_month, '#chart1');
 chart_pie(json_user, '#chart2');
 chart_stream(json_user_by_month, '#chart3');

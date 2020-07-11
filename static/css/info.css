@@ -1,4 +1,4 @@
-.inquiry-contents {
+.info-contents {
 	margin-top: 80px;
 }
 
@@ -27,7 +27,7 @@
 
 .title h1 {
     color: #545454;
-    margin-bottom: 50px
+    margin: 50px 40px;
 }
 
 .my-info-img {
