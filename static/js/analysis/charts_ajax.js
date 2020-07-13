@@ -186,7 +186,8 @@ function ajax_wordcloud(csrf_token, tag_id, start_date, end_date) {
         data: {
             'csrfmiddlewaretoken': csrf_token,
             'start_date': start_date,
-            'end_date': end_date
+            'end_date': end_date,
+            'word_limit': 100
         },
         success: function (data) {
             $(loading).hide();

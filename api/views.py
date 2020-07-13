@@ -7,7 +7,7 @@ import json
 import pandas as pd
 from datetime import datetime
 from .service import (user_count, user_count_score, user_count_monthly, user_count_monthly_names,
-                      groupby_hour_weekdays, user_count_word)
+                      groupby_hour_weekdays, user_count_word, wordcloud)
 
 import logging
 logger = logging.getLogger(__name__)
@@ -170,9 +170,6 @@ class GroupbyHourWeekdays(View):
         uid = request.session['user_chat_uid']
         start_date = request.POST.get('start_date')
         end_date = request.POST.get('end_date')
-        logger.debug(f'[API] GroupHourWeekdays uid : {uid}')
-        logger.debug(f'[API] GroupHourWeekdays start_date : {start_date}')
-        logger.debug(f'[API] GroupHourWeekdays end_date : {end_date}')
         parmas = {
             'uid': uid,
             'start_date': start_date,
@@ -187,9 +184,19 @@ class GroupbyHourWeekdays(View):
 
 class WordCloud(View):
     def post(self, request):
+        uid = request.session['user_chat_uid']
+        start_date = request.POST.get('start_date')
+        end_date = request.POST.get('end_date')
+        word_limit = request.POST.get('word_limit')
+        parmas = {
+            'uid': uid,
+            'start_date': start_date,
+            'end_date': end_date,
+            'word_limit': word_limit
+        }
 
-        json_wordcloud = [{'word': '개발중... ', 'count': 400}]
-        json_res = {'data': json_wordcloud}
+        service = wordcloud.Service()
+        json_res = service.run(parmas)
         logger.debug(f'[API] WordCloud json_res : {json_res}')
         return JsonResponse(json_res)
 
