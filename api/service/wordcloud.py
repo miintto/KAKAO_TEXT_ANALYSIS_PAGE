@@ -1,5 +1,5 @@
 from common.models import UserChat
-from common.module.nlp import get_word_list
+from common.module.nlp_mecab import get_word_list
 import pandas as pd
 
 import logging
