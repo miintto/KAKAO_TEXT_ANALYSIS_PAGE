@@ -10,7 +10,6 @@ idna==2.10
 JPype1==1.0.1
 konlpy==0.5.2
 lxml==4.5.2
-mecab-python @ file:///tmp/mecab-python-0.996
 numpy==1.18.1
 oauthlib==3.1.0
 pandas==1.0.1
