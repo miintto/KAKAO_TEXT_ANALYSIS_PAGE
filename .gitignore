@@ -9,6 +9,7 @@ venv/
 
 ### DB
 mysite.iml
+db.sqlite3
 
 ### cashe files
 **/__pycashe__
