@@ -1,6 +1,6 @@
 # 카카오톡 대화 분석
 
-[바로가기](http://52.78.105.24:8000)
+[바로가기](https://miintto.herokuapp.com/)
 
 # 1. Setting
 ## 1.1 Clone
