@@ -1,27 +1,267 @@
-.chart-table {
-	margin-left: auto;
-	margin-right: auto;
-	border-spacing: 30px;
+/*
+상단 카톡방 제목 CSS
+*/
+#title {
+	height: 100px;
+	color: #404040;
+	padding: 5px 0px
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 80px;
+    text-align: center;
+	/*position: fixed;*/
 }
-.chartbox {
-	width: 540px;
+
+
+
+/*
+날짜 박스 CSS
+*/
+.date-box {
+    width: 630px;
+    margin: 0px 30px 20px 30px;
+}
+
+ul.date-interval {
+    display: inline-block;
+    padding: 0px;
+    list-style:none;
+    margin: 0px;
+}
+
+ul.date-interval li {
+    float: left;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.date-box-unit {
+    display: block;
+    margin: 0px;
+	color: #404040;
+	background-color: #FCFCFC;
+    width: 150px;
+    height: 36px;
+    text-align: center;
 	border-radius: 2em;
-	background-color: #F6F6F6;
+    line-height: 36px;
+    cursor: pointer;
+    border: 0.05em #BBBBBB;
+    border-style: solid;
+    box-shadow: 0px 2px 15px 1px #E6E6E6;
 }
-.chartbox h3 {
-	text-align: center;
+
+.date-box-unit:hover {
+	background-color: #E6E6E6;
+    box-shadow: 0px 0px 0px 0px;
+}
+
+.date-join-string {
+    margin: 0px;
+	color: #404040;
+    width: 10px;
+    height: 36px;
+    text-align: center;
+    line-height: 36px;
+}
+
+
+
+/*
+차트 테이블 CSS
+*/
+.chart-table {
+	margin-bottom: 100px;
+}
+
+.chart-inline {
+    width: 630px;
+    margin-left: auto;
+    margin-right: auto;
+} @media (min-width: 1380px) {
+    .chart-inline {
+        width: 1380px;
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: auto;
+        margin-right: auto;
+	}
+}
+
+
+.chartbox {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+	width: 630px;
+	height: 540px;
+	border-radius: 1.5em;
+	background-color: #F6F6F6;
+	position: relative;
+}
+
+.chartbox-title {
+    padding: 20px;
+}
+
+.chartbox-title h1 {
+    display: inline-block;
+	text-align: left;
+	margin: 0px;
+	padding: 5px 15px 5px 15px;
+	border-radius: 0.2em;
+	color: #4D4D4D;
+	font-weight: normal;
+}
+
+.title-click h1:hover {
+	background-color: #E6E6E6;
+	cursor: pointer;
+}
+
+.chartbox svg {
+    display: block;
+    margin: auto;
+}
+
+
+
+/*
+D3 차트 CSS
+*/
+.chart-d3 {
+    padding: 20px
 }
 
 .cell:hover {
 	cursor: pointer;
 }
+
 .tooltip {
 	position: absolute;
 	border: 0px solid;
-	border-radius: 8px 8px 8px 8px;
-	/*background-color: #FFEB33;*/
+	border-radius: 8px;
 	background-color: #FFFFFF;
 	padding: 10px;
 	text-align: center;
 	font-size: 15px;
+	min-width: 120px;
+	min-height: 80px;
 }
+
+
+
+/*
+날짜 선택 팝업 창 CSS
+*/
+.popup-date {
+    display: block;
+    position: absolute;
+}
+
+.popup-date-background {
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: #000000;
+    position: fixed;
+    opacity: 0.5;
+}
+
+.popup-date-range {
+    height: 480px;
+    width: 600px;
+    top: 50%;
+    left: 50%;
+    margin-top: -200px;
+    margin-left: -300px;
+    position: fixed;
+	background-color: #F6F6F6;
+    border: 0.05em #BBBBBB;
+    border-style: solid;
+	border-radius: 1em;
+    color: #404040;
+}
+
+.popup-title h2 {
+	font-weight: normal;
+}
+
+.date-input-sec h3 {
+	font-weight: normal;
+}
+
+.date-input-table {
+	margin-left: auto;
+	margin-right: auto;
+    margin-bottom: 40px;
+    margin-bottom: 40px;
+    border-spacing: 20px;
+}
+
+.popup-date-input{
+    margin-left: 15px;
+}
+
+.popup-date-input input {
+	text-align : center;
+    font-size: 25px;
+    width: 200px;
+    height: 40px;
+}
+
+
+
+/*
+단어 선택 팝업 창 CSS
+*/
+.popup-word {
+    display: block;
+    position: absolute;
+}
+
+.popup-word-background {
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: #000000;
+    position: fixed;
+    opacity: 0.5;
+}
+
+.popup-word-search {
+    height: 400px;
+    width: 600px;
+    top: 50%;
+    left: 50%;
+    margin-top: -160px;
+    margin-left: -300px;
+    position: fixed;
+	background-color: #F6F6F6;
+    border: 0.05em #BBBBBB;
+    border-style: solid;
+	border-radius: 1em;
+    color: #404040;
+}
+
+.popup-close {
+    margin: 5px;
+    height: 40px;
+}
+
+.popup-close img:hover {
+	cursor: pointer;
+}
+
+.popup-input {
+    margin: 70px;
+}
+
+.popup-input input {
+    font-size: 25px;
+}
+

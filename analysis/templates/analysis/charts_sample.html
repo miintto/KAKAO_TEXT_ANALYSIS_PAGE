@@ -10,8 +10,8 @@
 <script type="text/javascript" src="{% static 'js/d3.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/d3.layout.cloud.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/analysis/chart_functions.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/analysis/charts_ajax.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/analysis/charts_main.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/analysis/sample_json.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/analysis/charts_sample.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -23,22 +23,21 @@
 	</div>
 	<div class="menu-button-bar">
 		<div class="menu-button"><a href="{% url 'main' %}">Main</a></div>
-		<div class="menu-button-active"><a href="{% url 'charts' %}">Charts</a></div>
-		<div class="menu-button"><a href="{% url 'info' %}">Info</a></div>
+		<div class="menu-button-active"><a href="{% url 'charts_sample' %}">Charts</a></div>
 	</div>
 </div>
 <div id="contents">
 	<div id="title">
-		<h2></h2>
+		<h2>SAMPLE</h2>
 	</div>
 	{% csrf_token %}
 	<div class='chart-table'>
 		<div class="chart-inline">
 			<div class="date-box">
 				<ul class="date-interval">
-					<li><p id="startdate" class="date-box-unit" onclick="show_date_popup()"></p></li>
+					<li><p id="startdate" class="date-box-unit">2019-01-01</p></li>
 					<li><p class="date-join-string">~</p></li>
-					<li><p id="enddate" class="date-box-unit" onclick="show_date_popup()"></p></li>
+					<li><p id="enddate" class="date-box-unit">2019-12-31</p></li>
 				</ul>
 			</div>
 			<div class="date-box"></div>
@@ -46,74 +45,45 @@
 				<div class="chartbox-title">
 					<h1># 월별 대화량</h1>
 				</div>
-				<div id="chart1-loading">
-					<center><img src="/static/img/chart_loading.svg" height="100%"></center>
-				</div>
 			</div>
 			<div id='chart2' class="chartbox">
 				<div class="chartbox-title">
 					<h1># 사용자 점유율</h1>
-				</div>
-				<div id="chart2-loading">
-					<center><img src="/static/img/chart_loading.svg" height="100%"></center>
 				</div>
 			</div>
 			<div id='chart3' class="chartbox">
 				<div class="chartbox-title">
 					<h1># 월별 대화 변동</h1>
 				</div>
-				<div id="chart3-loading">
-					<center><img src="/static/img/chart_loading.svg" height="100%"></center>
-				</div>
 			</div>
 			<div id='chart4' class="chartbox">
 				<div class="chartbox-title">
 					<h1># 요일x시간별 대화량</h1>
-				</div>
-				<div id="chart4-loading">
-					<center><img src="/static/img/chart_loading.svg" height="100%"></center>
 				</div>
 			</div>
 			<div id='chart5' class="chartbox">
 				<div class="chartbox-title">
 					<h1># 최빈 사용단어</h1>
 				</div>
-				<div id="chart5-loading">
-					<center><img src="/static/img/chart_loading.svg" height="100%"></center>
-				</div>
 			</div>
 			<div id='chart6' class="chartbox">
 				<div class="chartbox-title">
 					<h1># 사용자 대화량</h1>
 				</div>
-				<div id="chart6-loading">
-					<center><img src="/static/img/chart_loading.svg" height="100%"></center>
-				</div>
 			</div>
 			<div id='chart7' class="chartbox">
-				<div id="chart7-title" class="chartbox-title title-click" onclick="show_word_popup('#chart7')">
-					<h1># 언급 횟수</h1>
-				</div>
-				<div id="chart7-loading">
-					<center><img src="/static/img/chart_loading.svg" height="100%"></center>
+				<div class="chartbox-title">
+					<h1># 잉여력 랭킹</h1>
 				</div>
 			</div>
 			<div id='chart8' class="chartbox">
-				<div id="chart8-title" class="chartbox-title title-click" onclick="show_word_popup('#chart8')">
-					<h1># 언급 횟수</h1>
-				</div>
-				<div id="chart8-loading">
-					<center><img src="/static/img/chart_loading.svg" height="100%"></center>
+				<div class="chartbox-title">
+					<h1># Chart 8</h1>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<!-- 날짜 선택창 -->
-{% include "analysis/popup_date.html" %}
-<!-- 단어 선택창 -->
-{% include "analysis/popup_anal_word.html" %}
-
 {% include "common/footer.html" %}
 
 {% endblock content %}

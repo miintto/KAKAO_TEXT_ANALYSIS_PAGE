@@ -1,0 +1,129 @@
+{% extends "common/base.html" %}
+
+{% load static %}
+
+{% block css %}
+<link type="text/css" href="{% static 'css/info.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="menu-bar">
+	<div class="menu-title-bar">
+		<center>
+			<h3>카카오톡 대화 분석</h3>
+		</center>
+	</div>
+	<div class="menu-button-bar">
+		<div class="menu-button">
+			<div class="menu-button-text"><a class="sidemenu" href="{% url 'main' %}">Main</a></div>
+		</div>
+		<div class="menu-button">
+			<div class="menu-button-text"><a class="sidemenu" href="{% url 'charts' %}">Charts</a></div>
+		</div>
+		<div class="menu-button-active">
+			<div class="menu-button-text"><a class="sidemenu" href="{% url 'info' %}">Info</a></div>
+		</div>
+	</div>
+</div>
+<div class="info-contents" id="contents">
+	<div class="info-contents-box">
+		<div class="title">
+			<h1>History</h1>
+		</div>
+		<div id="info-history" class="info-history">
+			<div class="history-box">
+				<div class="info-sub-title">
+					<h2>2017년</h2>
+				</div>
+				<div>
+					<img src="{% static 'img/history_2017_01.jpg' %}" width="600" class="history-img-box">
+				</div>
+				<div>
+					<ul class="history-text">
+						<li><p>R 코드로 작성</p></li>
+						<li><p>이용자별 말풍선 개수 집계</p></li>
+						<li><p>단어는 단순 띄어쓰기 단위로 쪼개어 계산 (wordcloud 라이브러리 사용)</p></li>
+					</ul>
+				</div>
+			</div>
+			<div class="history-box">
+				<div class="info-sub-title">
+					<h2>2018년</h2>
+				</div>
+				<div>
+					<img src="{% static 'img/history_2018_01.jpg' %}" width="800" class="history-img-box">
+				</div>
+				<div>
+					<img src="{% static 'img/history_2018_02.jpg' %}" width="800" class="history-img-box">
+				</div>
+				<div>
+					<ul class="history-text">
+						<li><p>시각화 라이브러리를 ggplot2로 변경</p></li>
+						<li><p>시계열 분석을 도입하여 월별로 집계</p></li>
+						<li><p>이용자별 최빈 단어 Top 30 선정</p></li>
+					</ul>
+				</div>
+			</div>
+			<div class="history-box">
+				<div class="info-sub-title">
+					<h2>2019년</h2>
+				</div>
+				<div>
+					<img src="{% static 'img/history_2019_01.png' %}" width="800" class="history-img-box">
+				</div>
+				<div>
+					<ul class="history-text">
+						<li><p>python으로 작성</p></li>
+						<li><p>tkinter를 이용하여 GUI 모듈화</p></li>
+						<li><a href="https://github.com/miintto/KAKAO_TEXT_ANALYSIS" target="_blank">[Github 바로가기]</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="title">
+			<h1>Created by ..</h1>
+		</div>
+		<div id="info-profile" class="my-info">
+			<div class="my-info-img">
+				<img src="{% static 'img/profile.jpg' %}" width="150" height="150">
+			</div>
+			<div class="my-info-content">
+				<div class="my-info-name">
+					<div class="my-name">
+						<div class="my-name-kr">
+							<h2>박민재</h2>
+						</div>
+						<div class="my-name-eng">
+							<p>(Park Minjae)</p>
+						</div>
+					</div>
+				</div>
+				<div>
+					<ul class="profile-list">
+						<li><p>인하대학교 수학 / 통계학 전공 (2012 ~ 2019)</p></li>
+						<li><p>(주)데이터마케팅코리아 R&D센터 데이터기술연구소 전임 데이터 엔지니어 (2020 ~ )</p></li>
+					</ul>
+				</div>
+			</div>
+			<div class="my-info-contact">
+				<ul class="profile-list">
+					<li><p>E-mail: minjp93@gmail.com</p></li>
+					<li><p>Github: https://github.com/miintto</p></li>
+					<li><p>Blog: https://blog.naver.com/mj93m</p></li>
+				</ul>
+			</div>
+			<div class="my-info-tags">
+				<div>
+					<p>#Data Analysis #Statistics #Mathematics #Machine Learning #Deep Learning #Textmining #Data Science #Data Engineer
+						#Python #R #SAS #Postgresql #Mysql #Elasticsearch #Django #Tensorflow #Keras</p>
+				</div>
+			</div>
+			<div class="comment">
+				<p>문의 및 건의사항은 상단 이메일로 연락 바랍니다.</p>
+			</div>
+		</div>
+	</div>
+</div>
+{% include "common/footer.html" %}
+
+{% endblock content %}

@@ -1,0 +1,131 @@
+.info-contents {
+	margin-top: 80px;
+}
+
+.info-contents-box {
+    width: 840px;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: 'Noto Serif KR', serif;
+}
+
+/*
+제작자 정보 CSS
+*/
+.my-info {
+    width: 500px;
+    height: auto;
+    overflow: hidden;
+	margin-top: 100px;
+	margin-bottom: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px;
+/*	border-radius: 1.5em;*/
+/*	background-color: #F6F6F6;*/
+}
+
+.title h1 {
+    color: #545454;
+    margin: 50px 40px;
+}
+
+.my-info-img {
+    display: block;
+    float: left;
+    width: 30%;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.my-info-content {
+    float: right;
+    width: 70%;
+    font-size: 13px;
+}
+
+.my-name {
+    padding-left: 50px;
+}
+
+.my-name-kr {
+    float: left;
+    width: 20%;
+    height: 60px;
+}
+
+.my-name-eng {
+    float: left;
+    width: 80%;
+    height: 60px;
+}
+
+.my-name-eng p {
+    display: inline-block;
+    line-height: 36px;
+    vertical-align: middle;
+}
+
+ul.profile-list {
+    list-style:none;
+}
+
+.my-info-contact {
+	margin-top: 20px;
+    float: left;
+    width: 100%;
+    list-style:none;
+    font-size: 15px;
+}
+
+.my-info-tags {
+	margin-top: 20px;
+    float: right;
+    width: 100%;
+    font-size: 12px;
+}
+
+.comment {
+	margin-top: 50px;
+    float: left;
+    width: 100%;
+}
+
+
+/*
+히스토리 CSS
+*/
+.info-history {
+    width: 840px;
+    height: auto;
+    overflow: hidden;
+	margin-top: 50px;
+	margin-bottom: 150px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px;
+/*	border-radius: 1.5em;*/
+/*	background-color: #F6F6F6;*/
+}
+
+.info-sub-title h2 {
+    color: #545454;
+    margin-bottom: 30px
+}
+
+.history-box {
+	margin-bottom: 100px;
+}
+
+.history-img-box {
+	display: block;
+    margin: 20px auto;
+}
+.history-text {
+	list-style: circle;
+}
+
+.history-text a {
+	color: #175C85;
+	text-decoration: none;
+}

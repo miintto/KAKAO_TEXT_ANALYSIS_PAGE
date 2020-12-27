@@ -1,0 +1,45 @@
+<!--날짜 선택 팝업창-->
+<div class="popup-date">
+	<div class="popup-date-background" style="display:none;"></div>
+	<div class="popup-date-range" style="display:none;">
+		<div class="popup-close">
+			<img src="/static/img/close_window.png" width="40" height="40" align="right" onclick="close_date_popup()">
+		</div>
+		<div class="popup-title">
+			<center><h2>분석할 날짜 구간을 입력하세요.</h2></center>
+		</div>
+		<div class="popup-date-inputbox">
+			<table class='date-input-table'>
+				<tbody>
+					<tr>
+						<td>
+							<div class="date-input-sec"><center><h3>시작날짜</h3></center>
+							</div>
+						</td>
+						<td>
+							<div class="popup-date-input">
+								<center><input id="search-start_date"></center>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="date-input-sec"><center><h3>종료날짜</h3></center
+							></div>
+						</td>
+						<td>
+							<div class="popup-date-input">
+								<center><input id="search-end_date"></center>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="submit-button">
+			<center>
+				<button onclick="submit_date_range()">확인</button>
+			</center>
+		</div>
+	</div>
+</div>

@@ -1,7 +1,18 @@
 ### Ignore File ###
 
-mysite/setting_private.py
+### Setting Files
+KAKAO_ANAL/setting_private.py
 
+### Virtual Environment
+venv/
+.idea/
+
+### DB
+mysite.iml
+
+### cashe files
 **/__pycashe__
 *.pyc
-*.log
+*.ipynb
+*.csv
+kakao.log*
