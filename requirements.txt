@@ -7,7 +7,7 @@ Django==3.0.8
 idna==2.10
 JPype1==1.0.1
 konlpy==0.5.2
-lxml==4.5.2
+lxml==4.6.2
 mecab-python @ file:///tmp/mecab-python-0.996
 mysqlclient==2.0.1
 numpy==1.19.1
